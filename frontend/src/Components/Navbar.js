@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../Styles/Navbar.css';
 
 const NavBar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [activeSection, setActiveSection] = useState('investments');
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -23,6 +25,11 @@ const NavBar = () => {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
 
+  const handleWhyChooseUsClick = () => {
+    navigate('/why-maxiom#why-choose-us');
+    setActiveDropdown(null);
+  };
+
   const toggleSection = (section) => {
     setActiveSection(section);
   };
@@ -34,7 +41,7 @@ const NavBar = () => {
         {activeDropdown === 0 && (
           <div className="card-style-dropdown">
             <div className="dropdown-grid">
-              <div className="dropdown-card">
+              <div className="dropdown-card" onClick={handleWhyChooseUsClick}>
                 <div className="card-icon">
                   <img src="https://cdn-icons-png.flaticon.com/128/3176/3176298.png" alt="icon" />
                 </div>

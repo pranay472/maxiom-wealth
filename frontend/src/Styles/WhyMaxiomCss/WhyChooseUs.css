@@ -1,0 +1,262 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.why-maxiom-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.why-maxiom-content {
+  flex: 1;
+  width: 100vw;
+}
+
+.why-choose-us {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.hero-section {
+  position: relative;
+  width: 100vw;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #020617 0%, #1e3a8a 15%, #1e40af 35%, #172554 75%, #312e81 85%, #4c1d95 100%);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  width: 100vw;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  color: white;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.content-wrapper {
+  max-width: 48rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  line-height: 1;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  opacity: 0.9;
+  margin-bottom: 1.5rem;
+}
+
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: white;
+}
+
+span {
+  font-size: 1rem;
+}
+
+.values-section {
+  padding: 5rem 1.5rem;
+  background-color: #f8fafc;
+}
+
+.values-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.values-intro, .vision-box, .mission-box {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-in-out;
+  border: 1px solid #e2e8f0;
+  min-height: 250px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.values-intro:hover, .vision-box:hover, .mission-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.values-intro h2, .vision-box h3, .mission-box h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 1rem 0 1.5rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.values-intro h2:after, .vision-box h3:after, .mission-box h3:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: #3b82f6;
+}
+
+.values-description, .vision-box p, .mission-box p {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.vision-mission-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.values-intro .icon-wrapper, 
+.vision-box .icon-wrapper, 
+.mission-box .icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #e0f2fe;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.values-intro .icon,
+.vision-box .icon,
+.mission-box .icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #0369a1;
+}
+
+.card-icon-wrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #e0f2fe;
+  border-radius: 1rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.card-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #1e293b;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.quote-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0rem;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.dashed-line {
+  flex: 1;
+  border-top: 2px dashed #e2e8f0;
+  height: 0;
+}
+
+.quote-mark {
+  width: 40px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3.75rem;
+  }
+  
+  .hero-description {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .values-section {
+    padding: 3rem 1rem;
+  }
+
+  .values-intro, .vision-box, .mission-box {
+    padding: 2rem;
+  }
+
+  .values-intro h2, .vision-box h3, .mission-box h3 {
+    font-size: 1.5rem;
+  }
+
+  .values-description, .vision-box p, .mission-box p {
+    font-size: 1rem;
+  }
+}
