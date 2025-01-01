@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import WhyChooseUs from './WhyChooseUs';
 import Header from '../Header';
+import OurTeam from './OurTeam';
 
 const WhyMaxiom = () => {
   useEffect(() => {
@@ -19,6 +20,7 @@ const WhyMaxiom = () => {
       <Header/>
       <div className="why-maxiom-content">
         <WhyChooseUs />
+        <OurTeam/>
       </div>
     </div>
   );
