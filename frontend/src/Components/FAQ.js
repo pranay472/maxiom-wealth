@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
-import '../Styles/FAQ.css';
 
 const FAQ = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,44 +40,46 @@ const FAQ = () => {
   };
 
   return (
-    <div className="faq-section">
+    <div className="w-full max-w-4xl mx-auto mb-12 border border-neutral-700 rounded-lg overflow-hidden">
       <button 
-        className="faq-trigger"
+        className="w-full bg-neutral-800 hover:bg-neutral-700 transition-colors duration-300 text-white cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls="faq-content"
       >
-        <div className="faq-trigger-content">
-          <HelpCircle size={20} />
+        <div className="p-4 flex items-center gap-3 text-lg">
+          <HelpCircle className="w-5 h-5" />
           <span>Frequently Asked Questions</span>
           <ChevronDown 
-            size={20} 
-            className={`chevron-icon ${isOpen ? 'rotate' : ''}`}
+            className={`w-5 h-5 ml-auto transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
           />
         </div>
       </button>
       
       <div 
         id="faq-content"
-        className={`faq-content ${isOpen ? 'open' : ''}`}
+        className={`overflow-hidden transition-all duration-300 bg-neutral-900 ${isOpen ? 'max-h-[2000px]' : 'max-h-0'}`}
         aria-hidden={!isOpen}
       >
-        <div className="faq-list">
+        <div className="p-6 flex flex-col gap-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="faq-item">
+            <div key={index} className="bg-neutral-800 rounded-lg overflow-hidden">
               <button 
-                className="faq-question-button"
+                className="w-full p-5 hover:bg-neutral-700 transition-colors duration-300 flex justify-between items-center gap-4 cursor-pointer"
                 onClick={() => toggleQuestion(index)}
                 aria-expanded={openQuestions[index]}
               >
-                <h3 className="faq-question">{faq.question}</h3>
+                <h3 className="text-white text-left text-base font-semibold m-0">{faq.question}</h3>
                 <ChevronDown 
-                  size={16} 
-                  className={`faq-chevron ${openQuestions[index] ? 'rotate' : ''}`}
+                  className={`w-4 h-4 text-white flex-shrink-0 transition-transform duration-300 ${openQuestions[index] ? 'rotate-180' : ''}`}
                 />
               </button>
-              <div className={`faq-answer ${openQuestions[index] ? 'show' : ''}`}>
-                {faq.answer}
+              <div 
+                className={`overflow-hidden transition-all duration-300 ${
+                  openQuestions[index] ? 'max-h-[500px] p-5' : 'max-h-0'
+                }`}
+              >
+                <p className="text-neutral-400 m-0">{faq.answer}</p>
               </div>
             </div>
           ))}
@@ -89,8 +90,3 @@ const FAQ = () => {
 };
 
 export default FAQ;
-
-
-
-
-//import '../Styles/FAQ.css';
