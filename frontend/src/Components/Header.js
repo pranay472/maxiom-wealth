@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../Styles/Header.css';
 import Navbar from './Navbar';
 
@@ -26,9 +27,9 @@ const Header = () => {
         />
       </div>
       <div className="header-container">
-        <div className="logo">
+        <Link to="/" className="logo">
           <img src="https://jamaappprod.s3.ap-south-1.amazonaws.com/Website/maxiompms/maxiompms.svg" alt="Equirus Wealth" />
-        </div>
+        </Link>
         
         <Navbar />
 

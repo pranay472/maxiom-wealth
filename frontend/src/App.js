@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from './Components/Header';
+import Home from './Components/Home/Home';
 import WhyMaxiom from './Components/WhyMaxiom/WhyMaxiom';
+import Header from './Components/Header';
 import NavBar from './Components/Navbar';
 
 function App() {
@@ -15,7 +16,6 @@ function App() {
       .catch(error => console.error('Error:', error));
   }, []);
 
-
   return (
     <Router>
       <div className="App">
@@ -25,6 +25,7 @@ function App() {
           <Route path="/" element={
             <>
               <Header />
+              <Home />
             </>
           } />
         </Routes>
