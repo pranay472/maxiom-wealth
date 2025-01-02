@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import WhyChooseUs from './WhyChooseUs';
 import Header from '../Header';
+import Footer from '../Footer';
 import OurTeam from './OurTeam';
 import OurJourney from './OurJourney';
 
@@ -24,6 +25,7 @@ const WhyMaxiom = () => {
         <OurTeam/>
         <OurJourney/>
       </div>
+      <Footer/>
     </div>
   );
 };
