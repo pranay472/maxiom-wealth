@@ -210,6 +210,54 @@
     background: #ff6b00;
   }
   
+  .journey-image-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f0ff 100%);
+    border-radius: 35px;
+  }
+
+  .journey-image-container::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    right: 40px;
+    bottom: -20px;
+    background: linear-gradient(45deg, rgba(37, 99, 235, 0.15), rgba(59, 130, 246, 0.2));
+    border-radius: 35px;
+    filter: blur(25px);
+    z-index: 0;
+  }
+
+  .journey-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 800px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 35px;
+    box-shadow: 
+      0 8px 35px rgba(37, 99, 235, 0.3),
+      inset 0 2px 15px rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 1;
+    filter: 
+      contrast(1.08) 
+      saturate(1.15) 
+      brightness(1.03)
+      drop-shadow(0 15px 25px rgba(37, 99, 235, 0.25));
+    backdrop-filter: blur(5px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+    padding: 30px;
+    mix-blend-mode: luminosity;
+    opacity: 0.95;
+  }
+  
   @keyframes fadeIn {
     from {
       opacity: 0;
