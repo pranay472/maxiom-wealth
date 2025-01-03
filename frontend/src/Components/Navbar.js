@@ -37,7 +37,7 @@ const NavBar = () => {
   return (
     <nav className="nav-links" ref={dropdownRef}>
       <div className={`dropdown ${activeDropdown === 0 ? 'active' : ''}`} onClick={() => handleDropdownClick(0)}>
-        <span>Why Us <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
+        <span>Why Maxiom <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
         {activeDropdown === 0 && (
           <div className="card-style-dropdown">
             <div className="dropdown-grid">
@@ -73,7 +73,7 @@ const NavBar = () => {
         )}
       </div>
       <div className={`dropdown ${activeDropdown === 1 ? 'active' : ''}`} onClick={() => handleDropdownClick(1)}>
-        <span>Private Wealth <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
+        <span>Wealth Management <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
         {activeDropdown === 1 && (
           <div className="card-style-dropdown">
             <div className="dropdown-grid">
@@ -136,7 +136,7 @@ const NavBar = () => {
         )}
       </div>
       <div className={`dropdown ${activeDropdown === 2 ? 'active' : ''}`} onClick={() => handleDropdownClick(2)}>
-        <span>Digital Wealth <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
+        <span>Financial Advisory <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
         {activeDropdown === 2 && (
           <div className="card-style-dropdown">
             <div className="dropdown-grid">
@@ -181,7 +181,7 @@ const NavBar = () => {
         )}
       </div>
       <div className={`dropdown ${activeDropdown === 3 ? 'active' : ''}`} onClick={() => handleDropdownClick(3)}>
-        <span>Free Tools <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
+        <span>Resources <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
         {activeDropdown === 3 && (
           <div className="card-style-dropdown">
             <div className="dropdown-grid">
@@ -235,7 +235,7 @@ const NavBar = () => {
         )}
       </div>
       <div className={`dropdown ${activeDropdown === 4 ? 'active' : ''}`} onClick={() => handleDropdownClick(4)}>
-        <span>Blogs & Podcast <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
+        <span>Pricing <img src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png" alt="dropdown" className="dropdown-arrow" /></span>
         {activeDropdown === 4 && (
           <div className="card-style-dropdown">
             <div className="dropdown-grid">

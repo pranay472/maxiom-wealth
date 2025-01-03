@@ -22,25 +22,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-16">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="p-6 bg-white shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Investment Advisory</h3>
-                <p className="text-gray-600">Expert guidance for your investment decisions with personalized strategies.</p>
-              </div>
-              <div className="p-6 bg-white shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Portfolio Management</h3>
-                <p className="text-gray-600">Professional management of your investment portfolio for optimal returns.</p>
-              </div>
-              <div className="p-6 bg-white shadow-lg rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Wealth Planning</h3>
-                <p className="text-gray-600">Comprehensive wealth planning services for your financial future.</p>
-              </div>
-            </div>
-          </div>
-        </section>
       </main>
       <Footer />
     </div>
