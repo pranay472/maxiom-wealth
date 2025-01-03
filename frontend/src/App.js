@@ -5,6 +5,7 @@ import Home from './Components/Home/Home';
 import WhyMaxiom from './Components/WhyMaxiom/WhyMaxiom';
 import Header from './Components/Header';
 import NavBar from './Components/Navbar';
+import JEWELTop350 from './Components/WealthManagement/PMS/JEWELTop350/JEWELTop350';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -22,6 +23,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
+          <Route path="/wealth-management/pms/jewel-top-350" element={<JEWELTop350 />} />
           <Route path="/" element={
             <>
               <Header />

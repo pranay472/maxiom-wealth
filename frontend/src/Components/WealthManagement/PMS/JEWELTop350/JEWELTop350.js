@@ -1,10 +1,10 @@
 import React from "react";
-import Header from '../Header';
-import Footer from '../Footer';
+import Header from "../../../Header";
 import Hero from "./Hero";
 import TrustFactors from "./TrustFactor";
 import Services from "./Services";
 import FAQ from "./FAQ";
+import Footer from '../../../Footer';
 
 const JEWELTop350=()=>{
     return (
@@ -20,3 +20,5 @@ const JEWELTop350=()=>{
         </div>
       );
 }
+
+export default JEWELTop350;
