@@ -6,6 +6,7 @@ import WhyMaxiom from './Components/WhyMaxiom/WhyMaxiom';
 import Header from './Components/Header';
 import NavBar from './Components/Navbar';
 import JEWELTop350 from './Components/WealthManagement/PMS/JEWELTop350/JEWELTop350';
+import Spark351 from './Components/WealthManagement/PMS/Spark351/Spark351';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
           <Route path="/wealth-management/pms/jewel-top-350" element={<JEWELTop350 />} />
+          <Route path="/wealth-management/pms/spark351" element={<Spark351 />} />
           <Route path="/" element={
             <>
               <Header />

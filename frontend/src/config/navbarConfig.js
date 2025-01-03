@@ -27,7 +27,7 @@ export const navbarConfig = {
         title: 'Portfolio Management Services',
         description: 'Comprehensive portfolio management designed to meet your unique financial needs.',
         icon: 'https://cdn-icons-png.flaticon.com/512/1584/1584961.png',
-        route: '/wealth-management/pms/jewel-top-350',
+        route: '/wealth-management/pms/spark351',
         subItems: [
           {
             title: 'JEWEL Top 350',
