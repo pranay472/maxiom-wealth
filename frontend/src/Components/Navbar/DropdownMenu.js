@@ -10,8 +10,8 @@ const DropdownMenu = ({ items, onItemClick }) => {
             key={index}
             icon={item.icon}
             title={item.title}
-            description={item.description}
-            onClick={() => onItemClick && onItemClick(item)}
+            subItems={item.subItems}
+            onClick={onItemClick}
           />
         ))}
       </div>

@@ -403,66 +403,63 @@
 
 .dropdown-card {
     display: flex;
-    align-items: flex-start;
-    padding: 8px;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
     border-radius: 6px;
-    transition: all 0.3s ease;
-    cursor: pointer;
     background: white;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    height: 60px;
+    height: auto;
+    min-height: 60px;
 }
 
-.dropdown-card:hover {
-    background-color: rgba(0, 102, 255, 0.05);
-    transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #007bff;
+    padding-left: 2.5rem;
 }
 
 .card-icon {
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 24px;
+    height: 24px;
+    opacity: 0.9;
 }
 
-.card-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    opacity: 0.7;
+.card-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #007bff;
 }
 
-.card-content {
-    flex: 1;
-    min-width: 0;
+.card-subitems {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 0.75rem;
+    padding-left: 2.5rem;
 }
 
-.card-content h4 {
-    margin: 0 0 2px 0;
-    font-size: 0.8rem;
+.subitem {
+    cursor: pointer;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    padding: 0;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #000;
+    text-align: left;
+}
+
+.subitem:hover {
+    color: #007bff;
+}
+
+.subitem-title {
+    font-weight: 500;
+    font-size: 0.95rem;
     color: #333;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card-content p {
-    margin: 0;
-    font-size: 0.7rem;
-    color: #666;
-    line-height: 1.2;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
 }
 
 /* Remove all arrow positioning styles */
