@@ -396,9 +396,16 @@
     margin: 0 auto;
     padding: 15px 2rem;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     width: 100%;
+}
+
+.dropdown-grid.three-items {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.dropdown-grid.two-items {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .dropdown-card {

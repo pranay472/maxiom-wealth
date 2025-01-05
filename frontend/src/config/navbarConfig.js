@@ -8,7 +8,7 @@ export const navbarConfig = {
         icon: 'https://cdn-icons-png.flaticon.com/128/3176/3176298.png',
         subItems: [
           {
-            title: 'Values',
+            title: 'Values, Vision, Mission',
             description: 'Our core values and principles',
             route: '/about-us/values'
           },
@@ -22,11 +22,6 @@ export const navbarConfig = {
             description: 'Explore our history and milestones',
             route: '/about-us/journey'
           },
-          {
-            title: 'Client Testimonials',
-            description: 'What our clients say about us',
-            route: '/about-us/testimonials'
-          }
         ]
       },
       {
@@ -48,6 +43,18 @@ export const navbarConfig = {
             title: 'Three Eye Selection',
             description: 'Our comprehensive selection process',
             route: '/our-approach/three-eye-selection'
+          }
+        ]
+      },
+      {
+        title: 'Success Stories',
+        description: 'Success stories from our clients',
+        icon: 'https://cdn-icons-png.flaticon.com/128/3176/3176293.png',
+        subItems: [
+          {
+            title: 'Client Testimonials',
+            description: 'What our clients say about us',
+            route: '/about-us/testimonials'
           }
         ]
       }
