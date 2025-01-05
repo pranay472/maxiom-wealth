@@ -161,29 +161,63 @@ export const navbarConfig = {
     title: 'Resources',
     items: [
       {
-        title: 'Mutual Fund Browser',
-        description: 'Explore and compare various mutual funds to find the best fit for your investments.',
-        icon: 'https://cdn-icons-png.flaticon.com/512/2936/2936690.png'
+        title: 'Free Tools',
+        description: 'Access our collection of free financial tools and resources',
+        icon: 'https://cdn-icons-png.flaticon.com/512/2936/2936690.png',
+        subItems: [
+          {
+            title: 'Mutual Fund Browser',
+            description: 'Compare and analyze mutual funds',
+            route: '/resources/mutual-fund-browser'
+          },
+          {
+            title: 'Calculators',
+            description: 'Financial planning calculators',
+            route: '/resources/calculators'
+          },
+          {
+            title: 'Wealth Tracker',
+            description: 'Track and manage your wealth',
+            route: '/resources/wealth-tracker'
+          },
+          {
+            title: 'Learning Center',
+            description: 'Educational resources for investors',
+            route: '/resources/learning-center'
+          },
+          {
+            title: 'Will Maker',
+            description: 'Create your will online',
+            route: '/resources/will-maker'
+          }
+        ]
       },
       {
-        title: 'Calculators',
-        description: 'Use our financial calculators to plan and manage your investments effectively.',
-        icon: 'https://cdn-icons-png.flaticon.com/512/2037/2037619.png'
-      },
-      {
-        title: 'Wealth Tracker',
-        description: 'Monitor and track your investments with our comprehensive wealth tracker tool.',
-        icon: 'https://cdn-icons-png.flaticon.com/512/4222/4222019.png'
-      },
-      {
-        title: 'Learning Center',
-        description: 'Access educational resources and insights to enhance your financial knowledge.',
-        icon: 'https://cdn-icons-png.flaticon.com/512/1006/1006555.png'
-      },
-      {
-        title: 'Will Maker',
-        description: 'Create a will and plan your estate with our expert guidance and support.',
-        icon: 'https://cdn-icons-png.flaticon.com/512/1087/1087927.png'
+        title: 'Blogs',
+        description: 'Stay informed with our latest insights and analysis',
+        icon: 'https://cdn-icons-png.flaticon.com/512/2965/2965879.png',
+        subItems: [
+          {
+            title: 'Insights on Wealth creation',
+            description: 'Expert insights on building wealth',
+            route: '/resources/wealth-insights'
+          },
+          {
+            title: 'Financial Planning Compass',
+            description: 'Navigate your financial journey',
+            route: '/resources/financial-planning'
+          },
+          {
+            title: 'Askguru - trends in finance',
+            description: 'Latest trends and expert answers',
+            route: '/resources/askguru'
+          },
+          {
+            title: 'Maxiom Markets Podcast',
+            description: 'Listen to our market analysis',
+            route: '/resources/podcast'
+          }
+        ]
       }
     ]
   },

@@ -380,25 +380,21 @@
 
 /* Card Style Dropdown */
 .card-style-dropdown {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    top: 100%;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 85px;
+    left: 0;
+    right: 0;
     background: white;
     z-index: 999;
     margin-top: 1px;
-}
-
-.card-style-dropdown::before,
-.card-style-dropdown::after {
-    display: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 15px 2rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
