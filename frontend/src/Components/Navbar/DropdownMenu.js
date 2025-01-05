@@ -10,7 +10,6 @@ const DropdownMenu = ({ items, onItemClick }) => {
         {items.map((item, index) => (
           <DropdownCard
             key={index}
-            icon={item.icon}
             title={item.title}
             subItems={item.subItems}
             onClick={onItemClick}
