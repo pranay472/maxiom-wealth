@@ -1,15 +1,16 @@
 import React from 'react';
 import ParticlesBackground from './ParticlesBackground'; // Assuming ParticlesBackground is in the same directory
+import { FaGooglePlay, FaApple } from 'react-icons/fa';
 
 const HeroSection = () => {
   return (
-    <div className="w-full min-h-screen relative bg-gradient-to-br from-[#F8FAFF] via-[#FFF5EB] to-[#EDF2FF] font-['General Sans'] overflow-hidden">
+    <div className="w-full min-h-screen relative bg-gradient-to-br from-[#f0f0f0] via-[#e8e8e8] to-[#e0e0e0] font-['General Sans'] overflow-hidden">
       {/* Subtle grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAgTSAwIDIwIEwgNDAgMjAgTSAyMCAwIEwgMjAgNDAgTSAwIDMwIEwgNDAgMzAgTSAzMCAwIEwgMzAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzExMzI2MiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-12">
           {/* Left Column - Text Content */}
-          <div className="space-y-6">
+          <div className="space-y-6 lg:mt-16">
             {/* Main Heading - Using H1 typography scale: 32/38 */}
             <h1 className="text-[#113262] text-[32px] leading-[38px] font-bold max-w-xl">
               Grow & Protect Wealth. Through Scientific Investment Strategies.
@@ -172,13 +173,21 @@ const HeroSection = () => {
             </div>
             
             {/* App Store Buttons */}
-            <div className="flex justify-center gap-6 mt-8">
-              <button className="bg-[#545454]/90 border-2 border-[#545454] text-white px-8 py-2.5 rounded-lg hover:bg-[#333333] transition-colors duration-300 text-[14px] leading-[20px] font-medium">
-                App Store
-              </button>
-              <button className="bg-[#545454]/90 border-2 border-[#545454] text-white px-8 py-2.5 rounded-lg hover:bg-[#333333] transition-colors duration-300 text-[14px] leading-[20px] font-medium">
-                Play Store
-              </button>
+            <div className="flex justify-center gap-4 mt-8">
+              <a href="#" className="flex items-center space-x-2 bg-gradient-to-br from-[#113262] to-[#1C52A0] text-white px-4 py-2 rounded-lg hover:from-[#1C52A0] hover:to-[#113262] transition-all duration-300 shadow-lg hover:shadow-xl">
+                <FaApple className="w-6 h-6" />
+                <div className="flex flex-col items-start">
+                  <span className="text-[10px] opacity-80">Download on the</span>
+                  <span className="text-sm font-semibold leading-tight">App Store</span>
+                </div>
+              </a>
+              <a href="#" className="flex items-center space-x-2 bg-gradient-to-br from-[#113262] to-[#1C52A0] text-white px-4 py-2 rounded-lg hover:from-[#1C52A0] hover:to-[#113262] transition-all duration-300 shadow-lg hover:shadow-xl">
+                <FaGooglePlay className="w-5 h-5" />
+                <div className="flex flex-col items-start">
+                  <span className="text-[10px] opacity-80">GET IT ON</span>
+                  <span className="text-sm font-semibold leading-tight">Google Play</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
