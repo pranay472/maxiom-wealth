@@ -124,6 +124,8 @@
 }
 
 .book-meeting {
+    position: relative;
+    overflow: hidden;
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -140,10 +142,31 @@
     transition: all 0.2s ease;
 }
 
+/* Shine effect for book-meeting */
+.book-meeting::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s ease;
+}
+
 .book-meeting:hover {
     background: #f5f5f5;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.book-meeting:hover::before {
+    left: 100%;
 }
 
 .arrow-icon {
@@ -156,25 +179,50 @@
 }
 
 .login-btn {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #006BA6 0%, #0093E9 100%);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
     padding: 0.5rem 1.5rem;
-    background: white;
-    color: #0066FF;
-    border: 1px solid #0066FF;
-    border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
     font-size: 0.85rem;
     height: 36px;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Shine effect */
+.login-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s ease;
+}
+
+/* Hover effects */
 .login-btn:hover {
-    background: #000;
-    color: white;
-    border-color: #000;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 107, 166, 0.2);
+}
+
+.login-btn:hover::before {
+    left: 100%;
+}
+
+/* Active state */
+.login-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 107, 166, 0.2);
 }
 
 .navbar {
