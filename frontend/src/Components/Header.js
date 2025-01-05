@@ -26,6 +26,15 @@ const Header = () => {
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
+      
+      {/* Delicate floating elements */}
+      <div className="particle-1" />
+      <div className="particle-2" />
+      <div className="particle-3" />
+      <div className="particle-4" />
+      <div className="particle-5" />
+      <div className="particle-6" />
+
       <div className="header-container">
         <Link to="/" className="logo">
           <img src="https://jamaappprod.s3.ap-south-1.amazonaws.com/Website/maxiompms/maxiompms.svg" alt="Equirus Wealth" />
