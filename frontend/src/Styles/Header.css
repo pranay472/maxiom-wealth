@@ -26,7 +26,7 @@
   }
   
   .header-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -37,12 +37,14 @@
   .logo {
     display: flex;
     align-items: center;
-    margin-right: 4rem;
+    margin-right: 2rem;
   }
   
   .logo img {
-    height: 35px;
-    width: auto;
+    height: 45px;
+    width: 180px;
+    object-fit: contain;
+    transform: scale(1.3);
   }
   
   .header-buttons {
@@ -103,4 +105,10 @@
     border-color: #000;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  
+  .navbar {
+    flex: 1;
+    display: flex;
+    justify-content: center;
   }
