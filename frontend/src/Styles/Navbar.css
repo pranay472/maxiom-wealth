@@ -335,20 +335,36 @@
 
 /* Hover Animations */
 @keyframes slideIn {
-    from {
+    0% {
         opacity: 0;
         transform: translateX(-10px);
     }
-    to {
+    100% {
         opacity: 1;
         transform: translateX(0);
     }
 }
 
 .dropdown-content a {
-    animation: slideIn 0.5s ease-out forwards;
+    animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     animation-delay: calc(var(--item-index) * 0.1s);
     opacity: 0;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  opacity: 0;
+  animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Click animation for dropdown button */
@@ -384,7 +400,7 @@
     top: 85px;
     left: 0;
     right: 0;
-    background: white;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
     z-index: 999;
     margin-top: 1px;
     border-radius: 12px;
@@ -460,6 +476,9 @@
     color: #1a1a1a !important;
     transition: background-color 0.2s;
     font-weight: 500;
+    animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation-delay: calc(var(--item-index) * 0.1s);
+    opacity: 0;
 }
 
 .dropdown-card .card-subitems .subitem:hover {

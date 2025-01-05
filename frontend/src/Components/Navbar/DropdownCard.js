@@ -9,7 +9,12 @@ const DropdownCard = ({ title, subItems, onClick }) => {
       {subItems && (
         <div className="card-subitems">
           {subItems.map((item, index) => (
-            <button key={index} className="subitem" onClick={() => onClick && onClick(item)}>
+            <button 
+              key={index} 
+              className="subitem slide-in"
+              style={{ animationDelay: `${index * 200}ms` }}
+              onClick={() => onClick && onClick(item)}
+            >
               {item.icon && <img src={item.icon} alt="" className="subitem-icon" />}
               {item.title}
             </button>
