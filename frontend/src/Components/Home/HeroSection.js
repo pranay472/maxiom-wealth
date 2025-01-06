@@ -1,8 +1,26 @@
-import React from 'react';
-import ParticlesBackground from './ParticlesBackground'; // Assuming ParticlesBackground is in the same directory
+import React, { useState, useEffect } from 'react';
+import ParticlesBackground from './ParticlesBackground';
 import { FaGooglePlay, FaApple } from 'react-icons/fa';
+import './HeroSection.css';
 
 const HeroSection = () => {
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [prevTextIndex, setPrevTextIndex] = useState(2);
+  const texts = [
+    "Expertly managed Mutual Funds",
+    "Stocks",
+    "Portfolio Management Services"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPrevTextIndex(currentTextIndex);
+      setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [currentTextIndex]);
+
   return (
     <div className="w-full min-h-screen relative bg-gradient-to-br from-[#f0f0f0] via-[#e8e8e8] to-[#e0e0e0] font-['General Sans'] overflow-hidden">
       {/* Subtle grid pattern overlay */}
@@ -11,28 +29,35 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start pt-12">
           {/* Left Column - Text Content */}
           <div className="space-y-6 lg:mt-16">
-            {/* Main Heading - Using H1 typography scale: 32/38 */}
+            {/* Main Heading */}
             <h1 className="text-[#113262] text-[32px] leading-[38px] font-bold max-w-xl">
               Grow & Protect Wealth. Through Scientific Investment Strategies.
             </h1>
             
-            {/* Subheading - Using grey from neutral color palette */}
+            {/* Subheading */}
             <p className="text-[#8A8A8A] text-[20px] leading-[26px] max-w-lg">
               Join 10,000+ families who trust our independent research-backed approach to achieve their financial goals.
             </p>
             
-            {/* Services - Using Primary 300 color */}
-            <p className="text-[#1C52A0] text-[16px] leading-[26px] font-medium">
-              Expertly managed Mutual Funds • Stocks • Portfolio Management Services
-            </p>
+            {/* Animated Services Text */}
+            <div className="text-[#1C52A0] text-[24px] leading-[32px] font-medium h-[32px] overflow-hidden relative">
+              <div className="animation-wrapper">
+                <div key={`prev-${prevTextIndex}`} className="slide-out">
+                  {texts[prevTextIndex]}
+                </div>
+                <div key={`current-${currentTextIndex}`} className="slide-in">
+                  {texts[currentTextIndex]}
+                </div>
+              </div>
+            </div>
             
             <div className="flex flex-col sm:flex-col space-y-4 pt-4">
-              {/* Primary CTA Button - Using Primary 500 color */}
+              {/* Primary CTA Button */}
               <button className="w-full sm:w-auto bg-[#113262] border-2 border-[#113262] text-white px-12 py-4 rounded-lg text-[16px] leading-[26px] font-medium hover:bg-[#143970] transition-colors duration-300 shadow-sm">
                 Get free portfolio health check
               </button>
               
-              {/* Secondary CTA Button - Outlined style */}
+              {/* Secondary CTA Button */}
               <button className="w-full sm:w-auto border-2 border-[#113262] text-[#113262] px-12 py-4 rounded-lg text-[16px] leading-[26px] font-medium hover:bg-[#E8EEF6] transition-colors duration-300">
                 Start Goal Based Investment
               </button>
