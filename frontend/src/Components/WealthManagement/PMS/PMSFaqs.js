@@ -57,25 +57,9 @@ const PMSFaqs = () => {
               </span>
               <span className="text-secondary-300 ml-4">
                 {openIndex === index ? (
-                  <div className="relative w-6 h-6 transform transition-transform duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-br from-secondary-300 to-secondary-200 opacity-10 rounded-full"></div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-4 h-4 relative">
-                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-0.5 bg-secondary-300 rounded-full transform rotate-0"></span>
-                      </div>
-                    </div>
-                  </div>
+                  <ChevronUp className="w-6 h-6 text-secondary-300" />
                 ) : (
-                  <div className="relative w-6 h-6 transform transition-transform duration-300">
-                    <div className="absolute inset-0 bg-gradient-to-br from-secondary-300 to-secondary-200 opacity-10 rounded-full"></div>
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-4 h-4 relative">
-                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-0.5 bg-secondary-300 rounded-full transform rotate-90"></span>
-                        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-0.5 bg-secondary-300 rounded-full"></span>
-                      </div>
-                    </div>
-                    <div className="absolute -inset-1 bg-gradient-to-br from-secondary-300/20 to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
-                  </div>
+                  <ChevronDown className="w-6 h-6 text-secondary-300" />
                 )}
               </span>
             </button>

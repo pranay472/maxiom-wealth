@@ -149,67 +149,11 @@ export const navbarConfig = {
   },
   stocks: {
     title: 'Stocks',
-    items: [
-      {
-        title: 'Stock Research',
-        description: 'In-depth analysis and research reports',
-        subItems: [
-          {
-            title: 'Research Reports',
-            description: 'Access our detailed stock research reports',
-            route: '/stocks/research-reports',
-            icon: 'https://cdn-icons-png.flaticon.com/128/2593/2593491.png'
-          },
-          {
-            title: 'Market Analysis',
-            description: 'Stay updated with our market analysis',
-            route: '/stocks/market-analysis',
-            icon: 'https://cdn-icons-png.flaticon.com/128/3121/3121571.png'
-          }
-        ]
-      },
-      {
-        title: 'Stock Screener',
-        description: 'Tools to help you find the right stocks',
-        subItems: [
-          {
-            title: 'Screener Tool',
-            description: 'Filter and find stocks matching your criteria',
-            route: '/stocks/screener',
-            icon: 'https://cdn-icons-png.flaticon.com/128/8017/8017777.png'
-          },
-          {
-            title: 'Watchlist',
-            description: 'Track your favorite stocks',
-            route: '/stocks/watchlist',
-            icon: 'https://cdn-icons-png.flaticon.com/128/159/159604.png'
-          }
-        ]
-      }
-    ]
+    route: '/stocks'
   },
   mutualFunds: {
     title: 'Mutual Funds',
-    items: [
-      {
-        title: 'Mutual Fund Research',
-        description: 'Access a wide range of professionally managed investment funds.',
-        subItems: [
-          {
-            title: 'Fund Analysis',
-            description: 'Detailed analysis of mutual funds',
-            route: '/mutual-funds/analysis',
-            icon: 'https://cdn-icons-png.flaticon.com/128/1163/1163468.png'
-          },
-          {
-            title: 'Fund Comparison',
-            description: 'Compare different mutual funds',
-            route: '/mutual-funds/comparison',
-            icon: 'https://cdn-icons-png.flaticon.com/128/747/747086.png'
-          }
-        ]
-      }
-    ]
+    route: '/mutual-funds'
   },
   pms: {
     title: 'PMS',
