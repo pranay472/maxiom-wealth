@@ -213,26 +213,7 @@ export const navbarConfig = {
   },
   pms: {
     title: 'PMS',
-    items: [
-      {
-        title: 'PMS Research',
-        description: 'Access a wide range of professionally managed investment funds.',
-        subItems: [
-          {
-            title: 'Portfolio Strategies',
-            description: 'Explore our portfolio management strategies',
-            route: '/pms/strategies',
-            icon: 'https://cdn-icons-png.flaticon.com/128/3405/3405802.png'
-          },
-          {
-            title: 'Performance Reports',
-            description: 'View portfolio performance reports',
-            route: '/pms/performance',
-            icon: 'https://cdn-icons-png.flaticon.com/128/1170/1170576.png'
-          }
-        ]
-      }
-    ]
+    route: '/pms'
   },
   resources: {
     title: 'Resources',

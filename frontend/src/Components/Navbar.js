@@ -41,17 +41,19 @@ const NavBar = () => {
         <div
           key={key}
           className={`dropdown ${activeDropdown === index ? 'active' : ''}`}
-          onClick={() => handleDropdownClick(index)}
+          onClick={() => section.route ? handleItemClick(section) : handleDropdownClick(index)}
         >
           <span>
             {section.title}{' '}
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png"
-              alt="dropdown"
-              className="dropdown-arrow"
-            />
+            {!section.route && (
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/10503/10503084.png"
+                alt="dropdown"
+                className="dropdown-arrow"
+              />
+            )}
           </span>
-          {activeDropdown === index && (
+          {activeDropdown === index && section.items && (
             <DropdownMenu
               items={section.items}
               onItemClick={handleItemClick}
