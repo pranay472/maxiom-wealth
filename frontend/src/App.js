@@ -4,10 +4,10 @@ import './App.css';
 import Home from './Components/Home/Home';
 import WhyMaxiom from './Components/WhyMaxiom/WhyMaxiom';
 import Header from './Components/Header';
-import NavBar from './Components/Navbar';
 import JEWELTop350 from './Components/WealthManagement/PMS/JEWELTop350/JEWELTop350';
 import Spark351 from './Components/WealthManagement/PMS/Spark351/Spark351';
 import PMS from './Components/WealthManagement/PMS/PMS';
+import GEM from './Components/WealthManagement/PMS/GEM/GEM';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -22,12 +22,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <NavBar />
         <Routes>
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
           <Route path="/pms" element={<PMS />} />
-          <Route path="/wealth-management/pms/jewel-top-350" element={<JEWELTop350 />} />
-          <Route path="/wealth-management/pms/spark351" element={<Spark351 />} />
+          <Route path="/pms/jewel" element={<JEWELTop350 />} />
+          <Route path="/pms/spark" element={<Spark351 />} />
+          <Route path="/pms/gem" element={<GEM />} />
           <Route path="/" element={
             <>
               <Header />

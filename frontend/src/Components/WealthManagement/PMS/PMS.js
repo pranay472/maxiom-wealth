@@ -9,6 +9,7 @@ import InvestmentPhilosophy from "./InvestmentPhilosophy";
 import PMSDifference from "./PMSDifference";
 import ComparisonTable from "./ComparisonTable";
 import PMSFaqs from "./PMSFaqs";
+import PMSOfferings from "./PMSOfferings";
 
 
 const PMS = () => {
@@ -20,6 +21,7 @@ const PMS = () => {
         <HighlightsReel/>
         <PerformanceChart/>
         <WhyPMSSection/>
+        <PMSOfferings/>
         <InvestmentPhilosophy/>
         <PMSDifference/>
         <ComparisonTable/>
