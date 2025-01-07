@@ -21,9 +21,14 @@ const PortfolioComposition = () => {
   return (
     <div className="w-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-16 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 relative">
+          <motion.div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-2 border-dashed border-blue-400/30 rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          />
           <motion.h2 
-            className="text-4xl font-bold text-blue-100 mb-4 flex items-center justify-center"
+            className="text-4xl font-bold text-blue-100 mb-4 flex items-center justify-center relative z-10"
             initial={{ opacity: 0.6 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
