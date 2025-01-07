@@ -29,28 +29,28 @@ const FAQItem = ({ question, answer }) => {
 const GEMFAQ = () => {
   const faqs = [
     {
-      question: "How Does GEM Enhance Equity Growth?",
-      answer: "GEM capitalises on stock momentum, aligning investments with market trends for enhanced growth. Our data-driven approach ensures that these trends are leveraged effectively for your benefit."
+      question: "What is GEM?",
+      answer: "GEM is our investment strategy that combines quality companies with strong market momentum. We invest in companies that are not just fundamentally strong but are also showing positive price trends in the market."
     },
     {
-      question: "How Often is the Portfolio Rebalanced?",
-      answer: "Our GEM portfolios are rebalanced monthly even though we add a new stock for atleast four months. This frequency allows us to effectively capitalise on market momentum while keeping churn under control."
+      question: "What is your investment process?",
+      answer: "We follow a 5-step process: 1) Screen for quality companies using Roots & Wings, 2) Identify strong momentum indicators, 3) Analyze market trends, 4) Regular monitoring of momentum factors, 5) Make changes based on momentum shifts."
     },
     {
-      question: "What Makes GEM Different?",
-      answer: "Our GEM strategy is unique due to its monthly rebalancing, quality checks, and focus on top-tier stocks. This disciplined approach minimises risk while maximising potential returns."
+      question: "What are the investment details?",
+      answer: "The minimum investment is Rs. 50 lakhs, and the time horizon is best suited for 3-5 years or longer. We focus on companies across market sizes showing strong momentum."
     },
     {
-      question: "What is the 'Roots & Wings' Philosophy?",
-      answer: "Our 'Roots & Wings' philosophy combines foundational stability (Roots) with innovative growth strategies (Wings). It's integral to our approach, ensuring balanced and forward-thinking investment planning."
+      question: "How do you protect investments?",
+      answer: "We focus on fundamentally strong companies, regularly monitor momentum indicators, take quick action if momentum reverses, ensure diversification across sectors, and maintain a balance between quality and momentum factors."
     },
     {
-      question: "Is Momentum Investing Risky?",
-      answer: "While all investments carry some risk, our comprehensive risk management strategies in GEM mitigate these effectively. Continuous monitoring and adaptive strategies ensure safer investment choices."
+      question: "What are the risk factors to consider?",
+      answer: "Momentum strategies can be more volatile, market trends can change quickly, there's a possibility of momentum reversal, and it may lead to temporary underperformance. Investment value can fluctuate significantly."
     },
     {
-      question: "How Do You Handle Market Volatility?",
-      answer: "In volatile markets, our GEM strategy focuses on increasing cash positions and closely monitoring for momentum reversals. This proactive approach helps in navigating market fluctuations effectively."
+      question: "Who should invest in GEM?",
+      answer: "GEM is ideal for investors who want to capture market trends, can invest for at least 3-5 years, understand market momentum concepts, are comfortable with moderate to high risk, and want a blend of quality and momentum in their portfolio."
     }
   ];
 

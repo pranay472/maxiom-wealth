@@ -8,8 +8,8 @@ const GEMServices = () => {
   const services = [
     {
       icon: <PieChart className="w-6 h-6" />,
-      title: "Equity Portfolio Management",
-      description: "Tailoring equity portfolios to align with individual financial goals, ensuring optimal asset allocation.",
+      title: "Diverse Investment Portfolio",
+      description: "Investment spread across equity shares of selected companies, Exchange Traded Funds (ETFs), liquid mutual funds, and other market instruments for optimal returns.",
       accent: "bg-purple-400",
       gradient: "from-purple-400/20 to-purple-600/20",
       borderColor: "border-purple-200",
@@ -19,8 +19,8 @@ const GEMServices = () => {
     },
     {
       icon: <BarChart4 className="w-6 h-6" />,
-      title: "Optimal Asset Allocation",
-      description: "Crafting bespoke portfolios comprising of GEM and our other PMS strategies such as JEWEL, SPARK and SAPPHIRE catering to unique life stages and individual investment preferences.",
+      title: "Investment Process",
+      description: "Comprehensive 5-step process: screening quality companies, identifying momentum indicators, analyzing market trends, regular monitoring, and making changes based on momentum shifts.",
       accent: "bg-indigo-400",
       gradient: "from-indigo-400/20 to-indigo-600/20",
       borderColor: "border-indigo-200",
@@ -30,8 +30,8 @@ const GEMServices = () => {
     },
     {
       icon: <TrendingUp className="w-6 h-6" />,
-      title: "Momentum Investment Strategy",
-      description: "Employing momentum-based strategies to capitalise on market trends, enhancing portfolio performance.",
+      title: "Special Features",
+      description: "Emphasis on momentum-driven companies with strong fundamental backing, regular portfolio review process, and early risk detection system for dynamic portfolio management.",
       accent: "bg-orange-400",
       gradient: "from-orange-400/20 to-orange-600/20",
       borderColor: "border-orange-200",
@@ -41,8 +41,8 @@ const GEMServices = () => {
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: "Risk Management Solutions",
-      description: "Implementing robust risk management techniques to protect and grow your investments.",
+      title: "Risk Management",
+      description: "Focus on fundamentally strong companies with regular monitoring of momentum indicators, quick action on reversals, and diversification across sectors.",
       accent: "bg-teal-400",
       gradient: "from-teal-400/20 to-teal-600/20",
       borderColor: "border-teal-200",
@@ -82,9 +82,9 @@ const GEMServices = () => {
         <div className="mb-16">
           <div className="relative mb-16 text-center lg:text-left">
             <div className="inline-block">
-              <p className="text-lg font-medium text-secondary-500 mb-2">Experience Excellence in</p>
+              <p className="text-lg font-medium text-secondary-500 mb-2">Professional Investment Management</p>
               <h2 className="text-5xl font-bold text-primary-500 mb-4">
-                GEM PMS Services
+                GEM Investment Services
                 <div className="h-2 w-full bg-gradient-to-r from-secondary-300 to-secondary-500 mt-2 rounded-full transform transition-all duration-300 hover:scale-x-110 origin-left" />
               </h2>
               <div className="absolute -right-8 top-0 w-16 h-16 bg-secondary-300/10 rounded-full blur-xl animate-ping" />

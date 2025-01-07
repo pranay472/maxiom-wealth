@@ -5,33 +5,33 @@ const GEMFeatures = () => {
   const features = [
     {
       icon: <Zap className="w-12 h-12" />,
-      title: "ACTIVE MOMENTUM",
-      description: "Stocks which have performed exceptionally well in the recent past, tend to retain their momentum into the near future. GEM taps this."
+      title: "QUALITY & MOMENTUM",
+      description: "Combines two powerful investment approaches: quality and momentum, built on our trusted Roots & Wings philosophy."
     },
     {
       icon: <TrendingUp className="w-12 h-12" />,
-      title: "HIGHER GROWTH",
-      description: "By buying the 'strongest' performers and cutting losers, GEM aims to exploit market trends to generate maximal returns."
+      title: "MARKET LEADERSHIP",
+      description: "Focus on companies with strong fundamental qualities, positive price trends, and market leadership in their segments."
     },
     {
       icon: <RefreshCw className="w-12 h-12" />,
-      title: "ADAPTIVE MODEL",
-      description: "GEM strategy dynamically adjusts to market conditions and bear markets. By managing drawdowns, portfolios can be more resilient."
+      title: "DYNAMIC MANAGEMENT",
+      description: "Regular monitoring of momentum indicators and quick action if momentum reverses, ensuring portfolio optimization."
     },
     {
       icon: <Shield className="w-12 h-12" />,
-      title: "RISK MANAGEMENT",
-      description: "Our approach includes rigorous risk mitigation, safeguarding investments against market volatility with stop losses and cash positions."
+      title: "RISK PROTECTION",
+      description: "Focus on fundamentally strong companies with diversification across sectors and balance between quality and momentum factors."
     },
     {
       icon: <Award className="w-12 h-12" />,
-      title: "QUALITY MATTERS",
-      description: "GEM combines quality with momentum for delivering results. Quality is powered by our proven 'Roots & Wings' Investment Philosophy."
+      title: "SCIENTIFIC APPROACH",
+      description: "Scientific approach to stock selection with comprehensive screening for quality companies using Roots & Wings principles."
     },
     {
       icon: <BarChart2 className="w-12 h-12" />,
-      title: "VERIFIED STRATEGIES",
-      description: "GEM's approach is research-backed and uses proven quant techniques. It has done well in numerous simulations and also since launch by beating broad market indices."
+      title: "PROFESSIONAL MANAGEMENT",
+      description: "Early risk detection system and dynamic portfolio management with regular portfolio review process."
     }
   ];
 
@@ -39,7 +39,7 @@ const GEMFeatures = () => {
     <div className="w-full bg-gradient-to-br from-[#113262] to-[#1C52A0] py-20">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-4xl font-bold text-white text-center mb-16">
-          Why Trust Maxiom Wealth's GEM PMS
+          Why Choose GEM Strategy
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
