@@ -4,33 +4,33 @@ import { Shield, TrendingUp, PieChart, Scale, Award, Compass } from 'lucide-reac
 const factors = [
   {
     icon: Shield,
-    title: 'Stability',
-    description: 'Large cap companies grow well with the economy and can anchor the portfolio in turbulent times.'
+    title: 'Low Debt',
+    description: 'Focus on companies with low debt levels to ensure financial stability and wealth preservation.'
   },
   {
     icon: TrendingUp,
-    title: 'Growth',
-    description: 'Midcap stocks often present robust growth prospects, being at an inflection point in their evolution.'
+    title: 'Consistent Performance',
+    description: 'Companies with consistent ROE/ROCE performance demonstrating strong financial health.'
   },
   {
     icon: PieChart,
-    title: 'Diversification',
-    description: 'A varied equity portfolio across various sectors can provide better risk distribution.'
+    title: 'Strong Growth',
+    description: 'Emphasis on growth in sales, profits, and cash flows with trajectory of 1.5-3x GDP.'
   },
   {
     icon: Scale,
-    title: 'Balanced Approach',
-    description: 'Strikes a balance between the stability of large-cap and the volatility of mid-cap companies.'
+    title: 'Market Leadership',
+    description: 'Companies with strong pricing power, market sustainability, and leadership position.'
   },
   {
     icon: Award,
-    title: 'Industry Leaders',
-    description: 'The best large cap companies are leaders in their respective industries which augurs well for a long term portfolio.'
+    title: 'Business Resilience',
+    description: 'Focus on businesses with robust operating cash flows and proven resilience.'
   },
   {
     icon: Compass,
-    title: 'Emerging Trends',
-    description: 'Midcap companies have potential to become tomorrow\'s market leaders. JEWEL taps into these trends.'
+    title: 'Promoter Integrity',
+    description: 'Strong emphasis on promoter integrity and focus on capital preservation.'
   }
 ];
 

@@ -4,23 +4,23 @@ import { Target, Settings, RefreshCw, Shield } from 'lucide-react';
 const services = [
   {
     icon: Target,
-    title: 'Strategic Allocation',
-    description: 'Our experts manage your investments in high quality stocks allocated across large and mid caps across various sectors.'
+    title: 'Equity Focused Strategy',
+    description: 'Core investment approach focused on equity across market capitalizations, primarily in large-cap and midcap companies.'
   },
   {
     icon: Settings,
-    title: 'Portfolio Customisation',
-    description: 'Every investor is unique. We are able to tailor portfolios that reflect investor constraints, risk appetite and financial aspirations.'
+    title: 'Diverse Investment Universe',
+    description: 'Investment across listed securities, liquid mutual funds, money market instruments, fixed deposits, and exchange traded products.'
   },
   {
     icon: RefreshCw,
-    title: "'Full Service' With Rebalancing",
-    description: 'The dynamic nature of the stock market necessitates regular portfolio adjustments. We keep portfolios aligned with market developments.'
+    title: 'Dynamic Portfolio Management',
+    description: 'Professional portfolio management with periodic reviews and early risk detection system.'
   },
   {
     icon: Shield,
-    title: 'Risk Mitigation',
-    description: 'With proactive strategies, we ensure client investments are resilient against market uncertainties.'
+    title: 'Risk Management',
+    description: 'Comprehensive risk management covering market risk, liquidity risk, and concentration risk in focused portfolio.'
   }
 ];
 
@@ -29,7 +29,7 @@ const Services = () => {
     <section className="py-20 bg-[#F8F9FA]">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-[#113262] text-center mb-12">
-          JEWEL PMS- Equity Portfolio Management Services Offered
+          JEWEL Flexi Cap Quality-Growth PMS
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => (

@@ -3,28 +3,28 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'Why invest in both large and midcap equities?',
-    answer: 'This gives a good balance of risk and return for most investors. Large caps give steady returns whereas midcaps offer a blend of growth and resilience, potentially becoming market leaders.'
+    question: 'What is the investment objective of JEWEL PMS?',
+    answer: 'To achieve long-term capital appreciation by investing in a mix of large, mid-cap and the larger among small-cap companies that meet the Roots & Wings investment criteria.'
   },
   {
-    question: 'How do you select stocks?',
-    answer: 'Through in-depth research, data analytics, and understanding market dynamics.'
+    question: 'What is the Roots & Wings investment philosophy?',
+    answer: 'Our philosophy combines "Roots" (focus on wealth preservation through low debt companies, consistent ROE/ROCE, and strong promoter integrity) with "Wings" (emphasis on growth in sales, profits, cash flows, business resilience, and market leadership).'
   },
   {
-    question: 'How often do you review my portfolio?',
-    answer: 'Regular reviews, especially post quarterly results and significant market events, ensure optimal growth.'
+    question: 'What is your investment horizon?',
+    answer: '3 to 5 years and above, focusing on long-term capital appreciation through quality growth companies.'
   },
   {
-    question: 'Is midcap investing risky?',
-    answer: 'While there\'s inherent market risk, our strategies are designed to mitigate them effectively.'
+    question: 'What is your benchmark?',
+    answer: 'We use Nifty 50 TRI as our benchmark for comprehensive market performance reference and effective evaluation of investment returns.'
   },
   {
-    question: 'Do you use any technology for analysis?',
-    answer: 'Yes, our proprietary data analytics platform aids in objective stock evaluations.'
+    question: 'What has been your recent performance?',
+    answer: 'For Discretionary PMS: Current Year (April 2024 - September 2024): 20.31%, FY 2023-24: 7.07%. For Non-Discretionary PMS: Current Year: 23.19%, FY 2023-24: 17.73%. Note: Past performance is not indicative of future returns.'
   },
   {
-    question: 'How can Maxiom Wealth add value?',
-    answer: 'With our deep expertise and client-first approach, we aim to maximise your returns.'
+    question: 'How do you manage investment risks?',
+    answer: 'We manage market risk, liquidity risk, and concentration risk through our early risk detection system and dynamic portfolio management approach.'
   }
 ];
 
