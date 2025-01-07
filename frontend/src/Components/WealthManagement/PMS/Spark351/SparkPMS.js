@@ -5,10 +5,10 @@ const SparkPMS = () => {
   const [selectedTab, setSelectedTab] = useState('overview');
 
   const marketStats = [
-    { label: 'Average Market Cap', value: '₹4,000+ Cr' },
-    { label: 'Universe Coverage', value: '650 Companies' },
-    { label: 'Analysis Depth', value: '100+ Parameters' },
-    { label: 'Track Record', value: '15+ Years' }
+    { label: 'Minimum Investment', value: '₹50 Lakhs' },
+    { label: 'Investment Horizon', value: '3-5 Years' },
+    { label: 'Current Returns', value: '22.11%' },
+    { label: 'Previous Year', value: '23.69%' }
   ];
 
   return (
@@ -20,10 +20,10 @@ const SparkPMS = () => {
             <div className="mb-12">
               <span className="text-[#F49611] font-medium tracking-wider">EXCLUSIVE OFFERING</span>
               <h1 className="text-4xl lg:text-5xl font-bold text-white mt-4 mb-6">
-                SPARK PMS
+                SPARK: Your Gateway to Emerging Companies
               </h1>
               <p className="text-gray-300 text-lg mb-8">
-                Elite portfolio management service focusing on the next wave of market leaders
+                Discover and invest in promising small companies that show strong potential for growth
               </p>
               <div className="flex flex-wrap gap-4">
                 {marketStats.map((stat, index) => (
@@ -43,8 +43,8 @@ const SparkPMS = () => {
                   <Target className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#113262]">Next 650 Focus</h3>
-                  <p className="text-gray-600">Unlocking value in undiscovered market leaders</p>
+                  <h3 className="text-xl font-bold text-[#113262]">Small-Cap Focus</h3>
+                  <p className="text-gray-600">Investing in tomorrow's market leaders today</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -52,8 +52,8 @@ const SparkPMS = () => {
                   <ShieldCheck className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#113262]">Risk-Managed Growth</h3>
-                  <p className="text-gray-600">Scientific approach to portfolio protection</p>
+                  <h3 className="text-xl font-bold text-[#113262]">Protected Growth</h3>
+                  <p className="text-gray-600">Regular monitoring and risk management</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -61,8 +61,8 @@ const SparkPMS = () => {
                   <BrainCircuit className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#113262]">Data Intelligence</h3>
-                  <p className="text-gray-600">Proprietary analytics driving decisions</p>
+                  <h3 className="text-xl font-bold text-[#113262]">Expert Research</h3>
+                  <p className="text-gray-600">Thorough analysis and company selection</p>
                 </div>
               </div>
             </div>

@@ -26,31 +26,31 @@ const FAQItem = ({ question, answer, isOpen, toggleOpen }) => {
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(0);
-  
+
   const faqData = [
     {
-      question: "How does Spark PMS select small-cap stocks?",
-      answer: "Our deep expertise, combined with proprietary data analytics, guides our selection. Each pick aligns with our commitment to growth and safety."
+      question: "What is SPARK?",
+      answer: "SPARK is our investment strategy that focuses on discovering and investing in promising small companies that show strong potential for growth. Think of it as investing in tomorrow's market leaders while they're still in their growth phase."
     },
     {
-      question: "Is investing in small-cap stocks risky?",
-      answer: "While they can be volatile, our diversified and risk-controlled approach ensures a balanced portfolio to navigate market challenges."
+      question: "What is the minimum investment and time horizon?",
+      answer: "The minimum investment is Rs. 50 lakhs, and the investment horizon is best suited for 3-5 years or longer. This longer horizon allows for the growth potential of small companies to materialize."
     },
     {
-      question: "How often is the portfolio rebalanced?",
-      answer: "Regular rebalancing is key. We adjust portfolios in line with market dynamics and your financial goals. This happens atleast once quarterly."
+      question: "How do you choose companies for investment?",
+      answer: "We look for companies that have strong financial health with low debt, consistent track record of returns, trustworthy management, and clear growth opportunities ahead."
     },
     {
-      question: "Are my investments secure with Spark PMS?",
-      answer: "Absolutely. As a SEBI Registered PMS, we do not hold your stocks or funds. These are under the custodial services of a large and reputed bank."
+      question: "What are the risk factors to consider?",
+      answer: "Small company stocks can be more volatile and might be harder to buy or sell quickly. Investment values can fluctuate significantly, making this strategy best suited for those comfortable with market ups and downs."
     },
     {
-      question: "How does Spark PMS ensure diversified portfolios?",
-      answer: "Our expert management curates a mix of promising stocks, ensuring diversification to spread across sectors, sub-market-cap-classes and manage risk."
+      question: "How do you protect investments?",
+      answer: "We employ regular monitoring of companies, take quick action if we spot any risks, ensure diversification across different types of businesses, and maintain a strong focus on companies with solid fundamentals."
     },
     {
-      question: "What makes Spark PMS different from other portfolio services?",
-      answer: "Our holistic approach, from financial planning to execution, combined with our unique features and client-centric value system, sets us apart."
+      question: "What has been your recent performance?",
+      answer: "For the period April 2024 - September 2024, we achieved 22.11% returns, and in the previous year (2023-24), we delivered 23.69% returns. However, please note that past performance doesn't guarantee future returns."
     }
   ];
 

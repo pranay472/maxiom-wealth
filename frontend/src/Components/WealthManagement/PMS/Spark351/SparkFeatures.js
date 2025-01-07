@@ -150,56 +150,56 @@ const SparkFeatures = () => {
   const features = [
     {
       icon: TrendingUp,
-      title: "HIGH Growth POTENTIAL",
-      description: "Small-cap stocks have a high growth potential. With Maxiom Wealth Spark PMS, capitalise on opportunities as India rises in the world.",
+      title: "Hidden Gems Focus",
+      description: "We focus on discovering promising small companies that show strong potential for growth - tomorrow's market leaders in their growth phase.",
       metrics: [
-        { value: "35%", label: "Annual Growth" },
-        { value: "500+", label: "Stocks Analyzed" }
+        { value: "22.11%", label: "Current Returns" },
+        { value: "23.69%", label: "Previous Year" }
       ]
     },
     {
       icon: Users,
-      title: "Expert Management",
-      description: "Our seasoned professionals research into the nuances of small-cap equities tapping their decades of experience of working 'inside' the industry.",
+      title: "Strong Fundamentals",
+      description: "We select companies with strong financial health, low debt, consistent track record of returns, and trustworthy management.",
       metrics: [
-        { value: "25+", label: "Years Experience" },
-        { value: "12", label: "Expert Analysts" }
+        { value: "3-5", label: "Years Horizon" },
+        { value: "50L", label: "Min Investment" }
       ]
     },
     {
       icon: PieChart,
-      title: "Diversification Key",
-      description: "We curate the portfolios across sectors spreading risk and maximising returns. Focus is on manufacturing, technology and other rising industries.",
+      title: "Diverse Portfolio",
+      description: "Investment spread across carefully selected stocks, liquid funds for safety, and other market instruments for optimized returns.",
       metrics: [
-        { value: "15+", label: "Sectors" },
-        { value: "40+", label: "Industries" }
+        { value: "100%", label: "Research Coverage" },
+        { value: "24/7", label: "Monitoring" }
       ]
     },
     {
       icon: Shield,
-      title: "RISK-CONTROLLED APPROACH",
-      description: "With Spark PMS, experience a balanced approach that safeguards against market volatility. Stocks that dont meet quality criteria are exited.",
+      title: "Risk Management",
+      description: "Regular monitoring, quick action on risks, diversification across businesses, and focus on companies with strong fundamentals.",
       metrics: [
-        { value: "24/7", label: "Monitoring" },
-        { value: "15%", label: "Max Exposure" }
+        { value: "5+", label: "Risk Metrics" },
+        { value: "Daily", label: "Risk Assessment" }
       ]
     },
     {
       icon: BarChart4,
-      title: "ASSET ALLOCATION",
-      description: "We recommend an allocation of 15% to 50% of long term portfolio to this asset class. This depends on your risk profile covering both risk appetite and risk tolerance.",
+      title: "Investment Process",
+      description: "Thorough process including identifying promising companies, research, quality checks, regular monitoring, and proactive management.",
       metrics: [
-        { value: "50%", label: "Max Allocation" },
-        { value: "15%", label: "Min Allocation" }
+        { value: "5", label: "Step Process" },
+        { value: "Regular", label: "Reviews" }
       ]
     },
     {
       icon: Target,
-      title: "Proven Philosophy",
-      description: "We adhere to \"Roots & Wings\". Roots = Strong balance sheets, consistent ROE/ROCE, aligned promoters. Wings = Growing Financial trajectory.",
+      title: "Ideal Investment",
+      description: "Perfect for investors seeking higher returns, comfortable with market volatility, and able to invest for 3-5 years or longer.",
       metrics: [
-        { value: "20%", label: "Avg. ROE" },
-        { value: "95%", label: "Success Rate" }
+        { value: "3-5", label: "Year Timeline" },
+        { value: "High", label: "Growth Potential" }
       ]
     }
   ];
