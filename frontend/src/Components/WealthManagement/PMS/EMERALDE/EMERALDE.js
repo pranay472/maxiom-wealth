@@ -2,6 +2,11 @@ import React from "react";
 import Footer from "../../../Footer";
 import Header from "../../../Header";
 import EmeraldHero from "./EmeraldHero";
+import InvestmentStrategy from "./InvestmentStrategy";
+import PortfolioComposition from "./PortfolioComposition";
+import PerformanceDashboard from "./PerformanceDashboard";
+import InvestorProfile from "./InvestorProfile";
+import FAQComponent from "./FAQComponent";
 
 
 const EMERALDE = () => {
@@ -13,7 +18,11 @@ const EMERALDE = () => {
           <EmeraldHero/>
         </div>
         <div className="relative bg-white z-10">
-          
+          <InvestmentStrategy/>
+          <PortfolioComposition/>
+          <PerformanceDashboard/>
+          <InvestorProfile/>
+          <FAQComponent/>
         </div>
       </main>
       <div className="relative z-20">
