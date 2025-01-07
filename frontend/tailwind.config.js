@@ -5,6 +5,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: {
+          50: '#f0f7ff',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6'
+        },
+        secondary: {
+          300: '#fcd34d',
+          400: '#fbbf24'
+        }
+      },
       animation: {
         'fadeIn': 'fadeIn 1s ease-in forwards',
         'slideUp': 'slideUp 0.8s ease-out forwards',

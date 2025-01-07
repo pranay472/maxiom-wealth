@@ -31,14 +31,17 @@ const Hero = () => {
 
           {/* Main heading */}
           <h1 className={`text-5xl md:text-6xl font-bold text-center text-white mb-8 opacity-0 leading-tight ${isVisible ? 'animate-slideUp' : ''}`}>
-            Build Lasting Wealth Through
-            <span className="bg-gradient-to-r from-[#F49611] to-[#F6A839] text-transparent bg-clip-text"> Strategic Investments</span>
+            JEWEL Flexi Cap Quality-Growth PMS
+            <div className="text-lg mt-2 text-[#A2B8D8]">(formerly known as "JEWEL Large-Mid Cap Quality-Growth Strategy Portfolio")</div>
           </h1>
 
           {/* Subheading */}
-          <p className={`text-xl md:text-2xl text-[#A2B8D8] text-center max-w-3xl mx-auto mb-12 opacity-0 ${isVisible ? 'animate-slideUpDelayed' : ''}`}>
-            Achieve exceptional capital appreciation through our curated portfolio of large and mid-cap companies with proven track records.
-          </p>
+          <div className={`text-xl md:text-2xl text-[#A2B8D8] text-center max-w-3xl mx-auto mb-12 opacity-0 ${isVisible ? 'animate-slideUpDelayed' : ''}`}>
+            <h2 className="font-semibold mb-4">Investment Objective</h2>
+            <p>
+              To achieve long-term capital appreciation by investing in a mix of large, mid-cap and the larger among small-cap companies that meet the Roots & Wings investment criteria.
+            </p>
+          </div>
 
           {/* CTA buttons */}
           <div className={`flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 opacity-0 ${isVisible ? 'animate-slideUpMore' : ''}`}>
@@ -72,6 +75,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
-
-

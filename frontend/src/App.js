@@ -8,6 +8,7 @@ import JEWELTop350 from './Components/WealthManagement/PMS/JEWELTop350/JEWELTop3
 import Spark351 from './Components/WealthManagement/PMS/Spark351/Spark351';
 import PMS from './Components/WealthManagement/PMS/PMS';
 import GEM from './Components/WealthManagement/PMS/GEM/GEM';
+import EMERALDE from './Components/WealthManagement/PMS/EMERALDE/EMERALDE';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -28,6 +29,7 @@ function App() {
           <Route path="/pms/jewel" element={<JEWELTop350 />} />
           <Route path="/pms/spark" element={<Spark351 />} />
           <Route path="/pms/gem" element={<GEM />} />
+          <Route path="/pms/emerald-equity" element={<EMERALDE />} />
           <Route path="/" element={
             <>
               <Header />
