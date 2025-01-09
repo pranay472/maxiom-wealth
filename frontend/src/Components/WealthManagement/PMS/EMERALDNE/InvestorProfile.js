@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import { CheckCircle, XCircle } from "lucide-react";
 
 const InvestorProfile = () => {
   const fadeInUp = {
@@ -53,7 +53,7 @@ const InvestorProfile = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <h3 className="text-xl font-semibold leading-8 text-emerald-600 mb-8 flex items-center">
               <span className="bg-emerald-100 rounded-full p-2 mr-3">
-                <CheckCircleIcon className="h-6 w-6 text-emerald-600" />
+                <CheckCircle className="h-6 w-6 text-emerald-600" />
               </span>
               Ideal For
             </h3>
@@ -65,7 +65,7 @@ const InvestorProfile = () => {
                 "Those preferring fixed-income exposure"
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-4 group/item">
-                  <CheckCircleIcon className="h-6 w-6 flex-none text-emerald-600 mt-1 group-hover/item:scale-110 transition-transform" />
+                  <CheckCircle className="h-6 w-6 flex-none text-emerald-600 mt-1 group-hover/item:scale-110 transition-transform" />
                   <span className="text-gray-600 group-hover/item:text-gray-900 transition-colors">{item}</span>
                 </li>
               ))}
@@ -83,7 +83,7 @@ const InvestorProfile = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-red-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <h3 className="text-xl font-semibold leading-8 text-red-600 mb-8 flex items-center">
               <span className="bg-red-100 rounded-full p-2 mr-3">
-                <XCircleIcon className="h-6 w-6 text-red-600" />
+                <XCircle className="h-6 w-6 text-red-600" />
               </span>
               Not Suitable For
             </h3>
@@ -94,7 +94,7 @@ const InvestorProfile = () => {
                 "Investors seeking aggressive growth"
               ].map((item, index) => (
                 <li key={index} className="flex items-start gap-4 group/item">
-                  <XCircleIcon className="h-6 w-6 flex-none text-red-600 mt-1 group-hover/item:scale-110 transition-transform" />
+                  <XCircle className="h-6 w-6 flex-none text-red-600 mt-1 group-hover/item:scale-110 transition-transform" />
                   <span className="text-gray-600 group-hover/item:text-gray-900 transition-colors">{item}</span>
                 </li>
               ))}
