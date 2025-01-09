@@ -64,7 +64,7 @@ export const calculatorData = [
     description: 'Calculate how much you can make if you invest a fixed amount per month for "n" years',
     Icon: Calendar,
     category: 'Investment',
-    path: '/calculators/sip'
+    path: '/resources/calculators/sip'
   },
   {
     id: 'sip-delay',

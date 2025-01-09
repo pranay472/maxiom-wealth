@@ -17,6 +17,7 @@ import FD from './Components/Resources/Calculators/calculate/FD/FD';
 import PPF from './Components/Resources/Calculators/calculate/PPF/PPF';
 import RD from './Components/Resources/Calculators/calculate/RD/RD';
 import SimpleInterest from './Components/Resources/Calculators/calculate/SimpleInterest/SimpleInterest';
+import SIP from './Components/Resources/Calculators/calculate/SIP/SIP';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -46,6 +47,7 @@ function App() {
           <Route path="/resources/calculators/ppf" element={<PPF />} />
           <Route path="/resources/calculators/rd" element={<RD />} />
           <Route path="/resources/calculators/simple-interest" element={<SimpleInterest />} />
+          <Route path="/resources/calculators/sip" element={<SIP />} />
           <Route path="/" element={
             <>
               <Header />
