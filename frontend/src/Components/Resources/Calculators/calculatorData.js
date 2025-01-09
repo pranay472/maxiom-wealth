@@ -32,7 +32,7 @@ export const calculatorData = [
     description: 'Calculate and grow your money with fixed deposits',
     Icon: Landmark,
     category: 'Investment',
-    path: '/calculators/fd'
+    path: '/resources/calculators/fd'
   },
   {
     id: 'ppf',
@@ -40,7 +40,7 @@ export const calculatorData = [
     description: 'Calculate your tax-free and risk-free earnings',
     Icon: Wallet,
     category: 'Investment',
-    path: '/calculators/ppf'
+    path: '/resources/calculators/ppf'
   },
   {
     id: 'rd',
@@ -48,7 +48,7 @@ export const calculatorData = [
     description: 'Plan your finances wisely with our recurring deposit calculator',
     Icon: Repeat,
     category: 'Investment',
-    path: '/calculators/rd'
+    path: '/resources/calculators/rd'
   },
   {
     id: 'simple-interest',
@@ -56,7 +56,7 @@ export const calculatorData = [
     description: 'Know your Payment Plan',
     Icon: Calculator,
     category: 'Investment',
-    path: '/calculators/simple-interest'
+    path: '/resources/calculators/simple-interest'
   },
   {
     id: 'sip',

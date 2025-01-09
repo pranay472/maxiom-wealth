@@ -116,8 +116,6 @@ const CompoundInterest = () => {
           <CompoundInterestCalculator/>
           <CompoundInterestContent/>
         </div>
-        <div className="relative bg-white z-10">
-        </div>
       </main>
       <div className="relative z-20">
         <Footer />

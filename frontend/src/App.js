@@ -13,6 +13,10 @@ import EMERALDNE from './Components/WealthManagement/PMS/EMERALDNE/EMERALDNE';
 import Calculators from './Components/Resources/Calculators/Calculators';
 import CAGR from './Components/Resources/Calculators/calculate/CAGR/CAGR';
 import CompoundInterest from './Components/Resources/Calculators/calculate/CompoundInterest/CompoundInterest';
+import FD from './Components/Resources/Calculators/calculate/FD/FD';
+import PPF from './Components/Resources/Calculators/calculate/PPF/PPF';
+import RD from './Components/Resources/Calculators/calculate/RD/RD';
+import SimpleInterest from './Components/Resources/Calculators/calculate/SimpleInterest/SimpleInterest';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -38,6 +42,10 @@ function App() {
           <Route path="/resources/calculators" element={<Calculators />} />
           <Route path="/resources/calculators/cagr" element={<CAGR />} />
           <Route path="/resources/calculators/compound-interest" element={<CompoundInterest />} />
+          <Route path="/resources/calculators/fd" element={<FD />} />
+          <Route path="/resources/calculators/ppf" element={<PPF />} />
+          <Route path="/resources/calculators/rd" element={<RD />} />
+          <Route path="/resources/calculators/simple-interest" element={<SimpleInterest />} />
           <Route path="/" element={
             <>
               <Header />
