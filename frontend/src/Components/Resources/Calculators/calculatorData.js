@@ -6,7 +6,9 @@ import {
   Repeat, 
   Calculator, 
   Calendar, 
-  Clock 
+  Clock,
+  Rocket,
+  Sigma
 } from 'lucide-react';
 
 export const calculatorData = [
@@ -72,6 +74,22 @@ export const calculatorData = [
     description: 'Calculate how much you would potentially lose if you delay your SIP by a few years',
     Icon: Clock,
     category: 'Investment',
-    path: '/calculators/sip-delay'
+    path: '/resources/calculators/sip-delay'
+  },
+  {
+    id:'sip-growth',
+    title:'SIP Growth Calculator',
+    description:'Calculate the growth of your SIP over time',
+    Icon: Rocket,
+    category:'Investment',
+    path:'/resources/calculators/sip-growth'
+  },
+  {
+    id:'weighted-average-returns',
+    title:'Weighted Average Returns',
+    description:'Calculate the weighted average returns of your investments',
+    Icon: Sigma,
+    category:'Investment',
+    path:'/resources/calculators/weighted-returns'
   }
 ];

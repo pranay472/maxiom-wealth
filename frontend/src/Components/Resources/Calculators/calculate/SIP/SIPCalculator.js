@@ -114,7 +114,7 @@ const SIPCalculator = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6 bg-white">
+    <div className="w-full max-w-4xl mx-auto p-6 bg-white pt-36">
       <h2 className="text-2xl font-semibold mb-2">SIP Calculator</h2>
       <p className="text-gray-600 mb-8">Calculate your return on investment on SIP over time</p>
       

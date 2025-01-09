@@ -18,6 +18,9 @@ import PPF from './Components/Resources/Calculators/calculate/PPF/PPF';
 import RD from './Components/Resources/Calculators/calculate/RD/RD';
 import SimpleInterest from './Components/Resources/Calculators/calculate/SimpleInterest/SimpleInterest';
 import SIP from './Components/Resources/Calculators/calculate/SIP/SIP';
+import SIPDelay from './Components/Resources/Calculators/calculate/SIPDelay/SIPDelay';
+import SIPGrowth from './Components/Resources/Calculators/calculate/SIPGrowth/SIPGrowth';
+import WeightedReturns from './Components/Resources/Calculators/calculate/WeightedReturns/WeightedReturns';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -48,6 +51,9 @@ function App() {
           <Route path="/resources/calculators/rd" element={<RD />} />
           <Route path="/resources/calculators/simple-interest" element={<SimpleInterest />} />
           <Route path="/resources/calculators/sip" element={<SIP />} />
+          <Route path="/resources/calculators/sip-delay" element={<SIPDelay />} />
+          <Route path="/resources/calculators/sip-growth" element={<SIPGrowth />} />
+          <Route path="/resources/calculators/weighted-returns" element={<WeightedReturns />} />
           <Route path="/" element={
             <>
               <Header />
