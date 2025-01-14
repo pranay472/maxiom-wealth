@@ -8,7 +8,14 @@ import {
   Calendar, 
   Clock,
   Rocket,
-  Sigma
+  Sigma,
+  Users,
+  Book,
+  Heart,
+  Target,
+  Car,
+  Home,
+  Globe
 } from 'lucide-react';
 
 export const calculatorData = [
@@ -91,5 +98,84 @@ export const calculatorData = [
     Icon: Sigma,
     category:'Investment',
     path:'/resources/calculators/weighted-returns'
+  },
+  {
+    id:'aging-parents',
+    title:'Aging Parents',
+    description:'Calculate how much you need to secure for your aging parents',
+    Icon: Users,
+    category:'Goals',
+    path:'/resources/calculators/aging-parents'
+  },
+  {
+    id:'child-education',
+    title:'Child Education',
+    description:'Calculate how much you need to secure for your child\'s education',
+    Icon: Book,
+    category:'Goals',
+    path:'/resources/calculators/child-education'
+  },
+  {
+    id:'child-marriage',
+    title:'Child Marriage',
+    description:'Calculate how much you need to secure for your child\'s marriage',
+    Icon: Heart,
+    category:'Goals',
+    path:'/resources/calculators/child-marriage'
+  },
+  {
+    id:'custom-goal',
+    title:'Custom Goal',
+    description:'Calculate how much you need to secure for your custom goal',
+    Icon: Target,
+    category:'Goals',
+    path:'/resources/calculators/custom-goals'
+  },
+  {
+    id:'dream-wedding',
+    title:'Dream Wedding',
+    description:'Calculate how much you need to secure for your dream wedding',
+    Icon: Heart,
+    category:'Goals',
+    path:'/resources/calculators/dream-wedding' 
+  },
+  {id:'first-car',
+    title:'First Car',
+    description:'Calculate how much you need to secure for your first car',
+    Icon: Car,
+    category:'Goals',
+    path:'/resources/calculators/first-car'
+  },
+  {
+    id:'first-crore-goal',
+    title:'First Crore Goal',
+    description:'Calculate how much you need to secure for your first crore goal',  
+    Icon: Target,
+    category:'Goals',
+    path:'/resources/calculators/first-crore-goal'
+  },
+  {
+    id:'home-goal',
+    title:'Home Goal',
+    description:'Calculate how much you need to secure for your home goal',
+    Icon: Home,
+    category:'Goals',
+    path:'/resources/calculators/home-goal'
+  },
+  {
+    id:'overseas-vacation',
+    title:'Overseas Vacation Goal',
+    description:'Calculate how much you need to secure for your overseas vacation',
+    Icon: Globe,
+    category:'Goals',
+    path:'/resources/calculators/overseas-vacation'
+  },
+  {
+    id:'retirement',
+    title:'Retirement Plan Calculator',
+    description:'Calculate how much you need to secure for your retirement',
+    Icon: Target,
+    category:'Goals',
+    path:'/resources/calculators/retirement'
   }
 ];

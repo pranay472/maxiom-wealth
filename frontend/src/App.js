@@ -21,6 +21,11 @@ import SIP from './Components/Resources/Calculators/calculate/SIP/SIP';
 import SIPDelay from './Components/Resources/Calculators/calculate/SIPDelay/SIPDelay';
 import SIPGrowth from './Components/Resources/Calculators/calculate/SIPGrowth/SIPGrowth';
 import WeightedReturns from './Components/Resources/Calculators/calculate/WeightedReturns/WeightedReturns';
+import AgingParents from './Components/Resources/Calculators/GoalsCalculate/AgingParents/AgingParents';
+import ChildEducation from './Components/Resources/Calculators/GoalsCalculate/ChildEducation/ChildEducation';
+import ChildMarriage from './Components/Resources/Calculators/GoalsCalculate/ChildMarriage/ChildMarriage';
+import CustomGoals from './Components/Resources/Calculators/GoalsCalculate/CustomGoals/CustomGoals';
+import DreamWedding from './Components/Resources/Calculators/GoalsCalculate/DreamWedding/DreamWedding';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -54,6 +59,11 @@ function App() {
           <Route path="/resources/calculators/sip-delay" element={<SIPDelay />} />
           <Route path="/resources/calculators/sip-growth" element={<SIPGrowth />} />
           <Route path="/resources/calculators/weighted-returns" element={<WeightedReturns />} />
+          <Route path="/resources/calculators/aging-parents" element={<AgingParents />} />
+          <Route path="/resources/calculators/child-education" element={<ChildEducation />} />
+          <Route path="/resources/calculators/child-marriage" element={<ChildMarriage />} />
+          <Route path="/resources/calculators/custom-goals" element={<CustomGoals />} />
+          <Route path="/resources/calculators/dream-wedding" element={<DreamWedding />} />
           <Route path="/" element={
             <>
               <Header />
