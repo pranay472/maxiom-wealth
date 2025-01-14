@@ -28,6 +28,8 @@ import CustomGoals from './Components/Resources/Calculators/GoalsCalculate/Custo
 import DreamWedding from './Components/Resources/Calculators/GoalsCalculate/DreamWedding/DreamWedding';
 import FirstCar from './Components/Resources/Calculators/GoalsCalculate/FirstCar/FirstCar';
 import FirstCrore from './Components/Resources/Calculators/GoalsCalculate/FirstCrore/FirstCrore';
+import HomeGoal from './Components/Resources/Calculators/GoalsCalculate/HomeGoal/HomeGoal';
+import OverseasVacation from './Components/Resources/Calculators/GoalsCalculate/OverseasVacation/OverseasVacation';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -68,6 +70,8 @@ function App() {
           <Route path="/resources/calculators/dream-wedding" element={<DreamWedding />} />
           <Route path="/resources/calculators/first-car" element={<FirstCar />} />
           <Route path="/resources/calculators/first-crore" element={<FirstCrore />} />
+          <Route path="/resources/calculators/home-goal" element={<HomeGoal />} />
+          <Route path="/resources/calculators/overseas-vacation" element={<OverseasVacation />} />
           <Route path="/" element={
             <>
               <Header />
