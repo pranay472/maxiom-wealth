@@ -45,6 +45,48 @@ const Calculators = () => {
             ))}
           </div>
         </div>
+        <div className="space-y-8 pt-24">
+          <h2 className="text-2xl font-semibold text-gray-800">Loan Calculators</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {calculatorData.filter((calculator) => calculator.category === 'Loan').map((calculator) => (
+              <CalculatorCard
+                key={calculator.id}
+                title={calculator.title}
+                description={calculator.description}
+                Icon={calculator.Icon}
+                path={calculator.path}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="space-y-8 pt-24">
+          <h2 className="text-2xl font-semibold text-gray-800">Miscellaneous Calculators</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {calculatorData.filter((calculator) => calculator.category === 'Miscellaneous').map((calculator) => (
+              <CalculatorCard
+                key={calculator.id}
+                title={calculator.title}
+                description={calculator.description}
+                Icon={calculator.Icon}
+                path={calculator.path}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="space-y-8 pt-24">
+          <h2 className="text-2xl font-semibold text-gray-800">Retirement Calculators</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {calculatorData.filter((calculator) => calculator.category === 'Retirement').map((calculator) => (
+              <CalculatorCard
+                key={calculator.id}
+                title={calculator.title}
+                description={calculator.description}
+                Icon={calculator.Icon}
+                path={calculator.path}
+              />
+            ))}
+          </div>
+        </div>
       </div>
       <Footer />
     </div>

@@ -31,6 +31,14 @@ import FirstCrore from './Components/Resources/Calculators/GoalsCalculate/FirstC
 import HomeGoal from './Components/Resources/Calculators/GoalsCalculate/HomeGoal/HomeGoal';
 import OverseasVacation from './Components/Resources/Calculators/GoalsCalculate/OverseasVacation/OverseasVacation';
 import RecurringWorldTour from './Components/Resources/Calculators/GoalsCalculate/RecurringWorldTour/RecurringWorldTour';
+import CarLoan from './Components/Resources/Calculators/LoansCalculate/CarLoan/CarLoan';
+import EMI from './Components/Resources/Calculators/LoansCalculate/EMI/EMI';
+import HomeLoan from './Components/Resources/Calculators/LoansCalculate/HomeLoan/HomeLoan';
+import PersonalLoan from './Components/Resources/Calculators/LoansCalculate/PersonalLoan/PersonalLoan';
+import EducationLoan from './Components/Resources/Calculators/LoansCalculate/EducationLoan/EducationLoan';
+import RenovationLoan from './Components/Resources/Calculators/LoansCalculate/RenovationLoan/RenovationLoan';
+import LandConstruction from './Components/Resources/Calculators/LoansCalculate/LandConstruction/LandConstruction';
+import MarriageLoan from './Components/Resources/Calculators/LoansCalculate/MarriageLoan/MarriageLoan';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -74,6 +82,14 @@ function App() {
           <Route path="/resources/calculators/home-goal" element={<HomeGoal />} />
           <Route path="/resources/calculators/overseas-vacation" element={<OverseasVacation />} />
           <Route path="/resources/calculators/recurring-world-tour" element={<RecurringWorldTour />} />
+          <Route path="/resources/calculators/car-loan-emi" element={<CarLoan />} />
+          <Route path="/resources/calculators/emi" element={<EMI />} />
+          <Route path="/resources/calculators/home-loan-emi" element={<HomeLoan />} />
+          <Route path="/resources/calculators/personal-loan-emi" element={<PersonalLoan />} />
+          <Route path="/resources/calculators/education-loan-emi" element={<EducationLoan />} />
+          <Route path="/resources/calculators/home-extension-loan" element={<RenovationLoan />} />
+          <Route path="/resources/calculators/land-construction-loan" element={<LandConstruction />} />
+          <Route path="/resources/calculators/marriage-loan" element={<MarriageLoan />} />
           <Route path="/" element={
             <>
               <Header />
