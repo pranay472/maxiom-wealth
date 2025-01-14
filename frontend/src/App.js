@@ -30,6 +30,7 @@ import FirstCar from './Components/Resources/Calculators/GoalsCalculate/FirstCar
 import FirstCrore from './Components/Resources/Calculators/GoalsCalculate/FirstCrore/FirstCrore';
 import HomeGoal from './Components/Resources/Calculators/GoalsCalculate/HomeGoal/HomeGoal';
 import OverseasVacation from './Components/Resources/Calculators/GoalsCalculate/OverseasVacation/OverseasVacation';
+import RecurringWorldTour from './Components/Resources/Calculators/GoalsCalculate/RecurringWorldTour/RecurringWorldTour';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -72,6 +73,7 @@ function App() {
           <Route path="/resources/calculators/first-crore" element={<FirstCrore />} />
           <Route path="/resources/calculators/home-goal" element={<HomeGoal />} />
           <Route path="/resources/calculators/overseas-vacation" element={<OverseasVacation />} />
+          <Route path="/resources/calculators/recurring-world-tour" element={<RecurringWorldTour />} />
           <Route path="/" element={
             <>
               <Header />

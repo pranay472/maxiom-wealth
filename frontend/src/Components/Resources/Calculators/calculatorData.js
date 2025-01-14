@@ -171,11 +171,11 @@ export const calculatorData = [
     path:'/resources/calculators/overseas-vacation'
   },
   {
-    id:'retirement',
-    title:'Retirement Plan Calculator',
-    description:'Calculate how much you need to secure for your retirement',
+    id:'recurring-world-tour',
+    title:'Recurring World Tour',
+    description:'Calculate how much you need to secure for your recurring world tour',
     Icon: Target,
     category:'Goals',
-    path:'/resources/calculators/retirement'
+    path:'/resources/calculators/recurring-world-tour'
   }
 ];
