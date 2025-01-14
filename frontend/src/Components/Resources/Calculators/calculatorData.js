@@ -152,7 +152,7 @@ export const calculatorData = [
     description:'Calculate how much you need to secure for your first crore goal',  
     Icon: Target,
     category:'Goals',
-    path:'/resources/calculators/first-crore-goal'
+    path:'/resources/calculators/first-crore'
   },
   {
     id:'home-goal',

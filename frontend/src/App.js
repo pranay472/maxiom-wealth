@@ -26,6 +26,8 @@ import ChildEducation from './Components/Resources/Calculators/GoalsCalculate/Ch
 import ChildMarriage from './Components/Resources/Calculators/GoalsCalculate/ChildMarriage/ChildMarriage';
 import CustomGoals from './Components/Resources/Calculators/GoalsCalculate/CustomGoals/CustomGoals';
 import DreamWedding from './Components/Resources/Calculators/GoalsCalculate/DreamWedding/DreamWedding';
+import FirstCar from './Components/Resources/Calculators/GoalsCalculate/FirstCar/FirstCar';
+import FirstCrore from './Components/Resources/Calculators/GoalsCalculate/FirstCrore/FirstCrore';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -64,6 +66,8 @@ function App() {
           <Route path="/resources/calculators/child-marriage" element={<ChildMarriage />} />
           <Route path="/resources/calculators/custom-goals" element={<CustomGoals />} />
           <Route path="/resources/calculators/dream-wedding" element={<DreamWedding />} />
+          <Route path="/resources/calculators/first-car" element={<FirstCar />} />
+          <Route path="/resources/calculators/first-crore" element={<FirstCrore />} />
           <Route path="/" element={
             <>
               <Header />
