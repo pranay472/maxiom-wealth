@@ -39,6 +39,9 @@ import EducationLoan from './Components/Resources/Calculators/LoansCalculate/Edu
 import RenovationLoan from './Components/Resources/Calculators/LoansCalculate/RenovationLoan/RenovationLoan';
 import LandConstruction from './Components/Resources/Calculators/LoansCalculate/LandConstruction/LandConstruction';
 import MarriageLoan from './Components/Resources/Calculators/LoansCalculate/MarriageLoan/MarriageLoan';
+import RetirementPlan from './Components/Resources/Calculators/RetirementCalculate/RetirementPlan/RetirementPlan';
+import Superannuation from './Components/Resources/Calculators/RetirementCalculate/Superannuation/Superannuation';
+import FIRE from './Components/Resources/Calculators/RetirementCalculate/FIRE/FIRE';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -90,6 +93,9 @@ function App() {
           <Route path="/resources/calculators/home-extension-loan" element={<RenovationLoan />} />
           <Route path="/resources/calculators/land-construction-loan" element={<LandConstruction />} />
           <Route path="/resources/calculators/marriage-loan" element={<MarriageLoan />} />
+          <Route path="/resources/calculators/retirement-plan" element={<RetirementPlan />} />
+          <Route path="/resources/calculators/superannuation" element={<Superannuation />} />
+          <Route path="/resources/calculators/fire" element={<FIRE />} />
           <Route path="/" element={
             <>
               <Header />

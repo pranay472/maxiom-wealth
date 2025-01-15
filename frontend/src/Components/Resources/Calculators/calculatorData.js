@@ -403,12 +403,12 @@ export const calculatorData = [
     path: '/resources/calculators/superannuation'
   },
   {
-    id: 'early-retirement',
+    id: 'fire',
     title: 'Achieve early/fire retirement',
     description: 'Plan your path to financial independence and early retirement',
     Icon: Rocket,
     category: 'Retirement',
-    path: '/resources/calculators/early-retirement'
+    path: '/resources/calculators/fire'
   },
   {
     id: 'nps-reinvestment',
