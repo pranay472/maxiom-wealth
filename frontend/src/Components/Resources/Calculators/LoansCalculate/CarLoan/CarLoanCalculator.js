@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Share } from 'lucide-react';
+import { Share, ChevronDown } from 'lucide-react';
 
 const CarLoanCalculator = () => {
+  // Input states grouped by section
   const [values, setValues] = useState({
+    // Variables
     loanAmount: 1000000,
-    loanTenure: 6,
+    downPayment: 200000,
+    
+    // Expectations
     interestRate: 8,
+    loanTenure: 6,
+    
+    // Assumptions
+    processingFee: 1,
     repaymentYears: 1
   });
+
+  const [showAssumptions, setShowAssumptions] = useState(false);
 
   const handleChange = (key, value) => {
     setValues(prev => ({
@@ -18,35 +28,23 @@ const CarLoanCalculator = () => {
 
   const calculateLoan = () => {
     const { loanAmount, loanTenure, interestRate, repaymentYears } = values;
-    
-    // Calculate EMI
     const monthlyInterestRate = (interestRate / 12) / 100;
     const totalMonths = loanTenure * 12;
     const repaidMonths = repaymentYears * 12;
     
-    // Multiply loan amount by 10 to match the scale
     const scaledLoanAmount = loanAmount * 10;
     
     const emi = scaledLoanAmount * monthlyInterestRate * 
                 Math.pow(1 + monthlyInterestRate, totalMonths) / 
                 (Math.pow(1 + monthlyInterestRate, totalMonths) - 1);
     
-    // Calculate total amount
     const totalAmount = emi * totalMonths;
-    
-    // Calculate principle and interest paid
-    const totalInterest = totalAmount - scaledLoanAmount;
-    const monthlyPrincipal = scaledLoanAmount / totalMonths;
-    const principleRepaid = monthlyPrincipal * repaidMonths;
-    const interestPaid = (emi - monthlyPrincipal) * repaidMonths;
     const outstandingLoan = totalAmount - (emi * repaidMonths);
     
     return {
-      emi: Math.round(emi),
+      monthlyEMI: Math.round(emi),
       totalAmount: Math.round(totalAmount),
-      outstandingAmount: Math.round(outstandingLoan),
-      principleRepaid: Math.round(principleRepaid),
-      interestPaid: Math.round(interestPaid)
+      outstandingAmount: Math.round(outstandingLoan)
     };
   };
 
@@ -57,36 +55,21 @@ const CarLoanCalculator = () => {
   }, [values]);
 
   const formatCurrency = (amount) => {
-    // Convert to string and remove any existing commas
     let num = amount.toString().replace(/,/g, '');
-    
-    // Split into whole and decimal parts
     let parts = num.split('.');
     let wholePart = parts[0];
-    
-    // Handle negative numbers
-    let sign = '';
-    if (wholePart.startsWith('-')) {
-      sign = '-';
-      wholePart = wholePart.substring(1);
-    }
-    
-    // Format according to Indian numbering system
     let lastThree = wholePart.substring(wholePart.length - 3);
     let otherNumbers = wholePart.substring(0, wholePart.length - 3);
     if (otherNumbers !== '') {
       lastThree = ',' + lastThree;
     }
-    let formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThree;
-    
-    return formatted;
-  }; // Added missing closing brace
+    return '₹' + otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + lastThree;
+  };
 
-  const InputField = ({ label, value, onChange, min, max, unit, step = 1, helpText }) => (
-    <div className="mb-3">
-      <label className="block font-semibold text-gray-800 mb-1 text-sm">{label}</label>
-      {helpText && <p className="text-xs text-gray-600 mb-1">{helpText}</p>}
-      <div className="flex gap-2">
+  const InputField = ({ label, value, onChange, min, max, unit, step = 1 }) => (
+    <div>
+      <label className="block text-sm font-medium text-gray-800 mb-1.5">{label}</label>
+      <div className="flex items-center gap-2">
         <input 
           type="number" 
           value={value} 
@@ -96,7 +79,7 @@ const CarLoanCalculator = () => {
               onChange(val);
             }
           }}
-          className="w-24 px-2 py-1 border rounded text-sm" 
+          className="w-full p-1.5 border rounded text-sm" 
         />
         <span className="text-sm text-gray-600">{unit}</span>
       </div>
@@ -106,116 +89,142 @@ const CarLoanCalculator = () => {
         max={max} 
         step={step} 
         value={value}
-        onChange={e => {
-          const val = parseFloat(e.target.value);
-          if (!isNaN(val) && val >= min && val <= max) {
-            onChange(val);
-          }
-        }}
-        className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-1" 
+        onChange={e => onChange(parseFloat(e.target.value))}
+        className="w-full mt-2" 
       />
-      <div className="flex justify-between text-xs text-gray-500 mt-1">
-        <span>{formatCurrency(min)}</span>
-        <span>{formatCurrency(max)}</span>
-      </div>
     </div>
   );
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
-      <div className="container mx-auto">
-        <div className="mb-4 pt-36">
-          <h1 className="text-2xl font-bold text-gray-900">Car Loan EMI Calculator</h1>
-          <p className="text-sm text-gray-600 mt-1">Easy to own a car now. Calculate how much you need to pay monthly for a car.</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2 space-y-3">
-            <div className="grid grid-cols-2 gap-3">
-              <InputField 
-                label="Car Loan Amount" 
-                value={values.loanAmount}
-                onChange={v => handleChange('loanAmount', v)}
-                min={50000}
-                max={10000000}
-                unit="₹"
-                step={50000}
-                helpText="What is the your car loan amount today?"
-              />
-              <InputField 
-                label="Car Loan Tenure" 
-                value={values.loanTenure}
-                onChange={v => handleChange('loanTenure', v)}
-                min={1}
-                max={8}
-                unit="years"
-                helpText="What is the tenure of the car loan?"
-              />
-              <InputField 
-                label="Car Loan Interest" 
-                value={values.interestRate}
-                onChange={v => handleChange('interestRate', v)}
-                min={4}
-                max={20}
-                unit="%"
-                step={0.1}
-                helpText="What is the rate of interest on the car loan?"
-              />
-              <InputField 
-                label="Repayment Years" 
-                value={values.repaymentYears}
-                onChange={v => handleChange('repaymentYears', v)}
-                min={0}
-                max={8}
-                unit="years"
-                helpText="How many years of car loan repayment have you made?"
-              />
-            </div>
-          </div>
-
-          <div className="bg-[#113262] text-white p-4 rounded-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold">Car Loan EMI</h3>
-              <button className="p-1.5 hover:bg-[#1e3a8a] rounded">
-                <Share size={18} />
-              </button>
-            </div>
-
-            <div className="mb-6">
-              <div className="text-3xl font-bold mb-1">{formatCurrency(result.emi)}</div>
-              <div className="text-sm text-gray-300">Required amount (inflation adjusted)</div>
-            </div>
-
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-gray-300">New Investment Required</h4>
-              <div className="text-sm text-gray-300">(By frequency)</div>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between py-1.5 border-t border-white/20">
-                  <span className="text-sm">Total Loan Amount</span>
-                  <span className="font-bold">{formatCurrency(result.totalAmount)}</span>
-                </div>
-                
-                <div className="flex justify-between py-1.5 border-t border-white/20">
-                  <span className="text-sm">Outstanding Loan Amount</span>
-                  <span className="font-bold">₹{formatCurrency(result.outstandingAmount)}</span>
-                </div>
-
-                <div className="flex justify-between py-1.5 border-t border-white/20">
-                  <span className="text-sm">Principle Repaid</span>
-                  <span className="font-bold">₹{formatCurrency(result.principleRepaid)}</span>
-                </div>
-
-                <div className="flex justify-between py-1.5 border-t border-white/20">
-                  <span className="text-sm">Interest Paid</span>
-                  <span className="font-bold">₹{formatCurrency(result.interestPaid)}</span>
-                </div>
+    <div>
+      <div className="calculator-header text-center mb-8 pt-24">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">Car Loan EMI Tool</h1>
+        <h2 className="text-lg text-gray-600">Plan Loan Repayments with Car Loan EMI Calculator</h2>
+      </div>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 space-y-6">
+            {/* Loan Details Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Loan Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <InputField 
+                  label="Car Loan Amount"
+                  value={values.loanAmount}
+                  onChange={v => handleChange('loanAmount', v)}
+                  min={50000}
+                  max={10000000}
+                  unit="₹"
+                  step={50000}
+                />
+                <InputField 
+                  label="Down Payment"
+                  value={values.downPayment}
+                  onChange={v => handleChange('downPayment', v)}
+                  min={0}
+                  max={values.loanAmount * 0.5}
+                  unit="₹"
+                  step={10000}
+                />
               </div>
             </div>
 
-            <button className="w-full bg-[#fb923c] text-white py-2 rounded-lg mt-6 text-sm hover:bg-[#f97316] transition-colors">
-              Get Started →
-            </button>
+            {/* Loan Terms Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Loan Terms</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <InputField 
+                  label="Interest Rate"
+                  value={values.interestRate}
+                  onChange={v => handleChange('interestRate', v)}
+                  min={4}
+                  max={20}
+                  unit="%"
+                  step={0.1}
+                />
+                <InputField 
+                  label="Loan Tenure"
+                  value={values.loanTenure}
+                  onChange={v => handleChange('loanTenure', v)}
+                  min={1}
+                  max={8}
+                  unit="years"
+                />
+              </div>
+            </div>
+
+            {/* Additional Charges Section */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAssumptions(!showAssumptions)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
+              >
+                <h2 className="text-lg font-bold text-gray-900">Additional Charges</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAssumptions ? 'rotate-180' : ''}`}
+                  size={20}
+                />
+              </button>
+              
+              {showAssumptions && (
+                <div className="p-4 border-t">
+                  <div className="grid grid-cols-2 gap-6">
+                    <InputField 
+                      label="Processing Fee"
+                      value={values.processingFee}
+                      onChange={v => handleChange('processingFee', v)}
+                      min={0}
+                      max={3}
+                      unit="%"
+                      step={0.1}
+                    />
+                    <InputField 
+                      label="Repayment Years"
+                      value={values.repaymentYears}
+                      onChange={v => handleChange('repaymentYears', v)}
+                      min={0}
+                      max={values.loanTenure}
+                      unit="years"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[360px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold">Car Loan EMI</h3>
+                <button className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-4">
+              <div className="mb-4">
+                <div className="text-3xl font-bold mb-1">{formatCurrency(result.monthlyEMI)}</div>
+                <div className="text-sm text-gray-300">Monthly EMI</div>
+              </div>
+
+              <div className="space-y-3">
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Total Amount</span>
+                  <span className="font-bold">{formatCurrency(result.totalAmount)}</span>
+                </div>
+                
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Outstanding Amount</span>
+                  <span className="font-bold">{formatCurrency(result.outstandingAmount)}</span>
+                </div>
+              </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Apply Now →
+              </button>
+            </div>
           </div>
         </div>
       </div>
