@@ -32,7 +32,21 @@ const Calculators = () => {
           </div>
         </div>
         <div className="space-y-8 pt-24">
-          <h2 className="text-2xl font-semibold text-gray-800">Goals Calculators</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Children & Family Calculators</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {calculatorData.filter((calculator) => calculator.category === 'Family').map((calculator) => (
+              <CalculatorCard
+                key={calculator.id}
+                title={calculator.title}
+                description={calculator.description}
+                Icon={calculator.Icon}
+                path={calculator.path}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="space-y-8 pt-24">
+          <h2 className="text-2xl font-semibold text-gray-800">Lifestyle and Goal Planning Calculators</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {calculatorData.filter((calculator) => calculator.category === 'Goals').map((calculator) => (
               <CalculatorCard

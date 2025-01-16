@@ -24,7 +24,7 @@ import WeightedReturns from './Components/Resources/Calculators/calculate/Weight
 import AgingParents from './Components/Resources/Calculators/GoalsCalculate/AgingParents/AgingParents';
 import ChildEducation from './Components/Resources/Calculators/GoalsCalculate/ChildEducation/ChildEducation';
 import ChildMarriage from './Components/Resources/Calculators/GoalsCalculate/ChildMarriage/ChildMarriage';
-import CustomGoals from './Components/Resources/Calculators/GoalsCalculate/CustomGoals/CustomGoals';
+import CustomGoals from './Components/Resources/Calculators/calculate/CustomGoals/CustomGoals';
 import DreamWedding from './Components/Resources/Calculators/GoalsCalculate/DreamWedding/DreamWedding';
 import FirstCar from './Components/Resources/Calculators/GoalsCalculate/FirstCar/FirstCar';
 import FirstCrore from './Components/Resources/Calculators/GoalsCalculate/FirstCrore/FirstCrore';
@@ -42,6 +42,9 @@ import MarriageLoan from './Components/Resources/Calculators/LoansCalculate/Marr
 import RetirementPlan from './Components/Resources/Calculators/RetirementCalculate/RetirementPlan/RetirementPlan';
 import Superannuation from './Components/Resources/Calculators/RetirementCalculate/Superannuation/Superannuation';
 import FIRE from './Components/Resources/Calculators/RetirementCalculate/FIRE/FIRE';
+import TravelBudget from './Components/Resources/Calculators/GoalsCalculate/TravelBudget/TravelBudget';
+import WeddingBudget from './Components/Resources/Calculators/GoalsCalculate/WeddingBudget/WeddingBudget';
+import HomeRenovation from './Components/Resources/Calculators/GoalsCalculate/HomeRenovation/HomeRenovation';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -96,6 +99,9 @@ function App() {
           <Route path="/resources/calculators/retirement-plan" element={<RetirementPlan />} />
           <Route path="/resources/calculators/superannuation" element={<Superannuation />} />
           <Route path="/resources/calculators/fire" element={<FIRE />} />
+          <Route path="/resources/calculators/travel-budget" element={<TravelBudget />} />
+          <Route path="/resources/calculators/wedding-budget" element={<WeddingBudget />} />
+          <Route path="/resources/calculators/home-renovation-budget" element={<HomeRenovation />} />
           <Route path="/" element={
             <>
               <Header />

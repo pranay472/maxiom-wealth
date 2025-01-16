@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Share, ChevronDown } from 'lucide-react';
 
 const FDCalculator = () => {
-  const [principalAmount, setPrincipalAmount] = useState('1,00,000');
-  const [interestRate, setInterestRate] = useState('8');
-  const [years, setYears] = useState('6');
+  // Investment details
+  const [principalAmount, setPrincipalAmount] = useState(100000);
+  const [interestRate, setInterestRate] = useState(8);
+  const [years, setYears] = useState(6);
+
+  // Additional settings
+  const [showAdditional, setShowAdditional] = useState(false);
   const [compoundingFrequency, setCompoundingFrequency] = useState('annually');
-  const [maturityAmount, setMaturityAmount] = useState(0);
-  const [interestAccrued, setInterestAccrued] = useState(0);
   const [showShareToast, setShowShareToast] = useState(false);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const principal = urlParams.get('principal');
-    const rate = urlParams.get('rate');
-    const period = urlParams.get('years');
-    const frequency = urlParams.get('frequency');
-
-    if (principal) setPrincipalAmount(principal);
-    if (rate) setInterestRate(rate);
-    if (period) setYears(period);
-    if (frequency) setCompoundingFrequency(frequency);
-  }, []);
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
 
   const calculateFDInterest = () => {
     const frequencies = {
@@ -30,30 +28,19 @@ const FDCalculator = () => {
       'monthly': 12
     };
 
-    const p = Number(principalAmount.replace(/,/g, ''));
-    const r = Number(interestRate);
-    const t = Number(years);
+    const p = principalAmount;
+    const r = interestRate;
+    const t = years;
     const n = frequencies[compoundingFrequency];
     
     if (p <= 0 || r <= 0 || t <= 0) return { maturity: 0, interest: 0 };
     
     const amount = p * Math.pow(1 + (r / (100 * n)), n * t);
     const interest = amount - p;
-    return { maturity: amount, interest };
+    return { maturity: Math.round(amount), interest: Math.round(interest) };
   };
 
-  useEffect(() => {
-    const { maturity, interest } = calculateFDInterest();
-    setMaturityAmount(maturity);
-    setInterestAccrued(interest);
-
-    const newUrl = new URL(window.location.href);
-    if (principalAmount) newUrl.searchParams.set('principal', principalAmount);
-    if (interestRate) newUrl.searchParams.set('rate', interestRate);
-    if (years) newUrl.searchParams.set('years', years);
-    if (compoundingFrequency) newUrl.searchParams.set('frequency', compoundingFrequency);
-    window.history.replaceState({}, '', newUrl);
-  }, [principalAmount, interestRate, years, compoundingFrequency]);
+  const results = calculateFDInterest();
 
   const handleShare = async () => {
     try {
@@ -66,153 +53,171 @@ const FDCalculator = () => {
   };
 
   return (
-    <div className="w-full bg-white py-12">
-      {showShareToast && (
-        <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
-          Link copied!
-        </div>
-      )}
-
-      <div className="max-w-6xl mx-auto px-6 pt-20">
-        <h1 className="text-3xl font-bold text-gray-900">FD Calculator</h1>
-        <p className="text-gray-600 mt-2">Calculate the returns on a fixed deposit over a period.</p>
-
-        <div className="mt-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Principal Amount */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Principal Amount</label>
-                <p className="text-sm text-gray-600 mt-1">What is the amount you wish to invest today?</p>
-              </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={principalAmount.replace(/,/g, '')}
-                  onChange={(e) => {
-                    const value = Number(e.target.value).toLocaleString('en-IN');
-                    setPrincipalAmount(value);
-                  }}
-                  min="100000"
-                  max="100000000"
-                  step="100000"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">1L</span>
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">FD Returns Estimator</h1>
+        <h2 className="text-lg text-gray-600">Maximise FD Returns with Fixed Deposit Calculator</h2>
+      </div>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Investment Details Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Investment Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Principal Amount</label>
                   <input
-                    type="text"
+                    type="number"
                     value={principalAmount}
-                    onChange={(e) => setPrincipalAmount(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
+                    onChange={(e) => setPrincipalAmount(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
                   />
-                  <span className="text-sm text-gray-600">10Cr</span>
+                  <input
+                    type="range"
+                    min={100000}
+                    max={100000000}
+                    step={100000}
+                    value={principalAmount}
+                    onChange={(e) => setPrincipalAmount(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹1L</span>
+                    <span>₹10Cr</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Interest Rate (%)</label>
+                  <input
+                    type="number"
+                    value={interestRate}
+                    onChange={(e) => setInterestRate(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={5}
+                    max={20}
+                    step={0.1}
+                    value={interestRate}
+                    onChange={(e) => setInterestRate(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>5%</span>
+                    <span>20%</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Interest Rate */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Rate Of Interest</label>
-                <p className="text-sm text-gray-600 mt-1">Interest rate on your FD</p>
-              </div>
-              <div className="relative mt-6">
+            {/* Time Period Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Time Period</h2>
+              <div>
+                <label className="block font-medium text-sm mb-1.5">Investment Period (Years)</label>
+                <input
+                  type="number"
+                  value={years}
+                  onChange={(e) => setYears(Number(e.target.value))}
+                  className="w-full p-1.5 border rounded text-sm"
+                />
                 <input
                   type="range"
-                  value={interestRate}
-                  onChange={(e) => setInterestRate(e.target.value)}
-                  min="5"
-                  max="20"
-                  step="0.1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  min={1}
+                  max={10}
+                  value={years}
+                  onChange={(e) => setYears(Number(e.target.value))}
+                  className="w-full mt-2"
                 />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">5%</span>
-                  <input
-                    type="text"
-                    value={interestRate}
-                    onChange={(e) => setInterestRate(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
-                  />
-                  <span className="text-sm text-gray-600">20%</span>
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1 year</span>
+                  <span>10 years</span>
                 </div>
               </div>
             </div>
 
-            {/* Result Card */}
-            <div className="lg:row-span-3">
-              <div className="space-y-6">
-                <div className="bg-[#113262] text-white p-6 rounded-lg">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg">AMOUNT INVESTED</span>
-                    <button onClick={handleShare}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-                      </svg>
-                    </button>
-                  </div>
-                  
-                  <div className="text-4xl font-bold mb-6">₹{principalAmount}</div>
-
+            {/* Additional Settings Section */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAdditional(!showAdditional)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
+              >
+                <h2 className="text-lg font-bold text-gray-900">Additional Settings</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAdditional ? 'rotate-180' : ''}`} 
+                  size={20}
+                />
+              </button>
+              
+              {showAdditional && (
+                <div className="p-4 border-t">
+                  <label className="block font-medium text-sm mb-2">Interest Compounding</label>
                   <select 
                     value={compoundingFrequency}
                     onChange={(e) => setCompoundingFrequency(e.target.value)}
-                    className="w-full bg-[#1C52A0] text-white p-2 rounded mb-6"
+                    className="w-full p-2 border rounded text-sm"
                   >
-                    <option value="monthly">Invested Monthly</option>
-                    <option value="quarterly">Invested Quarterly</option>
-                    <option value="semi-annually">Invested Semi Annually</option>
-                    <option value="annually">Invested Annually</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="semi-annually">Semi Annually</option>
+                    <option value="annually">Annually</option>
                   </select>
-
-                  <div className="space-y-4">
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Interest Accrued</span>
-                      <span>₹{Math.round(interestAccrued).toLocaleString('en-IN')}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Maturity Amount</span>
-                      <span>₹{Math.round(maturityAmount).toLocaleString('en-IN')}</span>
-                    </div>
-                  </div>
                 </div>
+              )}
+            </div>
+          </div>
 
-                <button className="w-full bg-[#F49611] hover:bg-[#F6A839] text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
-                  Get Started →
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[400px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">FD Summary</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
                 </button>
               </div>
             </div>
 
-            {/* Investment Period */}
-            <div className="lg:col-span-1">
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Investment Period</label>
-                <p className="text-sm text-gray-600 mt-1">How many years till you wish to invest?</p>
+            <div className="p-4">
+              <div className="mb-4">
+                <div className="text-3xl font-bold mb-1">{formatCurrency(results.maturity)}</div>
+                <div className="text-sm text-gray-300">Maturity Amount</div>
               </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={years}
-                  onChange={(e) => setYears(e.target.value)}
-                  min="5"
-                  max="25"
-                  step="1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">5 years</span>
-                  <input
-                    type="text"
-                    value={years}
-                    onChange={(e) => setYears(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
-                  />
-                  <span className="text-sm text-gray-600">25 years</span>
+
+              <div className="space-y-3">
+                <h4 className="text-sm font-medium text-gray-300">Investment Breakdown</h4>
+                
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Principal Amount</span>
+                  <span className="font-bold">{formatCurrency(principalAmount)}</span>
+                </div>
+                
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Interest Earned</span>
+                  <span className="font-bold">{formatCurrency(results.interest)}</span>
+                </div>
+
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Compounding</span>
+                  <span className="font-bold capitalize">{compoundingFrequency}</span>
                 </div>
               </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Start Investing →
+              </button>
             </div>
           </div>
+
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>

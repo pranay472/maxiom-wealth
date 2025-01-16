@@ -1,29 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Share, ChevronDown } from 'lucide-react';
 
 const PPFCalculator = () => {
-  const [annualInvestment, setAnnualInvestment] = useState('86,500');
-  const [years, setYears] = useState('15');
-  const [expectedReturns, setExpectedReturns] = useState('6');
-  const [totalInvested, setTotalInvested] = useState(0);
-  const [totalInterest, setTotalInterest] = useState(0);
-  const [maturityValue, setMaturityValue] = useState(0);
+  // Investment details
+  const [annualInvestment, setAnnualInvestment] = useState(86500);
+  const [years, setYears] = useState(15);
+  const [expectedReturns, setExpectedReturns] = useState(6);
+
+  // Additional settings
+  const [showAdditional, setShowAdditional] = useState(false);
   const [showShareToast, setShowShareToast] = useState(false);
 
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const investment = urlParams.get('investment');
-    const period = urlParams.get('years');
-    const returns = urlParams.get('returns');
-
-    if (investment) setAnnualInvestment(investment);
-    if (period) setYears(period);
-    if (returns) setExpectedReturns(returns);
-  }, []);
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
 
   const calculatePPF = () => {
-    const principal = Number(annualInvestment.replace(/,/g, ''));
-    const period = Number(years);
-    const rate = Number(expectedReturns) / 100;
+    const principal = annualInvestment;
+    const period = years;
+    const rate = expectedReturns / 100;
     
     if (principal <= 0 || period <= 0 || rate <= 0) return { 
       totalInvested: 0, 
@@ -43,24 +42,13 @@ const PPFCalculator = () => {
     const totalInterest = balance - totalInvested;
     
     return {
-      totalInvested,
-      totalInterest,
-      maturity: balance
+      totalInvested: Math.round(totalInvested),
+      totalInterest: Math.round(totalInterest),
+      maturity: Math.round(balance)
     };
   };
 
-  useEffect(() => {
-    const { totalInvested: invested, totalInterest: interest, maturity } = calculatePPF();
-    setTotalInvested(invested);
-    setTotalInterest(interest);
-    setMaturityValue(maturity);
-
-    const newUrl = new URL(window.location.href);
-    if (annualInvestment) newUrl.searchParams.set('investment', annualInvestment);
-    if (years) newUrl.searchParams.set('years', years);
-    if (expectedReturns) newUrl.searchParams.set('returns', expectedReturns);
-    window.history.replaceState({}, '', newUrl);
-  }, [annualInvestment, years, expectedReturns]);
+  const results = calculatePPF();
 
   const handleShare = async () => {
     try {
@@ -73,142 +61,148 @@ const PPFCalculator = () => {
   };
 
   return (
-    <div className="w-full bg-white py-12">
-      {showShareToast && (
-        <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
-          Link copied!
-        </div>
-      )}
-
-      <div className="max-w-6xl mx-auto px-6 pt-20">
-        <h1 className="text-3xl font-bold text-gray-900">PPF Calculator</h1>
-        <p className="text-gray-600 mt-2">Calculate the present and future value of your pension fund</p>
-
-        <div className="mt-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Annual Investment */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Annual Investment</label>
-                <p className="text-sm text-gray-600 mt-1">What is the annual amount you wish to invest?</p>
-              </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={annualInvestment.replace(/,/g, '')}
-                  onChange={(e) => {
-                    const value = Number(e.target.value).toLocaleString('en-IN');
-                    setAnnualInvestment(value);
-                  }}
-                  min="500"
-                  max="150000"
-                  step="500"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">500</span>
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">PPF Planner</h1>
+        <h2 className="text-lg text-gray-600">Secure Your Future with PPF Calculator</h2>
+      </div>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Investment Details Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Investment Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Annual Investment</label>
                   <input
-                    type="text"
+                    type="number"
                     value={annualInvestment}
-                    onChange={(e) => setAnnualInvestment(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
+                    onChange={(e) => setAnnualInvestment(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
                   />
-                  <span className="text-sm text-gray-600">1.5L</span>
+                  <input
+                    type="range"
+                    min={500}
+                    max={150000}
+                    step={500}
+                    value={annualInvestment}
+                    onChange={(e) => setAnnualInvestment(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹500</span>
+                    <span>₹1.5L</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Returns (%)</label>
+                  <input
+                    type="number"
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={5}
+                    max={8}
+                    step={0.1}
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>5%</span>
+                    <span>8%</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Investment Period */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Investment Period</label>
-                <p className="text-sm text-gray-600 mt-1">How many years you wish to invest?</p>
-              </div>
-              <div className="relative mt-6">
+            {/* Time Period Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Time Period</h2>
+              <div>
+                <label className="block font-medium text-sm mb-1.5">Investment Period (Years)</label>
+                <input
+                  type="number"
+                  value={years}
+                  onChange={(e) => setYears(Number(e.target.value))}
+                  className="w-full p-1.5 border rounded text-sm"
+                />
                 <input
                   type="range"
+                  min={5}
+                  max={25}
                   value={years}
-                  onChange={(e) => setYears(e.target.value)}
-                  min="5"
-                  max="25"
-                  step="1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  onChange={(e) => setYears(Number(e.target.value))}
+                  className="w-full mt-2"
                 />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">5 years</span>
-                  <input
-                    type="text"
-                    value={years}
-                    onChange={(e) => setYears(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
-                  />
-                  <span className="text-sm text-gray-600">25 years</span>
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>5 years</span>
+                  <span>25 years</span>
                 </div>
               </div>
             </div>
 
-            {/* Result Card */}
-            <div className="lg:row-span-3">
-              <div className="space-y-6">
-                <div className="bg-[#113262] text-white p-6 rounded-lg">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg">INVESTED AMOUNT</span>
-                    <button onClick={handleShare}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-                      </svg>
-                    </button>
-                  </div>
-                  
-                  <div className="text-4xl font-bold mb-6">₹{Math.round(totalInvested).toLocaleString('en-IN')}</div>
+            {/* Information Note */}
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <p className="text-sm text-blue-800">
+                Note: The current PPF interest rate is 6% per annum, compounded annually. The minimum investment period is 15 years.
+              </p>
+            </div>
+          </div>
 
-                  <div className="space-y-4">
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Total Interest</span>
-                      <span>₹{Math.round(totalInterest).toLocaleString('en-IN')}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Maturity Value</span>
-                      <span>₹{Math.round(maturityValue).toLocaleString('en-IN')}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <button className="w-full bg-[#F49611] hover:bg-[#F6A839] text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
-                  Get Started →
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[400px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">PPF Summary</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
                 </button>
               </div>
             </div>
 
-            {/* Expected Returns */}
-            <div className="lg:col-span-1">
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Expected Returns On Investment</label>
-                <p className="text-sm text-gray-600 mt-1">Current PPF interest rate is 6% per annum</p>
+            <div className="p-4">
+              <div className="mb-4">
+                <div className="text-3xl font-bold mb-1">{formatCurrency(results.maturity)}</div>
+                <div className="text-sm text-gray-300">Maturity Value</div>
               </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={expectedReturns}
-                  onChange={(e) => setExpectedReturns(e.target.value)}
-                  min="5"
-                  max="8"
-                  step="0.1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">5%</span>
-                  <input
-                    type="text"
-                    value={expectedReturns}
-                    onChange={(e) => setExpectedReturns(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
-                  />
-                  <span className="text-sm text-gray-600">8%</span>
+
+              <div className="space-y-3">
+                <h4 className="text-sm font-medium text-gray-300">Investment Breakdown</h4>
+                
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Total Investment</span>
+                  <span className="font-bold">{formatCurrency(results.totalInvested)}</span>
+                </div>
+                
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Interest Earned</span>
+                  <span className="font-bold">{formatCurrency(results.totalInterest)}</span>
+                </div>
+
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
+                  <span className="text-sm">Investment Period</span>
+                  <span className="font-bold">{years} Years</span>
                 </div>
               </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Start PPF Investment →
+              </button>
             </div>
           </div>
+
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>

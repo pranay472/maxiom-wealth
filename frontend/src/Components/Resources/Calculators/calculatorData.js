@@ -21,40 +21,40 @@ import {
 export const calculatorData = [
   {
     id: 'cagr',
-    title: 'CAGR',
-    description: 'Calculate the compounded annual growth of your investments over time',
+    title: 'CAGR Tracker',
+    description: 'Track Your Wealth Growth with CAGR Calculator',
     Icon: TrendingUp,
     category: 'Investment',
     path: '/resources/calculators/cagr'
   },
   {
     id: 'compound-interest',
-    title: 'Compound Interest',
-    description: "How can you make the most of your money? With compound interest, that's how!",
+    title: 'Compound Interest Tool',
+    description: "Boost Savings with Compound Interest Calculator",
     Icon: PiggyBank,
     category: 'Investment',
     path: '/resources/calculators/compound-interest'
   },
   {
     id: 'fd',
-    title: 'FD',
-    description: 'Calculate and grow your money with fixed deposits',
+    title: 'FD Returns Estimator',
+    description: 'Maximise FD Returns with Fixed Deposit Calculator',
     Icon: Landmark,
     category: 'Investment',
     path: '/resources/calculators/fd'
   },
   {
     id: 'ppf',
-    title: 'Public Provident Fund (PPF)',
-    description: 'Calculate your tax-free and risk-free earnings',
+    title: 'PPF Planner',
+    description: 'Secure Your Future with PPF Calculator',
     Icon: Wallet,
     category: 'Investment',
     path: '/resources/calculators/ppf'
   },
   {
     id: 'rd',
-    title: 'RD',
-    description: 'Plan your finances wisely with our recurring deposit calculator',
+    title: 'Recurring Deposit Planner',
+    description: 'Save Consistently with Recurring Deposit Calculator',
     Icon: Repeat,
     category: 'Investment',
     path: '/resources/calculators/rd'
@@ -148,11 +148,19 @@ export const calculatorData = [
     path: '/resources/calculators/future-value'
   },
   {
+    id:'custom-goal',
+    title:'Custom Goal Tracker',
+    description:'Achieve Any Financial Goals with Custom Goal Calculator',
+    Icon: Target,
+    category:'Investment',
+    path:'/resources/calculators/custom-goals'
+  },
+  {
     id:'aging-parents',
     title:'Aging Parents',
     description:'Calculate how much you need to secure for your aging parents',
     Icon: Users,
-    category:'Goals',
+    category:'Family',
     path:'/resources/calculators/aging-parents'
   },
   {
@@ -160,7 +168,7 @@ export const calculatorData = [
     title:'Child Education',
     description:'Calculate how much you need to secure for your child\'s education',
     Icon: Book,
-    category:'Goals',
+    category:'Family',
     path:'/resources/calculators/child-education'
   },
   {
@@ -168,28 +176,44 @@ export const calculatorData = [
     title:'Child Marriage',
     description:'Calculate how much you need to secure for your child\'s marriage',
     Icon: Heart,
-    category:'Goals',
+    category:'Family',
     path:'/resources/calculators/child-marriage'
   },
   {
-    id:'custom-goal',
-    title:'Custom Goal',
-    description:'Calculate how much you need to secure for your custom goal',
-    Icon: Target,
+    id:'travel-budget',
+    title:'Travel Budget Calculator',
+    description:'Plan travel budgets with this calculator',
+    Icon: Globe,
     category:'Goals',
-    path:'/resources/calculators/custom-goals'
+    path:'/resources/calculators/travel-budget'
+  },
+  {
+    id:'wedding-budget',
+    title:'Wedding Budget Planner',
+    description:'Break down wedding costs with this calculator',
+    Icon: Heart,
+    category:'Goals',
+    path:'/resources/calculators/wedding-budget'
+  },
+  {
+    id:'home-renovation-budget',
+    title:'Home Renovation Budget Planner',
+    description:'Calculate renovation costs with this calculator.',
+    Icon: Landmark,
+    category:'Goals',
+    path:'/resources/calculators/home-renovation-budget'
   },
   {
     id:'dream-wedding',
-    title:'Dream Wedding',
-    description:'Calculate how much you need to secure for your dream wedding',
+    title:'Dream Wedding Fund',
+    description:'Plan a memorable wedding with Dream Wedding Fund Calculator',
     Icon: Heart,
     category:'Goals',
     path:'/resources/calculators/dream-wedding' 
   },
   {id:'first-car',
-    title:'First Car',
-    description:'Calculate how much you need to secure for your first car',
+    title:'First Car Planner',
+    description:'Get moving with First Car Calculator',
     Icon: Car,
     category:'Goals',
     path:'/resources/calculators/first-car'
@@ -197,31 +221,31 @@ export const calculatorData = [
   {
     id:'first-crore-goal',
     title:'First Crore Goal',
-    description:'Calculate how much you need to secure for your first crore goal',  
+    description:'Become a Crorepati with First Crore Goal Calculator',  
     Icon: Target,
     category:'Goals',
     path:'/resources/calculators/first-crore'
   },
   {
     id:'home-goal',
-    title:'Home Goal',
-    description:'Calculate how much you need to secure for your home goal',
+    title:'Home Purchase Planner',
+    description:'Secure your dream home with Home Goal Calculator',
     Icon: Home,
     category:'Goals',
     path:'/resources/calculators/home-goal'
   },
   {
     id:'overseas-vacation',
-    title:'Overseas Vacation Goal',
-    description:'Calculate how much you need to secure for your overseas vacation',
+    title:'Vacation Goal Planner',
+    description:'Become a Jetsetter with Overseas Vacation Goal Calculator',
     Icon: Globe,
     category:'Goals',
     path:'/resources/calculators/overseas-vacation'
   },
   {
     id:'recurring-world-tour',
-    title:'Recurring World Tour',
-    description:'Calculate how much you need to secure for your recurring world tour',
+    title:'Recurring Vacation Fund',
+    description:'Become a Frequent Flying Jetsetter with Recurring Vacation Goal Calculator',
     Icon: Target,
     category:'Goals',
     path:'/resources/calculators/recurring-world-tour'

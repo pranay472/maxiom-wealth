@@ -70,33 +70,36 @@ const DropdownMenu = ({ items, onItemClick }) => {
         </div>
         
         {/* Second and third columns for nested subsections */}
-        <div className="w-2/3 pl-8 overflow-y-auto">
-          {items[activeSubsection]?.subItems && (
-            <div className="grid grid-cols-2 gap-6 pb-8">
-              {items[activeSubsection].subItems.map((item, index) => (
-                <div 
-                  key={index}
-                  onClick={(e) => handleNestedItemClick(item, e)}
-                  className="group relative p-6 rounded-xl bg-white border border-[#E6E6E6] hover:border-[#1C52A0] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-pointer overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1C52A0] to-[#0A1E3A] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
-                  <div className="relative">
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="w-6 h-6 text-[#1C52A0] group-hover:text-[#113262] transition-colors duration-300">
-                        {item.icon}
+        <div className="w-2/3 pl-8 flex flex-col">
+          {/* Subsection content */}
+          <div className="subsection-content">
+            {items[activeSubsection]?.subItems && (
+              <div className="grid grid-cols-2 gap-6 pb-8">
+                {items[activeSubsection].subItems.map((item, index) => (
+                  <div 
+                    key={index}
+                    onClick={(e) => handleNestedItemClick(item, e)}
+                    className="subsection-item group relative p-6 rounded-xl bg-white border border-[#E6E6E6] hover:border-[#1C52A0] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg cursor-pointer overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1C52A0] to-[#0A1E3A] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+                    <div className="relative">
+                      <div className="flex items-start gap-4 mb-4">
+                        <div className="w-6 h-6 text-[#1C52A0] group-hover:text-[#113262] transition-colors duration-300">
+                          {item.icon}
+                        </div>
+                        <h4 className="text-lg font-semibold text-[#113262] group-hover:text-[#0C131C] transition-colors duration-300">
+                          {item.title}
+                        </h4>
                       </div>
-                      <h4 className="text-lg font-semibold text-[#113262] group-hover:text-[#0C131C] transition-colors duration-300">
-                        {item.title}
-                      </h4>
+                      <p className="text-[#545454] text-sm leading-relaxed group-hover:text-[#262626] transition-colors duration-300">
+                        {item.description}
+                      </p>
                     </div>
-                    <p className="text-[#545454] text-sm leading-relaxed group-hover:text-[#262626] transition-colors duration-300">
-                      {item.description}
-                    </p>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

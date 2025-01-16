@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Share, Plane, Hotel, UtensilsCrossed, Train, Globe, Briefcase, Users } from 'lucide-react';
+import React, { useState } from 'react';
+import { Share, ChevronDown, Plane, Hotel, UtensilsCrossed, Train, Globe, Briefcase, Users } from 'lucide-react';
 
 const WorldTourCalculator = () => {
-  const [values, setValues] = useState({
-    numDestinations: 5,
-    daysPerDestination: 4,
-    accommodationLevel: 150,
-    travelClass: 'economy',
-    frequency: 1,
-    includeActivities: true,
-    activityBudget: 100
-  });
+  // Basic tour details
+  const [numDestinations, setNumDestinations] = useState(5);
+  const [daysPerDestination, setDaysPerDestination] = useState(4);
+  const [frequency, setFrequency] = useState(1);
+  const [travelClass, setTravelClass] = useState('economy');
 
-  const handleChange = (key, value) => {
-    setValues(prev => ({
-      ...prev,
-      [key]: value
-    }));
+  // Budget details
+  const [accommodationLevel, setAccommodationLevel] = useState(12000);  // ~$150
+  const [activityBudget, setActivityBudget] = useState(8000);     // ~$100
+
+  // Additional settings
+  const [showAdditional, setShowAdditional] = useState(false);
+  const [includeActivities, setIncludeActivities] = useState(true);
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+      maximumFractionDigits: 0
+    }).format(amount);
   };
 
   const calculateTour = () => {
-    const { numDestinations, daysPerDestination, accommodationLevel, travelClass, frequency, includeActivities, activityBudget } = values;
-    
-    // Base costs per destination
+    // Base costs per destination (in INR)
     const baseCosts = {
-      economy: 800,
-      business: 2500,
-      first: 5000
+      economy: 65000,   // ~$800
+      business: 205000, // ~$2500
+      first: 410000    // ~$5000
     };
 
     // Flight multipliers based on class
@@ -48,8 +51,8 @@ const WorldTourCalculator = () => {
     // Calculate food costs (40% of accommodation budget per day)
     const foodCosts = (accommodationLevel * 0.4) * totalDays;
     
-    // Calculate local transport costs ($60 per day)
-    const transportCosts = 60 * totalDays;
+    // Calculate local transport costs (₹5000 per day)
+    const transportCosts = 5000 * totalDays;
     
     // Calculate activities costs
     const activityCosts = includeActivities ? (activityBudget * totalDays) : 0;
@@ -60,7 +63,7 @@ const WorldTourCalculator = () => {
     // Calculate annual costs based on frequency
     const annualCost = tripTotal * frequency;
     
-    const result = {
+    return {
       totalAnnualCost: Math.round(annualCost),
       monthlySavings: Math.round(annualCost / 12),
       breakdown: {
@@ -71,238 +74,260 @@ const WorldTourCalculator = () => {
         activities: Math.round(activityCosts * frequency)
       }
     };
-    
-    return result;
   };
 
-  const [result, setResult] = useState(calculateTour());
-
-  useEffect(() => {
-    setResult(calculateTour());
-  }, [values]);
-
-  const formatCurrency = amount => new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    maximumFractionDigits: 0
-  }).format(amount);
-
-  const InputField = ({ label, value, onChange, min, max, unit, step = 1 }) => (
-    <div className="mb-3">
-      <label className="block font-semibold text-gray-800 mb-1 text-sm">{label}</label>
-      <div className="flex gap-2">
-        <input 
-          type="number" 
-          value={value} 
-          onChange={e => {
-            const val = parseFloat(e.target.value);
-            if (!isNaN(val) && val >= min && val <= max) {
-              onChange(val);
-            }
-          }}
-          className="w-24 px-2 py-1 border rounded text-sm" 
-        />
-        <span className="text-sm text-gray-600">{unit}</span>
-      </div>
-      <input 
-        type="range" 
-        min={min} 
-        max={max} 
-        step={step} 
-        value={value}
-        onChange={e => {
-          const val = parseFloat(e.target.value);
-          if (!isNaN(val) && val >= min && val <= max) {
-            onChange(val);
-          }
-        }}
-        className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-1" 
-      />
-    </div>
-  );
+  const results = calculateTour();
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
-      <div className="container mx-auto">
-        <div className="mb-4 pt-36">
-          <h1 className="text-2xl font-bold text-gray-900">World Tour Calculator</h1>
-          <p className="text-sm text-gray-600 mt-1">Plan your recurring world adventures with precision</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2 space-y-3">
-            <div className="grid grid-cols-2 gap-3">
-              <InputField 
-                label="Number of Destinations" 
-                value={values.numDestinations}
-                onChange={v => handleChange('numDestinations', v)}
-                min={2}
-                max={15}
-                unit="places"
-              />
-              <InputField 
-                label="Days per Destination" 
-                value={values.daysPerDestination}
-                onChange={v => handleChange('daysPerDestination', v)}
-                min={2}
-                max={10}
-                unit="days"
-              />
-              <InputField 
-                label="Daily Accommodation Budget" 
-                value={values.accommodationLevel}
-                onChange={v => handleChange('accommodationLevel', v)}
-                min={50}
-                max={500}
-                unit="USD"
-                step={10}
-              />
-              <InputField 
-                label="Tours per Year" 
-                value={values.frequency}
-                onChange={v => handleChange('frequency', v)}
-                min={1}
-                max={4}
-                unit="tours"
-              />
-            </div>
-
-            <div className="bg-white p-4 rounded-lg shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <label htmlFor="includeActivities" className="text-sm font-semibold text-gray-800 cursor-pointer">
-                  Include Activities & Entertainment?
-                </label>
-                <div className="relative inline-block w-12 h-6 transition duration-200 ease-in-out">
-                  <input 
-                    type="checkbox" 
-                    id="includeActivities" 
-                    checked={values.includeActivities}
-                    onChange={e => handleChange('includeActivities', e.target.checked)}
-                    className="peer absolute w-0 h-0 opacity-0"
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">World Tour Calculator</h1>
+        <h2 className="text-lg text-gray-600">Plan Your Global Adventures</h2>
+      </div>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Tour Details Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Tour Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Number of Destinations</label>
+                  <input
+                    type="number"
+                    value={numDestinations}
+                    onChange={(e) => setNumDestinations(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
                   />
-                  <label 
-                    htmlFor="includeActivities"
-                    className="block h-6 overflow-hidden bg-gray-300 rounded-full cursor-pointer peer-checked:bg-[#113262] transition-colors duration-200"
-                  >
-                    <span 
-                      className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-6"
-                    ></span>
-                  </label>
+                  <input
+                    type="range"
+                    min={2}
+                    max={15}
+                    value={numDestinations}
+                    onChange={(e) => setNumDestinations(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Days per Destination</label>
+                  <input
+                    type="number"
+                    value={daysPerDestination}
+                    onChange={(e) => setDaysPerDestination(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={2}
+                    max={10}
+                    value={daysPerDestination}
+                    onChange={(e) => setDaysPerDestination(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Tours per Year</label>
+                  <input
+                    type="number"
+                    value={frequency}
+                    onChange={(e) => setFrequency(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={1}
+                    max={4}
+                    value={frequency}
+                    onChange={(e) => setFrequency(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
                 </div>
               </div>
-
-              {values.includeActivities && (
-                <div className="grid grid-cols-2 gap-3 animate-fadeIn">
-                  <InputField 
-                    label="Daily Activity Budget" 
-                    value={values.activityBudget}
-                    onChange={v => handleChange('activityBudget', v)}
-                    min={50}
-                    max={300}
-                    unit="USD"
-                    step={10}
-                  />
-                </div>
-              )}
             </div>
 
-            <div className="mt-4 bg-white p-4 rounded-lg shadow-sm">
-              <label className="block font-semibold text-gray-800 mb-3 text-sm">Travel Class</label>
+            {/* Travel Class Section */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Travel Class</h2>
               <div className="flex gap-2">
-                { [
+                {[
                   { value: 'economy', icon: Users, label: 'Economy' },
                   { value: 'business', icon: Briefcase, label: 'Business' },
                   { value: 'first', icon: Plane, label: 'First' }
                 ].map(({ value, icon: Icon, label }) => (
                   <button
                     key={value}
-                    onClick={() => handleChange('travelClass', value)}
+                    onClick={() => setTravelClass(value)}
                     className={`
                       flex-1 px-4 py-3 rounded-lg flex flex-col items-center gap-2
                       transition-all duration-200 ease-in-out
-                      ${values.travelClass === value 
+                      ${travelClass === value 
                         ? 'bg-[#113262] text-white shadow-md transform scale-[1.02]' 
                         : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
                       }
                     `}
                   >
-                    <Icon size={18} className={values.travelClass === value ? 'text-white' : 'text-gray-500'} />
+                    <Icon size={18} className={travelClass === value ? 'text-white' : 'text-gray-500'} />
                     <span className="text-sm font-medium">{label}</span>
                   </button>
-                )) }
+                ))}
               </div>
+            </div>
+
+            {/* Additional Settings Section */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAdditional(!showAdditional)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
+              >
+                <h2 className="text-lg font-bold text-gray-900">Additional Settings</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAdditional ? 'rotate-180' : ''}`} 
+                  size={20}
+                />
+              </button>
+              
+              {showAdditional && (
+                <div className="p-4 border-t">
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block font-medium text-sm mb-1.5">Daily Accommodation Budget (₹)</label>
+                      <input
+                        type="number"
+                        value={accommodationLevel}
+                        onChange={(e) => setAccommodationLevel(Number(e.target.value))}
+                        className="w-full p-1.5 border rounded text-sm"
+                      />
+                      <input
+                        type="range"
+                        min={4000}
+                        max={40000}
+                        step={1000}
+                        value={accommodationLevel}
+                        onChange={(e) => setAccommodationLevel(Number(e.target.value))}
+                        className="w-full mt-2"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <label className="text-sm font-medium text-gray-900">Include Activities & Entertainment</label>
+                      <div className="relative inline-block w-12 h-6">
+                        <input 
+                          type="checkbox" 
+                          checked={includeActivities}
+                          onChange={(e) => setIncludeActivities(e.target.checked)}
+                          className="peer absolute w-0 h-0 opacity-0"
+                        />
+                        <label 
+                          className="block h-6 overflow-hidden bg-gray-300 rounded-full cursor-pointer peer-checked:bg-[#113262] transition-colors duration-200"
+                        >
+                          <span 
+                            className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-6"
+                          ></span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {includeActivities && (
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Daily Activity Budget (₹)</label>
+                        <input
+                          type="number"
+                          value={activityBudget}
+                          onChange={(e) => setActivityBudget(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
+                        <input
+                          type="range"
+                          min={4000}
+                          max={24000}
+                          step={1000}
+                          value={activityBudget}
+                          onChange={(e) => setActivityBudget(Number(e.target.value))}
+                          className="w-full mt-2"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="bg-[#113262] text-white p-4 rounded-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold">Annual Tour Cost</h3>
-              <button className="p-1.5 hover:bg-[#1e3a8a] rounded">
-                <Share size={18} />
-              </button>
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[600px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">Tour Cost Summary</h3>
+                <button className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
+                </button>
+              </div>
             </div>
 
-            <div className="mb-6">
-              <div className="text-3xl font-bold mb-1">{formatCurrency(result.totalAnnualCost)}</div>
-              <div className="text-sm text-gray-300">Total annual cost for {values.frequency} tour(s)</div>
-            </div>
+            <div className="p-4">
+              <div className="mb-4">
+                <div className="text-3xl font-bold mb-1">{formatCurrency(results.totalAnnualCost)}</div>
+                <div className="text-sm text-gray-300">Total Annual Cost ({frequency} tour{frequency > 1 ? 's' : ''})</div>
+              </div>
 
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-gray-300">Cost Breakdown</h4>
-              <div className="text-sm text-gray-300">(Annual costs)</div>
-　　 　 　 　 <div className="space-y-2">
-                <div className="flex justify-between items-center py-1.5 border-t border-white/20">
+              <div className="space-y-3">
+                <h4 className="text-sm font-medium text-gray-300">Annual Cost Breakdown</h4>
+                
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
                   <div className="flex items-center gap-2">
                     <Plane className="h-4 w-4" />
                     <span className="text-sm">Flights</span>
                   </div>
-                  <span className="font-bold">{formatCurrency(result.breakdown.flights)}</span>
+                  <span className="font-bold">{formatCurrency(results.breakdown.flights)}</span>
                 </div>
-                
-                <div className="flex justify-between items-center py-1.5 border-t border-white/20">
+
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
                   <div className="flex items-center gap-2">
                     <Hotel className="h-4 w-4" />
                     <span className="text-sm">Accommodation</span>
                   </div>
-                  <span className="font-bold">{formatCurrency(result.breakdown.accommodation)}</span>
+                  <span className="font-bold">{formatCurrency(results.breakdown.accommodation)}</span>
                 </div>
 
-                <div className="flex justify-between items-center py-1.5 border-t border-white/20">
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
                   <div className="flex items-center gap-2">
                     <UtensilsCrossed className="h-4 w-4" />
                     <span className="text-sm">Food & Dining</span>
                   </div>
-                  <span className="font-bold">{formatCurrency(result.breakdown.food)}</span>
+                  <span className="font-bold">{formatCurrency(results.breakdown.food)}</span>
                 </div>
 
-                <div className="flex justify-between items-center py-1.5 border-t border-white/20">
+                <div className="flex justify-between items-center py-2 border-t border-white/20">
                   <div className="flex items-center gap-2">
                     <Train className="h-4 w-4" />
                     <span className="text-sm">Local Transport</span>
                   </div>
-                  <span className="font-bold">{formatCurrency(result.breakdown.transport)}</span>
+                  <span className="font-bold">{formatCurrency(results.breakdown.transport)}</span>
                 </div>
 
-                {values.includeActivities && (
-                  <div className="flex justify-between items-center py-1.5 border-t border-white/20">
+                {includeActivities && (
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
                     <div className="flex items-center gap-2">
                       <Globe className="h-4 w-4" />
                       <span className="text-sm">Activities</span>
                     </div>
-                    <span className="font-bold">{formatCurrency(result.breakdown.activities)}</span>
+                    <span className="font-bold">{formatCurrency(results.breakdown.activities)}</span>
                   </div>
                 )}
               </div>
-            </div>
 
-            <div className="mt-6 pt-4 border-t border-white/20">
-              <div className="text-sm text-gray-300 mb-1">Required Monthly Savings</div>
-              <div className="text-2xl font-bold">{formatCurrency(result.monthlySavings)}</div>
-            </div>
+              <div className="mt-4 pt-4 border-t border-white/20">
+                <div className="text-sm text-gray-300 mb-1">Required Monthly Savings</div>
+                <div className="text-2xl font-bold">{formatCurrency(results.monthlySavings)}</div>
+              </div>
 
-            <button className="w-full bg-[#fb923c] text-white py-2 rounded-lg mt-6 text-sm hover:bg-[#f97316] transition-colors">
-              Start Planning →
-            </button>
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Start Tour Planning →
+              </button>
+            </div>
           </div>
         </div>
       </div>

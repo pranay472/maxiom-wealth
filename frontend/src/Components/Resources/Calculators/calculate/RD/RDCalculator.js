@@ -82,8 +82,8 @@ const RDCalculator = () => {
       )}
 
       <div className="max-w-6xl mx-auto px-6 pt-20">
-        <h1 className="text-3xl font-bold text-gray-900">RD Calculator</h1>
-        <p className="text-gray-600 mt-2">Plan your finances wisely with our recurring deposit calculator</p>
+        <h1 className="text-3xl font-bold text-gray-900">Recurring Deposit Planner</h1>
+        <p className="text-gray-600 mt-2">Save Consistently with Recurring Deposit Calculator</p>
 
         <div className="mt-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
