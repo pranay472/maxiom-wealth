@@ -10,10 +10,16 @@ const WhyMaxiom = () => {
     // Handle hash navigation when component mounts
     const hash = window.location.hash;
     if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      setTimeout(() => {
+        // Extract just the fragment identifier part after the last #
+        const fragmentId = hash.split('#').pop();
+        if (fragmentId) {
+          const element = document.getElementById(fragmentId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }, 100);
     }
   }, []);
 
@@ -21,7 +27,9 @@ const WhyMaxiom = () => {
     <div className="why-maxiom-container">
       <Header/>
       <div className="why-maxiom-content">
-        <WhyChooseUs />
+        <div id="whyChooseUs">
+          <WhyChooseUs />
+        </div>
         <OurTeam/>
         <OurJourney/>
       </div>

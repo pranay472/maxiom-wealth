@@ -2,6 +2,8 @@ import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
 import HeroSection from './HeroSection';
+import PortfolioForms from './PortfolioForms';
+import InvestmentApproach from './InvestmentApproach';
 
 const Home = () => {
   return (
@@ -9,6 +11,8 @@ const Home = () => {
       <Header />
       <main className="flex-grow">
         <HeroSection/>
+        <PortfolioForms/>
+        <InvestmentApproach/>
       </main>
       <Footer />
     </div>

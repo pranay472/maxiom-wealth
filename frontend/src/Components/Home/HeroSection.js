@@ -65,7 +65,7 @@ const HeroSection = () => {
           </div>
           
           {/* Right Column - Mobile App Screenshot */}
-          <div className="relative flex flex-col items-center">
+          <div className="relative flex flex-col items-center mt-6">
             {/* Mobile mockup with dark theme */}
             <div className="w-[320px] h-[650px] bg-[#0C131C] rounded-3xl shadow-xl overflow-hidden relative">
               {/* Bottom gradient overlay */}
