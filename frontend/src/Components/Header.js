@@ -37,7 +37,7 @@ const Header = () => {
 
       <div className="header-container">
         <Link to="/" className="logo">
-          <img src="https://jamaappprod.s3.ap-south-1.amazonaws.com/Website/maxiompms/maxiompms.svg" alt="Equirus Wealth" />
+          <img src="https://jamaappprod.s3.ap-south-1.amazonaws.com/Website/maxiom_wealth_logo.svg" alt="Equirus Wealth" />
         </Link>
         
         <Navbar />

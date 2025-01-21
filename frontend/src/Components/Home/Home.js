@@ -4,6 +4,9 @@ import Footer from '../Footer';
 import HeroSection from './HeroSection';
 import PortfolioForms from './PortfolioForms';
 import InvestmentApproach from './InvestmentApproach';
+import PortfolioAnalysis from './PortfolioAnalysis';
+import PortfolioXray from './PortfolioXray';
+import GoalBasedInvestment from './GoalBasedInvestment';
 
 const Home = () => {
   return (
@@ -13,6 +16,9 @@ const Home = () => {
         <HeroSection/>
         <PortfolioForms/>
         <InvestmentApproach/>
+        <PortfolioAnalysis/>
+        <PortfolioXray/>
+        <GoalBasedInvestment/>
       </main>
       <Footer />
     </div>

@@ -148,7 +148,7 @@ const PortfolioForms = () => {
                   </div>
                   <button 
                     type="submit" 
-                    className="w-full py-4 px-6 bg-[#113262] text-white text-lg font-medium rounded-lg hover:bg-[#143970] transform hover:-translate-y-0.5 transition-all duration-200"
+                    className="w-full py-4 px-6 bg-gradient-to-r from-[#1C52A0] to-[#0A1E3A] text-white text-lg font-medium rounded-lg hover:bg-gradient-to-r hover:from-[#0A1E3A] hover:to-[#1C52A0] transition-all duration-300"
                   >
                     Get Free Analysis
                   </button>
@@ -185,7 +185,7 @@ const PortfolioForms = () => {
                   </div>
                   <button 
                     type="submit" 
-                    className="w-full py-4 px-6 bg-[#113262] text-white text-lg font-medium rounded-lg hover:bg-[#143970] transform hover:-translate-y-0.5 transition-all duration-200"
+                    className="w-full py-4 px-6 bg-gradient-to-r from-[#1C52A0] to-[#0A1E3A] text-white text-lg font-medium rounded-lg hover:bg-gradient-to-r hover:from-[#0A1E3A] hover:to-[#1C52A0] transition-all duration-300"
                   >
                     Start Planning
                   </button>

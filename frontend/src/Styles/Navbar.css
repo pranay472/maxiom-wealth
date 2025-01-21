@@ -36,7 +36,7 @@
 
 .dropdown span {
     color: #113262;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -66,8 +66,8 @@
 }
 
 .dropdown-arrow {
-    width: 16px;
-    height: 16px;
+    width: 17px;
+    height: 17px;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0.8;
     margin-top: 1px;
