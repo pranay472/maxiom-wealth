@@ -30,6 +30,7 @@ import FirstCar from './Components/Resources/Calculators/GoalsCalculate/FirstCar
 import FirstCrore from './Components/Resources/Calculators/GoalsCalculate/FirstCrore/FirstCrore';
 import HomeGoal from './Components/Resources/Calculators/GoalsCalculate/HomeGoal/HomeGoal';
 import OverseasVacation from './Components/Resources/Calculators/GoalsCalculate/OverseasVacation/OverseasVacation';
+import MutualFundsPricing from './Components/Pricing/MutualFundsPricing';
 import RecurringWorldTour from './Components/Resources/Calculators/GoalsCalculate/RecurringWorldTour/RecurringWorldTour';
 import CarLoan from './Components/Resources/Calculators/LoansCalculate/CarLoan/CarLoan';
 import EMI from './Components/Resources/Calculators/LoansCalculate/EMI/EMI';
@@ -45,6 +46,7 @@ import FIRE from './Components/Resources/Calculators/RetirementCalculate/FIRE/FI
 import TravelBudget from './Components/Resources/Calculators/GoalsCalculate/TravelBudget/TravelBudget';
 import WeddingBudget from './Components/Resources/Calculators/GoalsCalculate/WeddingBudget/WeddingBudget';
 import HomeRenovation from './Components/Resources/Calculators/GoalsCalculate/HomeRenovation/HomeRenovation';
+import Pricing from './Components/Pricing/Pricing';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -58,6 +60,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/pms" element={<PMS />} />
           <Route path="/pms/jewel" element={<JEWELTop350 />} />
           <Route path="/pms/spark" element={<Spark351 />} />
