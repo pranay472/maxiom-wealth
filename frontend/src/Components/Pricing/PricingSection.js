@@ -88,8 +88,8 @@ const PricingSection = () => {
       title: "Stocks",
       description: "DIY investment without advisory",
       link: {
-        text: "For direct equity advisory plans",
-        to: "/stocks"
+        text: "To know more about stocks pricing",
+        to: "/stocks-pricing"
       }
     },
     {
@@ -97,8 +97,8 @@ const PricingSection = () => {
       title: "PMS",
       description: "Management fee with profit share above a threshold",
       link: {
-        text: "For all PMS fee plans including fixed fee % and hybrid,",
-        to: "/pms"
+        text: "To know more about PMS pricing",
+        to: "/pms-pricing"
       }
     }
   ];

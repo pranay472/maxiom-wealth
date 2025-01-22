@@ -47,6 +47,8 @@ import TravelBudget from './Components/Resources/Calculators/GoalsCalculate/Trav
 import WeddingBudget from './Components/Resources/Calculators/GoalsCalculate/WeddingBudget/WeddingBudget';
 import HomeRenovation from './Components/Resources/Calculators/GoalsCalculate/HomeRenovation/HomeRenovation';
 import Pricing from './Components/Pricing/Pricing';
+import StocksPricing from './Components/Pricing/StocksPricing';
+import PMSPricing from './Components/Pricing/PMSPricing';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -62,6 +64,8 @@ function App() {
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
+          <Route path="/stocks-pricing" element={<StocksPricing />} />
+          <Route path="/pms-pricing" element={<PMSPricing />} />
           <Route path="/pms" element={<PMS />} />
           <Route path="/pms/jewel" element={<JEWELTop350 />} />
           <Route path="/pms/spark" element={<Spark351 />} />
