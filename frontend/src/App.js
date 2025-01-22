@@ -6,6 +6,7 @@ import WhyMaxiom from './Components/WhyMaxiom/WhyMaxiom';
 import Header from './Components/Header';
 import JEWELTop350 from './Components/WealthManagement/PMS/JEWELTop350/JEWELTop350';
 import Spark351 from './Components/WealthManagement/PMS/Spark351/Spark351';
+import Stocks from './Components/Stocks/Stocks';
 import PMS from './Components/WealthManagement/PMS/PMS';
 import GEM from './Components/WealthManagement/PMS/GEM/GEM';
 import EMERALDE from './Components/WealthManagement/PMS/EMERALDE/EMERALDE';
@@ -64,6 +65,7 @@ function App() {
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
+          <Route path="/stocks" element={<Stocks />} />
           <Route path="/stocks-pricing" element={<StocksPricing />} />
           <Route path="/pms-pricing" element={<PMSPricing />} />
           <Route path="/pms" element={<PMS />} />
