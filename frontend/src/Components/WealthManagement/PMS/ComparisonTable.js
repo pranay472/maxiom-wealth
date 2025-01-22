@@ -112,7 +112,7 @@ const ComparisonTable = () => {
           <h2 className="text-5xl font-bold mb-4 text-primary-500">
             PMS vs Mutual Funds
           </h2>
-          <div className="w-32 h-1.5 bg-gradient-to-r from-primary-300 to-secondary-300 mx-auto rounded-full mb-4" />
+          <div className="w-32 h-1.5 bg-gradient-to-r from-primary-500 via-primary-300 to-primary-500 mx-auto rounded-full mb-4 shadow-sm" />
           <p className="text-neutral-600 text-lg font-medium">Understanding Key Investment Differences</p>
         </div>
 

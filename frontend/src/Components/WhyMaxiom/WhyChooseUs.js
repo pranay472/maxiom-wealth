@@ -26,13 +26,24 @@ const WhyChooseUs = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center transform scale-105 hero-background"
         >
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 to-indigo-900/90 hero-overlay"></div>
+          {/* Base Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#113262] via-[#1C52A0] to-[#0A1E3A] opacity-95"></div>
+          
+          {/* Accent Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1C52A0]/20 via-transparent to-[#F49611]/10"></div>
+          
+          {/* Subtle Pattern Overlay */}
+          <div className="absolute inset-0 opacity-5" 
+            style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+              backgroundSize: '32px 32px'
+            }}>
+          </div>
         </div>
         
         {/* Content */}
         <div className="container mx-auto px-6 relative z-10 text-white hero-content">
-          <div className="max-w-3xl content-wrapper">
+          <div className="max-w-3xl content-wrapper pt-24">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Why Choose Maxiom
             </h1>

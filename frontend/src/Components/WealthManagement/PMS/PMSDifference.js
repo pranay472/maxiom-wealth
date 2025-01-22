@@ -67,18 +67,18 @@ const PMSDifference = () => {
   ];
 
   return (
-    <div className="w-full bg-gradient-to-br from-primary-50 via-white to-secondary-50 py-24">
+    <div className="w-full bg-gradient-to-br from-primary-50 via-white to-primary-100 py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Elegant Header Section */}
         <MotionDiv className="text-center mb-20">
-          <span className="text-secondary-300 font-semibold text-sm tracking-wider uppercase mb-4 block">
+          <span className="text-secondary-500 font-semibold text-sm tracking-wider uppercase mb-4 block">
             Portfolio Management Services
           </span>
           <h2 className="text-5xl font-bold text-primary-500 mb-6 tracking-tight relative">
             Exceptional Investment Strategies
-            <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-secondary-300"></span>
+            <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-secondary-500"></span>
           </h2>
-          <div className="w-24 h-1 bg-secondary-300 mx-auto mb-6"></div>
+          <div className="w-24 h-1 bg-secondary-500 mx-auto mb-6"></div>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Experience institutional-grade portfolio management with our signature investment approaches
           </p>
@@ -96,12 +96,12 @@ const PMSDifference = () => {
                 
                 <CardHeader className="relative z-10">
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary-100 to-primary-50 text-primary-500">
+                    <div className="p-3 rounded-xl bg-gradient-to-br from-primary-200 to-primary-50 text-primary-500">
                       {service.icon}
                     </div>
                     <div>
                       <h3 className="text-2xl font-bold text-primary-500">{service.title}</h3>
-                      <p className="text-secondary-300">{service.subtitle}</p>
+                      <p className="text-secondary-500">{service.subtitle}</p>
                     </div>
                   </div>
                 </CardHeader>
@@ -115,7 +115,7 @@ const PMSDifference = () => {
                     <div className="grid grid-cols-1 gap-4">
                       {service.stats.map((stat, idx) => (
                         <div key={idx} className="flex items-center space-x-2">
-                          <Check className="w-5 h-5 text-secondary-300" />
+                          <Check className="w-5 h-5 text-secondary-500" />
                           <span className="text-gray-700">{stat}</span>
                         </div>
                       ))}
@@ -130,17 +130,17 @@ const PMSDifference = () => {
         {/* Premium Feature Section */}
         <MotionDiv className="bg-white rounded-3xl shadow-xl p-12 relative overflow-hidden">
           {/* Decorative Background */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary-50 rounded-full -mr-32 -mt-32 opacity-20"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary-50 rounded-full -ml-32 -mb-32 opacity-20"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary-100 rounded-full -mr-32 -mt-32 opacity-20"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary-100 rounded-full -ml-32 -mb-32 opacity-20"></div>
 
           <div className="relative z-10">
             <div className="text-center mb-16">
-              <span className="text-secondary-300 font-semibold text-sm tracking-wider uppercase block mb-4">
+              <span className="text-secondary-500 font-semibold text-sm tracking-wider uppercase block mb-4">
                 Why Choose Us
               </span>
               <h3 className="text-4xl font-bold text-primary-500 tracking-tight relative inline-block">
                 The Maxiom Wealth Advantage
-                <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-secondary-300"></span>
+                <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-secondary-500"></span>
               </h3>
             </div>
 

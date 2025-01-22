@@ -30,14 +30,10 @@ const PMSFaqs = () => {
   return (
     <div className="w-full max-w-4xl mx-auto py-16 px-4">
       <div className="text-center mb-16 relative">
-        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-          <div className="w-20 h-1 bg-gradient-to-r from-secondary-300 to-secondary-200"></div>
-        </div>
-        <h2 className="text-[32px] leading-[38px] font-bold text-primary-500 mb-3">
+        <h2 className="text-[32px] leading-[38px] font-bold text-primary-500 mb-6">
           Frequently Asked Questions
         </h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-primary-300 to-primary-100 mx-auto mb-4"></div>
-        <p className="text-neutral-300 text-lg max-w-2xl mx-auto">
+        <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
           Everything you need to know about our premium Portfolio Management Services
         </p>
       </div>
@@ -55,11 +51,11 @@ const PMSFaqs = () => {
               <span className="text-[18px] leading-[24px] font-semibold text-primary-500">
                 {faq.question}
               </span>
-              <span className="text-secondary-300 ml-4">
+              <span className="text-primary-400 ml-4">
                 {openIndex === index ? (
-                  <ChevronUp className="w-6 h-6 text-secondary-300" />
+                  <ChevronUp className="w-6 h-6 text-primary-400" />
                 ) : (
-                  <ChevronDown className="w-6 h-6 text-secondary-300" />
+                  <ChevronDown className="w-6 h-6 text-primary-400" />
                 )}
               </span>
             </button>
@@ -69,7 +65,7 @@ const PMSFaqs = () => {
                 openIndex === index ? 'max-h-96' : 'max-h-0'
               }`}
             >
-              <p className="text-neutral-300 text-[16px] leading-[26px] px-6 pb-6">
+              <p className="text-neutral-600 text-[16px] leading-[26px] px-6 pb-6">
                 {faq.answer}
               </p>
             </div>
@@ -78,7 +74,7 @@ const PMSFaqs = () => {
       </div>
 
       <div className="mt-12 text-center">
-        <button className="bg-gradient-to-r from-secondary-300 to-secondary-200 text-white px-8 py-3 rounded-lg font-semibold hover:from-secondary-400 hover:to-secondary-300 transition-all duration-300">
+        <button className="w-full max-w-md py-4 px-6 bg-gradient-to-r from-[#1C52A0] to-[#0A1E3A] text-white text-lg font-medium rounded-lg hover:bg-gradient-to-r hover:from-[#0A1E3A] hover:to-[#1C52A0] transition-all duration-300">
           Schedule a Consultation
         </button>
       </div>
