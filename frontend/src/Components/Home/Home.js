@@ -7,6 +7,7 @@ import InvestmentApproach from './InvestmentApproach';
 import PortfolioAnalysis from './PortfolioAnalysis';
 import PortfolioXray from './PortfolioXray';
 import GoalBasedInvestment from './GoalBasedInvestment';
+import Testimonials from './Testimonials';
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
         <PortfolioAnalysis/>
         <PortfolioXray/>
         <GoalBasedInvestment/>
+        <Testimonials/>
       </main>
       <Footer />
     </div>
