@@ -50,6 +50,7 @@ import HomeRenovation from './Components/Resources/Calculators/GoalsCalculate/Ho
 import Pricing from './Components/Pricing/Pricing';
 import StocksPricing from './Components/Pricing/StocksPricing';
 import PMSPricing from './Components/Pricing/PMSPricing';
+import AlternateInvestments from './Components/WealthManagement/AlternateInvestments/AlternateInvestments';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -62,7 +63,9 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
+          <Route path="/wealth-services/alternate-investments" element={<AlternateInvestments />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />
@@ -109,7 +112,7 @@ function App() {
           <Route path="/resources/calculators/travel-budget" element={<TravelBudget />} />
           <Route path="/resources/calculators/wedding-budget" element={<WeddingBudget />} />
           <Route path="/resources/calculators/home-renovation-budget" element={<HomeRenovation />} />
-          <Route path="/" element={
+          <Route path="/header" element={
             <>
               <Header />
               <Home />
