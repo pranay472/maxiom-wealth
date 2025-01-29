@@ -51,6 +51,7 @@ import Pricing from './Components/Pricing/Pricing';
 import StocksPricing from './Components/Pricing/StocksPricing';
 import PMSPricing from './Components/Pricing/PMSPricing';
 import AlternateInvestments from './Components/WealthManagement/AlternateInvestments/AlternateInvestments';
+import TaxPlanning from './Components/WealthManagement/TaxPlanning/TaxPlanning';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -66,6 +67,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
           <Route path="/wealth-services/alternate-investments" element={<AlternateInvestments />} />
+          <Route path="/wealth-services/tax-planning" element={<TaxPlanning />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />
