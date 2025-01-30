@@ -52,6 +52,13 @@ import StocksPricing from './Components/Pricing/StocksPricing';
 import PMSPricing from './Components/Pricing/PMSPricing';
 import AlternateInvestments from './Components/WealthManagement/AlternateInvestments/AlternateInvestments';
 import TaxPlanning from './Components/WealthManagement/TaxPlanning/TaxPlanning';
+import EstatePlanning from './Components/WealthManagement/EstatePlanning/EstatePlanning';
+import OffshoreProducts from './Components/WealthManagement/OffshoreProducts/OffshoreProducts';
+import ScrollToTop from './Components/ScrollToTop';
+import PrivateEquity from './Components/WealthManagement/PrivateEquity/PrivateEquity';
+import PrivateCredit from './Components/WealthManagement/PrivateCredit/PrivateCredit';
+import GoalBasedInvestments from './Components/FinancialAdvisory/GoalBasedInvestments/GoalBasedInvestments';
+import FinancialPlanning from './Components/FinancialAdvisory/FinancialPlanning/FInancialPlanning';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -63,11 +70,18 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
           <Route path="/wealth-services/alternate-investments" element={<AlternateInvestments />} />
           <Route path="/wealth-services/tax-planning" element={<TaxPlanning />} />
+          <Route path="/wealth-services/estate-planning" element={<EstatePlanning />} />
+          <Route path="/wealth-services/offshore-products" element={<OffshoreProducts />} />
+          <Route path="/wealth-services/private-equity" element={<PrivateEquity />} />
+          <Route path="/wealth-services/private-credit" element={<PrivateCredit />} />
+          <Route path="/financial-advisory/goal-based-investments" element={<GoalBasedInvestments />} />
+          <Route path="/financial-advisory/financial-planning" element={<FinancialPlanning />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />
