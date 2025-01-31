@@ -64,6 +64,10 @@ import TRetirementPlanning from './Components/FinancialAdvisory/RetirementPlanni
 import PostRetirement from './Components/FinancialAdvisory/RetirementPlanning/PostRetirement/PostRetirement';
 import FIREPlanning from './Components/FinancialAdvisory/RetirementPlanning/FIREPlanning/FIREPlanning';
 import CorporateFinancialWellness from './Components/FinancialAdvisory/CorporateFinancialWellness/CorporateFinancialWellness';
+import CarPurchase from './Components/FinancialAdvisory/GoalBasedInvestments/CarPurchase/CarPurchase';
+import HomeLoanGoal from './Components/FinancialAdvisory/GoalBasedInvestments/HomeLoan/HomeLoanGoal';
+import DreamHomeGoal from './Components/FinancialAdvisory/GoalBasedInvestments/DreamHomeGoal/DreamHomeGoal';
+
 
 function App() {
   const [message, setMessage] = useState('');
@@ -92,6 +96,9 @@ function App() {
           <Route path="/financial-advisory/retirement-planning/post" element={<PostRetirement />} />
           <Route path="/financial-advisory/retirement-planning/fire" element={<FIREPlanning />} />
           <Route path="/financial-advisory/corporate-financial-wellness" element={<CorporateFinancialWellness />} />
+          <Route path="/financial-advisory/goal-based-investments/car-purchase" element={<CarPurchase />} />
+          <Route path="/financial-advisory/goal-based-investments/home-loan" element={<HomeLoanGoal />} />
+          <Route path="/financial-advisory/goal-based-investments/dream-home" element={<DreamHomeGoal />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />

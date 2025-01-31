@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Car, Home, Building2, Briefcase, CircleDollarSign, GraduationCap, Plane, HeartPulse } from 'lucide-react';
 
 const goals = [
@@ -77,7 +78,39 @@ const goals = [
 ];
 
 const GoalCard = ({ goal }) => {
-  const { icon: Icon, title, description, timeframe, riskProfile, minInvestment } = goal;
+  const navigate = useNavigate();
+  const { icon: Icon, title, description, timeframe, riskProfile, minInvestment, id } = goal;
+  
+  const handleLearnMore = () => {
+    switch(id) {
+      case 'car-purchase':
+        navigate('/financial-advisory/goal-based-investments/car-purchase');
+        break;
+      case 'home-loan':
+        navigate('/financial-advisory/goal-based-investments/home-loan');
+        break;
+      case 'dream-home':
+        navigate('/financial-advisory/goal-based-investments/dream-home');
+        break;
+      case 'business':
+        navigate('/financial-advisory/goal-based-investments/business');
+        break;
+      case 'education':
+        navigate('/financial-advisory/goal-based-investments/education');
+        break;
+      case 'retirement':
+        navigate('/financial-advisory/goal-based-investments/retirement');
+        break;
+      case 'vacation':
+        navigate('/financial-advisory/goal-based-investments/vacation');
+        break;
+      case 'gold-loan':
+        navigate('/financial-advisory/goal-based-investments/gold-loan');
+        break;
+      default:
+        break;
+    }
+  };
   
   return (
     <div className="group relative">
@@ -114,7 +147,10 @@ const GoalCard = ({ goal }) => {
         </div>
 
         {/* CTA Button */}
-        <button className="mt-6 w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-xl font-semibold transition-colors duration-300">
+        <button 
+          onClick={handleLearnMore}
+          className="mt-6 w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-xl font-semibold transition-colors duration-300"
+        >
           Learn More
         </button>
       </div>
