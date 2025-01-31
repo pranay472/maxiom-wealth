@@ -59,6 +59,9 @@ import PrivateEquity from './Components/WealthManagement/PrivateEquity/PrivateEq
 import PrivateCredit from './Components/WealthManagement/PrivateCredit/PrivateCredit';
 import GoalBasedInvestments from './Components/FinancialAdvisory/GoalBasedInvestments/GoalBasedInvestments';
 import FinancialPlanning from './Components/FinancialAdvisory/FinancialPlanning/FInancialPlanning';
+import RetirementPlanning from './Components/FinancialAdvisory/RetirementPlanning/RetirementPlanning';
+import TRetirementPlanning from './Components/FinancialAdvisory/RetirementPlanning/TRetirementPlanning/TRetirementPlanning';
+import CorporateFinancialWellness from './Components/FinancialAdvisory/CorporateFinancialWellness/CorporateFinancialWellness';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -82,6 +85,9 @@ function App() {
           <Route path="/wealth-services/private-credit" element={<PrivateCredit />} />
           <Route path="/financial-advisory/goal-based-investments" element={<GoalBasedInvestments />} />
           <Route path="/financial-advisory/financial-planning" element={<FinancialPlanning />} />
+          <Route path="/financial-advisory/retirement-planning" element={<RetirementPlanning />} />
+          <Route path="/financial-advisory/retirement-planning/traditional" element={<TRetirementPlanning />} />
+          <Route path="/financial-advisory/corporate-financial-wellness" element={<CorporateFinancialWellness />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />

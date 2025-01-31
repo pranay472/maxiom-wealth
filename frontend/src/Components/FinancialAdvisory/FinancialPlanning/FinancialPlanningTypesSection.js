@@ -1,83 +1,62 @@
 import React from 'react';
-import { TrendingUp, Shield, Crown, Home, Heart, GraduationCap, Leaf, Building } from 'lucide-react';
+import { GraduationCap, Target, Users, Briefcase, ChevronRight } from 'lucide-react';
 
 const planTypes = [
   {
-    id: 'wealth-compounding',
-    title: 'Wealth Compounding',
-    icon: TrendingUp,
-    description: 'Strategic long-term wealth creation through systematic investment and reinvestment of returns, leveraging the power of compound growth.',
-    timeframe: '10-20 Years',
-    riskProfile: 'Medium to High',
-    minInvestment: '₹25L'
-  },
-  {
-    id: 'wealth-preservation',
-    title: 'Wealth Preservation',
-    icon: Shield,
-    description: 'Conservative strategies to protect and maintain accumulated wealth through diversification and risk management techniques.',
-    timeframe: '5-10 Years',
-    riskProfile: 'Low to Medium',
-    minInvestment: '₹50L'
-  },
-  {
-    id: 'lifestyle-preservation',
-    title: 'Lifestyle Preservation',
-    icon: Crown,
-    description: 'Structured planning to maintain your desired lifestyle through retirement, focusing on inflation-adjusted income generation.',
-    timeframe: '15-30 Years',
-    riskProfile: 'Medium',
-    minInvestment: '₹75L'
-  },
-  {
-    id: 'vacation-home',
-    title: 'Vacation Home',
-    icon: Home,
-    description: 'Strategic investment planning for acquiring and maintaining a second home while optimizing tax efficiency and rental income potential.',
-    timeframe: '7-15 Years',
-    riskProfile: 'Medium to High',
-    minInvestment: '₹1Cr'
-  },
-  {
-    id: 'philanthropy',
-    title: 'Philanthropy',
-    icon: Heart,
-    description: 'Structured approach to charitable giving that maximizes social impact while optimizing tax benefits and ensuring sustainable contributions.',
-    timeframe: '5-20 Years',
-    riskProfile: 'Flexible',
-    minInvestment: '₹50L'
-  },
-  {
-    id: 'children-needs',
-    title: 'Children\'s Needs',
+    id: 'education-planning',
+    title: 'Financial Planning for Education',
     icon: GraduationCap,
-    description: 'Comprehensive planning for education, marriage, and other milestone expenses for your children with inflation-adjusted goals.',
-    timeframe: '10-20 Years',
-    riskProfile: 'Medium to High',
-    minInvestment: '₹30L'
+    bullets: [
+      'Financial Planning for UG Education Abroad',
+      'Financial Planning for UG Education in India',
+      'Financial Planning for Masters Education Abroad',
+      'Financial Planning for Helping Child Overseas'
+    ]
   },
   {
-    id: 'impact-investing',
-    title: 'Impact Investing',
-    icon: Leaf,
-    description: 'Investment strategies aligned with ESG principles, focusing on companies that generate both financial returns and positive social impact.',
-    timeframe: '5-15 Years',
-    riskProfile: 'Medium to High',
-    minInvestment: '₹25L'
+    id: 'specific-goals',
+    title: 'Financial Planning for Specific Goals',
+    icon: Target,
+    bullets: [
+      'Financial Planning for Car Purchase',
+      'Financial Planning for Home Loan Prepayment',
+      'Dream Home Purchase',
+      'Starting A Business',
+      'Foreclosure Of Gold Loan'
+    ]
   },
   {
-    id: 'legacy-preservation',
-    title: 'Legacy Preservation',
-    icon: Building,
-    description: 'Estate and succession planning to ensure seamless wealth transfer across generations while minimizing tax implications.',
-    timeframe: '20+ Years',
-    riskProfile: 'Conservative',
-    minInvestment: '₹1Cr'
+    id: 'life-situations',
+    title: 'Financial Planning for Life Situations',
+    icon: Users,
+    bullets: [
+      'Financial Planning for Child Birth',
+      'Financial Planning for Child\'s Marriage',
+      'Financial Planning for Health Emergency',
+      'Financial Planning for Disability',
+      'Financial Planning for Single Mothers',
+      'Financial Planning for Single Parents',
+      'Financial Planning In Case Of Sudden Death Of Income Earner',
+      'Financial Planning for Divorce',
+      'Financial Planning for Those Migrating From India',
+      'Financial Planning for Those Returning To India'
+    ]
+  },
+  {
+    id: 'professionals',
+    title: 'Financial Planning for Professionals',
+    icon: Briefcase,
+    bullets: [
+      'Financial Planning for Sportspersons',
+      'Financial Planning for Doctors',
+      'Financial Planning for Retired Bank Employees',
+      'Financial Planning for Entrepreneurs'
+    ]
   }
 ];
 
 const PlanTypeCard = ({ plan }) => {
-  const { icon: Icon, title, description, timeframe, riskProfile, minInvestment } = plan;
+  const { icon: Icon, title, bullets } = plan;
   
   return (
     <div className="group relative">
@@ -95,28 +74,24 @@ const PlanTypeCard = ({ plan }) => {
 
         {/* Content */}
         <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
-        <p className="text-white/80 mb-6 flex-grow">{description}</p>
-
-        {/* Metrics */}
-        <div className="grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
-          <div>
-            <div className="text-white/60 text-sm mb-1">Timeframe</div>
-            <div className="text-white font-semibold">{timeframe}</div>
-          </div>
-          <div>
-            <div className="text-white/60 text-sm mb-1">Risk Profile</div>
-            <div className="text-white font-semibold">{riskProfile}</div>
-          </div>
-          <div className="col-span-2">
-            <div className="text-white/60 text-sm mb-1">Minimum Investment</div>
-            <div className="text-[#F49611] font-bold">{minInvestment}</div>
-          </div>
-        </div>
-
-        {/* CTA Button */}
-        <button className="mt-6 w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-xl font-semibold transition-colors duration-300">
-          Explore Plan
-        </button>
+        
+        {/* Links List */}
+        <ul className="space-y-3">
+          {bullets.map((bullet, index) => (
+            <li key={index} className="group/item">
+              <a 
+                href={`/financial-planning/${bullet.toLowerCase().replace(/\s+/g, '-')}`}
+                className="flex items-center p-2 -ml-2 transition-all duration-300"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-[#F49611] mr-2 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-300"></div>
+                <span className="text-white/90 group-hover/item:text-[#F49611] text-sm transition-colors duration-300 flex-grow">
+                  {bullet}
+                </span>
+                <ChevronRight className="w-4 h-4 text-[#F49611]/70 group-hover/item:text-[#F49611] transform group-hover/item:translate-x-1 transition-all duration-300" />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -124,41 +99,24 @@ const PlanTypeCard = ({ plan }) => {
 
 const FinancialPlanningTypesSection = () => {
   return (
-    <div className="bg-white py-20">
-      <div className="max-w-7xl mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-12 h-0.5 bg-[#F49611]"></div>
-              <span className="text-[#F49611] font-medium uppercase tracking-wider">Financial Planning Solutions</span>
-              <div className="w-12 h-0.5 bg-[#F49611]"></div>
-            </div>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#113262] mb-6">
-            Comprehensive Financial Planning for Every Goal
+    <section className="py-24 bg-white">
+      <div className="container max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+        <div className="flex flex-col items-center justify-center mb-16">
+          <h2 className="text-4xl font-bold text-[#113262] relative mb-8 drop-shadow-md group">
+            Types of Financial Planning
+            <span className="absolute -bottom-2 left-1/2 w-3/5 h-[3px] bg-gradient-to-r from-transparent via-[#1C52A0] to-transparent -translate-x-1/2 group-hover:w-4/5 transition-all duration-300"></span>
           </h2>
-          <p className="text-xl text-gray-600">
-            Discover our range of specialized financial planning solutions, each tailored 
-            to help you achieve specific life goals while building lasting wealth.
-          </p>
         </div>
-
-        {/* Planning Types Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {planTypes.map((plan) => (
-            <PlanTypeCard key={plan.id} plan={plan} />
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <button className="w-full max-w-md py-4 px-6 bg-gradient-to-r from-[#1C52A0] to-[#0A1E3A] text-white text-lg font-medium rounded-lg hover:bg-gradient-to-r hover:from-[#0A1E3A] hover:to-[#1C52A0] transition-all duration-300">
-            Schedule a Financial Planning Consultation
-          </button>
+        
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {planTypes.map((plan) => (
+              <PlanTypeCard key={plan.id} plan={plan} />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
