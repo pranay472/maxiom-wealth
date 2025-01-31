@@ -61,6 +61,8 @@ import GoalBasedInvestments from './Components/FinancialAdvisory/GoalBasedInvest
 import FinancialPlanning from './Components/FinancialAdvisory/FinancialPlanning/FInancialPlanning';
 import RetirementPlanning from './Components/FinancialAdvisory/RetirementPlanning/RetirementPlanning';
 import TRetirementPlanning from './Components/FinancialAdvisory/RetirementPlanning/TRetirementPlanning/TRetirementPlanning';
+import PostRetirement from './Components/FinancialAdvisory/RetirementPlanning/PostRetirement/PostRetirement';
+import FIREPlanning from './Components/FinancialAdvisory/RetirementPlanning/FIREPlanning/FIREPlanning';
 import CorporateFinancialWellness from './Components/FinancialAdvisory/CorporateFinancialWellness/CorporateFinancialWellness';
 
 function App() {
@@ -87,6 +89,8 @@ function App() {
           <Route path="/financial-advisory/financial-planning" element={<FinancialPlanning />} />
           <Route path="/financial-advisory/retirement-planning" element={<RetirementPlanning />} />
           <Route path="/financial-advisory/retirement-planning/traditional" element={<TRetirementPlanning />} />
+          <Route path="/financial-advisory/retirement-planning/post" element={<PostRetirement />} />
+          <Route path="/financial-advisory/retirement-planning/fire" element={<FIREPlanning />} />
           <Route path="/financial-advisory/corporate-financial-wellness" element={<CorporateFinancialWellness />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
