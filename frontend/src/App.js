@@ -69,7 +69,14 @@ import HomeLoanGoal from './Components/FinancialAdvisory/GoalBasedInvestments/Ho
 import DreamHomeGoal from './Components/FinancialAdvisory/GoalBasedInvestments/DreamHomeGoal/DreamHomeGoal';
 import BusinessStartGoal from './Components/FinancialAdvisory/GoalBasedInvestments/BusinessStartGoal/BusinessStartGoal';
 import GoldLoan from './Components/FinancialAdvisory/GoalBasedInvestments/GoldLoan/GoldLoan';
-
+import UGIndia from './Components/FinancialAdvisory/FinancialPlanning/FPEducation/UGIndia/UGIndia';
+import UGAbroad from './Components/FinancialAdvisory/FinancialPlanning/FPEducation/UGAbroad/UGAbroad';
+import MToChild from './Components/FinancialAdvisory/FinancialPlanning/FPEducation/MToChild/MToChild';
+import PGMasters from './Components/FinancialAdvisory/FinancialPlanning/FPEducation/PGMasters/PGMasters';
+import SportsP from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/SportsP/SportsP';
+import RBEmp from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/RBEmp/RBEmp';
+import Doctors from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/Doctors/Doctors';
+import EntreP from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/EntreP/EntreP';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -103,6 +110,14 @@ function App() {
           <Route path="/financial-advisory/goal-based-investments/dream-home" element={<DreamHomeGoal />} />
           <Route path="/financial-advisory/goal-based-investments/business" element={<BusinessStartGoal />} />
           <Route path="/financial-advisory/goal-based-investments/gold-loan" element={<GoldLoan />} />
+          <Route path="/financial-planning/education-planning/financial-planning-for-ug-education-in-india" element={<UGIndia />} />
+          <Route path="/financial-planning/education-planning/financial-planning-for-ug-education-abroad" element={<UGAbroad />} />
+          <Route path="/financial-planning/education-planning/financial-planning-for-helping-child-overseas" element={<MToChild />} />
+          <Route path="/financial-planning/education-planning/financial-planning-for-masters-education-abroad" element={<PGMasters />} />
+          <Route path="/financial-planning/professionals/financial-planning-for-sportspersons" element={<SportsP />} />
+          <Route path="/financial-planning/professionals/financial-planning-for-retired-bank-employees" element={<RBEmp />} />
+          <Route path="/financial-planning/professionals/financial-planning-for-doctors" element={<Doctors />} />
+          <Route path="/financial-planning/professionals/financial-planning-for-entrepreneurs" element={<EntreP />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />

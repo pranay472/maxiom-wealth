@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { GraduationCap, Target, Users, Briefcase, ChevronRight } from 'lucide-react';
 
 const planTypes = [
@@ -67,8 +68,8 @@ const PlanTypeCard = ({ plan }) => {
         <ul className="space-y-3">
           {bullets.map((bullet, index) => (
             <li key={index} className="group/item">
-              <a 
-                href={`/financial-planning/${bullet.toLowerCase().replace(/\s+/g, '-')}`}
+              <Link 
+                to={`/financial-planning/${plan.id}/${bullet.toLowerCase().replace(/\s+/g, '-')}`}
                 className="flex items-center p-2 -ml-2 transition-all duration-300"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-[#F49611] mr-2 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-300"></div>
@@ -76,7 +77,7 @@ const PlanTypeCard = ({ plan }) => {
                   {bullet}
                 </span>
                 <ChevronRight className="w-4 h-4 text-[#F49611]/70 group-hover/item:text-[#F49611] transform group-hover/item:translate-x-1 transition-all duration-300" />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
