@@ -40,33 +40,6 @@ const goals = [
     minInvestment: '₹40L'
   },
   {
-    id: 'education',
-    title: 'Child Education',
-    icon: GraduationCap,
-    description: 'Secure your child\'s future with our education-focused investment strategies.',
-    timeframe: '10-15 Years',
-    riskProfile: 'Medium to High',
-    minInvestment: '₹30L'
-  },
-  {
-    id: 'retirement',
-    title: 'Retirement Planning',
-    icon: HeartPulse,
-    description: 'Create a robust retirement corpus with our scientific investment approach.',
-    timeframe: '15-30 Years',
-    riskProfile: 'Balanced',
-    minInvestment: '₹50L'
-  },
-  {
-    id: 'vacation',
-    title: 'Dream Vacation',
-    icon: Plane,
-    description: 'Plan your perfect getaway with structured short-term investments.',
-    timeframe: '1-3 Years',
-    riskProfile: 'Low',
-    minInvestment: '₹5L'
-  },
-  {
     id: 'gold-loan',
     title: 'Gold Loan Foreclosure',
     icon: CircleDollarSign,
@@ -94,15 +67,6 @@ const GoalCard = ({ goal }) => {
         break;
       case 'business':
         navigate('/financial-advisory/goal-based-investments/business');
-        break;
-      case 'education':
-        navigate('/financial-advisory/goal-based-investments/education');
-        break;
-      case 'retirement':
-        navigate('/financial-advisory/goal-based-investments/retirement');
-        break;
-      case 'vacation':
-        navigate('/financial-advisory/goal-based-investments/vacation');
         break;
       case 'gold-loan':
         navigate('/financial-advisory/goal-based-investments/gold-loan');

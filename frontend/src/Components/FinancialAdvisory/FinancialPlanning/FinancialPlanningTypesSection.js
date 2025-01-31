@@ -14,15 +14,14 @@ const planTypes = [
     ]
   },
   {
-    id: 'specific-goals',
-    title: 'Financial Planning for Specific Goals',
-    icon: Target,
+    id: 'professionals',
+    title: 'Financial Planning for Professionals',
+    icon: Briefcase,
     bullets: [
-      'Financial Planning for Car Purchase',
-      'Financial Planning for Home Loan Prepayment',
-      'Dream Home Purchase',
-      'Starting A Business',
-      'Foreclosure Of Gold Loan'
+      'Financial Planning for Sportspersons',
+      'Financial Planning for Doctors',
+      'Financial Planning for Retired Bank Employees',
+      'Financial Planning for Entrepreneurs'
     ]
   },
   {
@@ -40,17 +39,6 @@ const planTypes = [
       'Financial Planning for Divorce',
       'Financial Planning for Those Migrating From India',
       'Financial Planning for Those Returning To India'
-    ]
-  },
-  {
-    id: 'professionals',
-    title: 'Financial Planning for Professionals',
-    icon: Briefcase,
-    bullets: [
-      'Financial Planning for Sportspersons',
-      'Financial Planning for Doctors',
-      'Financial Planning for Retired Bank Employees',
-      'Financial Planning for Entrepreneurs'
     ]
   }
 ];
@@ -110,9 +98,14 @@ const FinancialPlanningTypesSection = () => {
         
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {planTypes.map((plan) => (
+            {/* First row - first two cards */}
+            {planTypes.slice(0, 2).map((plan) => (
               <PlanTypeCard key={plan.id} plan={plan} />
             ))}
+          </div>
+          {/* Second row - third card centered */}
+          <div className="mt-8 md:w-1/2 md:mx-auto">
+            <PlanTypeCard plan={planTypes[2]} />
           </div>
         </div>
       </div>

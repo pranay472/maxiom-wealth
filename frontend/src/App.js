@@ -67,6 +67,8 @@ import CorporateFinancialWellness from './Components/FinancialAdvisory/Corporate
 import CarPurchase from './Components/FinancialAdvisory/GoalBasedInvestments/CarPurchase/CarPurchase';
 import HomeLoanGoal from './Components/FinancialAdvisory/GoalBasedInvestments/HomeLoan/HomeLoanGoal';
 import DreamHomeGoal from './Components/FinancialAdvisory/GoalBasedInvestments/DreamHomeGoal/DreamHomeGoal';
+import BusinessStartGoal from './Components/FinancialAdvisory/GoalBasedInvestments/BusinessStartGoal/BusinessStartGoal';
+import GoldLoan from './Components/FinancialAdvisory/GoalBasedInvestments/GoldLoan/GoldLoan';
 
 
 function App() {
@@ -99,6 +101,8 @@ function App() {
           <Route path="/financial-advisory/goal-based-investments/car-purchase" element={<CarPurchase />} />
           <Route path="/financial-advisory/goal-based-investments/home-loan" element={<HomeLoanGoal />} />
           <Route path="/financial-advisory/goal-based-investments/dream-home" element={<DreamHomeGoal />} />
+          <Route path="/financial-advisory/goal-based-investments/business" element={<BusinessStartGoal />} />
+          <Route path="/financial-advisory/goal-based-investments/gold-loan" element={<GoldLoan />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />
