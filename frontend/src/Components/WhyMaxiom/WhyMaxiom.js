@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import WhyChooseUs from './WhyChooseUs';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -10,22 +11,29 @@ import ThreeEye from './ThreeEye';
 import ClientTestimonials from './ClientTestimonials';
 
 const WhyMaxiom = () => {
+  const location = useLocation();
+
   useEffect(() => {
-    // Handle hash navigation when component mounts
-    const hash = window.location.hash;
-    if (hash) {
-      setTimeout(() => {
-        // Extract just the fragment identifier part after the last #
-        const fragmentId = hash.split('#').pop();
-        if (fragmentId) {
-          const element = document.getElementById(fragmentId);
+    // Function to scroll to section
+    const scrollToSection = () => {
+      const hash = location.hash.replace('#', '');
+      if (hash) {
+        setTimeout(() => {
+          const element = document.getElementById(hash);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
-        }
-      }, 100);
-    }
-  }, []);
+        }, 100);
+      }
+    };
+
+    // Call on mount and when location changes
+    scrollToSection();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', scrollToSection);
+    return () => window.removeEventListener('hashchange', scrollToSection);
+  }, [location]);
 
   return (
     <div className="why-maxiom-container">
@@ -34,16 +42,24 @@ const WhyMaxiom = () => {
         <div id="whyChooseUs">
           <WhyChooseUs />
         </div>
-        <RootsWings />
-        <LSG />
-        <div className="mb-24"> {/* Add bottom margin to create separation */}
+        <div id="rootsWings">
+          <RootsWings />
+        </div>
+        <div id="lsg">
+          <LSG />
+        </div>
+        <div id="threeEye" className="mb-24">
           <ThreeEye />
         </div>
-        <div className="pt-12">
+        <div id="ourTeam" className="pt-12">
           <OurTeam />
         </div>
-        <OurJourney />
-        <ClientTestimonials/>
+        <div id="ourJourney">
+          <OurJourney />
+        </div>
+        <div id="clientTestimonials">
+          <ClientTestimonials/>
+        </div>
       </div>
       <Footer />
     </div>

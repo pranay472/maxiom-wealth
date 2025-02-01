@@ -28,7 +28,15 @@ const NavBar = () => {
 
   const handleItemClick = (item) => {
     if (item.route) {
-      navigate(item.route);
+      const [path, hash] = item.route.split('#');
+      const currentPath = window.location.pathname;
+
+      // If we're on the same page, use replace to trigger a location change
+      if (currentPath === path) {
+        navigate(item.route, { replace: true });
+      } else {
+        navigate(item.route);
+      }
       setActiveDropdown(null);
     }
   };
