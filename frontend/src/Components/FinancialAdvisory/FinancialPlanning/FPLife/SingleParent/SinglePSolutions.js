@@ -49,55 +49,57 @@ const SinglePSolutions = () => {
         {/* Main heading with accent */}
         <div className="flex items-center gap-4 mb-16">
           <div className="w-20 h-1 bg-[#F49611]" />
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Why is Divorce Financial Planning Crucial</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">Why is Financial Guidance Essential for Single Parents?</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="md:col-span-2">
             <p className="text-2xl text-white/90 leading-relaxed">
-              Divorce can significantly impact your financial stability. Professional guidance ensures a secure transition to financial independence.
+              Single parents face unique financial challenges that require tailored guidance and planning.
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Large feature */}
-          <FeatureCard
-            icon={TrendingUp}
-            title="Financial Independence"
-            description="Establishing financial independence post-divorce is crucial. Our strategies help you achieve and maintain financial autonomy."
-            isLarge={true}
-          />
-          
-          <FeatureCard
-            icon={Shield}
-            title="Asset Protection"
-            description="Protect and manage your assets during and after divorce proceedings."
-          />
-          
-          <FeatureCard
-            icon={FileText}
-            title="Tax Efficiency"
-            description="Navigate the tax implications of divorce with expert guidance and strategic planning."
-          />
-          
-          <FeatureCard
-            icon={FileCheck}
-            title="Legal Compliance"
-            description="Ensure all financial decisions align with legal requirements and settlement terms."
-          />
-
-          <FeatureCard
-            icon={Lock}
-            title="Future Security"
-            description="Build a secure financial foundation for your post-divorce life and future goals."
-          />
-
-          <FeatureCard
-            icon={Heart}
-            title="Expert Support"
-            description="Receive dedicated support from financial experts who understand divorce complexities."
-          />
+          {[ 
+            {
+              icon: TrendingUp,
+              title: "Solo Financial Role",
+              description: "Single parents bear all financial responsibilities, necessitating unique stability strategies."
+            },
+            {
+              icon: Shield,
+              title: "Child-Centric Plans",
+              description: "Financial strategies for single parents heavily emphasise child-related expenses and future requirements."
+            },
+            {
+              icon: FileText,
+              title: "Unforeseen Challenges",
+              description: "One-income households demand robust emergency funds to tackle unexpected setbacks."
+            },
+            {
+              icon: FileCheck,
+              title: "Balanced Investments",
+              description: "Single parents require expert guidance to maintain an optimal risk-reward balance in investments."
+            },
+            {
+              icon: Lock,
+              title: "Optimised Tax Benefits",
+              description: "Single parents can significantly profit from specific tax-efficient strategies."
+            },
+            {
+              icon: Heart,
+              title: "Future Blueprint",
+              description: "It's imperative for single parents to meticulously plan for their child's education, life events, and more."
+            }
+          ].map((solution, index) => (
+            <FeatureCard
+              key={index}
+              icon={solution.icon}
+              title={solution.title}
+              description={solution.description}
+            />
+          ))}
         </div>
       </div>
     </div>

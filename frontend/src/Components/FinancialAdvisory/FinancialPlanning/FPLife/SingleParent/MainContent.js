@@ -69,33 +69,33 @@ const MainContent = () => {
           {[
             {
               icon: TrendingUp,
-              title: "Deep Expertise",
-              description: "With vast knowledge in stocks and mutual funds, we offer sound investment advice for your child's future."
+              title: "Market Insight",
+              description: "Our deep expertise in stocks and mutual funds crafts the right investment strategies for you."
             },
             {
               icon: Smartphone,
-              title: "Integrated Platform",
-              description: "Our web and mobile app streamlines financial planning, execution, and tracking for family needs."
+              title: "Unified Platform",
+              description: "From financial blueprinting to its execution, our integrated app ensures a seamless experience."
             },
             {
               icon: Award,
-              title: "Certified Processes",
-              description: "ISO 9001 certified, ensuring quality in financial and investment planning tailored for childbirth."
+              title: "Quality Assurance",
+              description: "Benefit from our ISO 9001 certified processes in financial and investment planning."
             },
             {
               icon: ShieldCheck,
-              title: "Fiduciary Role",
-              description: "As SEBI registered advisors, our allegiance lies solely with our clients, ensuring unbiased advice."
+              title: "SEBI Affiliation",
+              description: "Being SEBI registered, we work with the primary aim of prioritising your financial well-being."
             },
             {
               icon: Target,
-              title: "Goal-Oriented",
-              description: "Our unique approach aligns all assets and investment plans to your child's future goals."
+              title: "Objective-Oriented Plans",
+              description: "Unique financial plan assurance that connects all your assets and plans to your goals."
             },
             {
               icon: LineChart,
-              title: "No Third-Party Bias",
-              description: "With a proprietary data analytics platform, we offer insights based purely on merit, not external influences."
+              title: "Unbiased Recommendations",
+              description: "Relying on our data analytics, we offer impartial advice, uninfluenced by third parties."
             }
           ].map((approach, index) => (
             <ApproachCard
@@ -115,30 +115,30 @@ const MainContent = () => {
         <div className="relative max-w-7xl mx-auto px-4 py-24">
           <SectionTitle
             subtitle="Key Benefits"
-            title="Benefits of Childbirth Financial Planning"
+            title="Single Parent Financial Planning Benefits"
             align="center"
           />
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: BarChart3,
-                title: "Future-Ready Finances",
-                description: "Ensure that when your child arrives, the financial aspect is stress-free. Adequate planning translates to peace during crucial moments."
+                title: "Enhanced Savings",
+                description: "Utilise tax-efficient methods crafted for single parents to amplify your savings."
               },
               {
                 icon: ShieldCheck,
-                title: "Optimised Returns",
-                description: "Even as you spend on your car, your wealth continues to grow without hiccups. Efficient portfolio management ensures this balance."
+                title: "Trusted Expertise",
+                description: "Rely on our profound market insight specially tailored for single parent households."
               },
               {
                 icon: Target,
-                title: "Complete Financial Safety",
-                description: "Our tailored plans and insurance advice ensure that unpredicted events don't derail your financial stability. Your family's future remains secure."
+                title: "Bespoke Financial Strategies",
+                description: "Financial blueprints shaped specifically for the individual needs of single parents."
               },
               {
                 icon: DollarSign,
-                title: "Transparent Processes",
-                description: "Experience a journey with no hidden motives. Our SEBI registration guarantees honest, transparent, and effective financial advice."
+                title: "Ensured Future",
+                description: "With our assistance, guarantee a prosperous and comfortable tomorrow for you and your child."
               }
             ].map((benefit, index) => (
               <BenefitCard

@@ -31,28 +31,28 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "How is financial planning for doctors unique?",
-      answer: "Medical professionals often have varied income streams and longer educational paths. Tailored financial planning understands these nuances, ensuring optimal financial health."
+      question: "Why is tailored financial planning vital for single parents?",
+      answer: "Customised planning directly addresses the singular challenges and aspirations of single parents, providing stability and security. We're here to simplify this journey."
     },
     {
-      question: "Can I protect against malpractice suits?",
-      answer: "Definetly. Our insurance advisory can guide you on policies that safeguard against potential liabilities, giving you peace of mind."
+      question: "Which investment avenues are ideal for single parents?",
+      answer: "We suggest a blend of safe and return-oriented investments and financial stability without unnecessary risks."
     },
     {
-      question: "How do regulatory changes impact me?",
-      answer: "The healthcare sector has its regulations. We stay updated, ensuring your financial plans remain compliant and advantageous."
+      question: "How is tax planning modified for single parents?",
+      answer: "Single parents have access to distinct tax-efficient methods which enhance overall savings."
     },
     {
-      question: "Is retirement planning necessary?",
-      answer: "Absolutely. Ensuring a comfortable retirement after years of service is crucial. Our strategies make this a reality."
+      question: "How do you highlight child-focused budgeting?",
+      answer: "Our strategies underscore milestones like education, health, and other essentials in financial blueprints for single parents."
     },
     {
-      question: "Do you offer digital solutions?",
-      answer: "Yes. Our integrated mobile and webapp offers a seamless experience from planning to execution and tracking."
+      question: "Should single parents opt for specific insurance schemes?",
+      answer: "Each single parent's insurance requirements vary. We guide towards complete coverage for both parent and child."
     },
     {
-      question: "How are investment decisions made?",
-      answer: "Without third-party bias, our proprietary data analytics platform rates stocks and mutual funds, ensuring your interests are paramount."
+      question: "How can I safeguard my child's financial well-being?",
+      answer: "Our definitive, goal-centric plans, backed by expert counsel, aim at protecting your child's future at every step."
     }
   ];
 
@@ -63,10 +63,10 @@ const FAQ = () => {
           <div className="sticky top-8">
             <div className="w-12 h-0.5 bg-[#F49611] mb-3"></div>
             <h2 className="text-4xl font-bold text-[#113262] mb-6">
-              Frequently Asked Questions About Doctors' Financial Planning
+              Frequently Asked Questions About Single Parent Financial Planning
             </h2>
             <p className="text-gray-600 mb-8">
-              Get answers to common questions about financial planning for medical professionals. 
+              Get answers to common questions about financial planning for single parents. 
               For more detailed guidance, our experts are here to help.
             </p>
             <button className="flex items-center text-[#F49611] font-semibold hover:gap-2 transition-all">

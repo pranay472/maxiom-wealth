@@ -33,14 +33,14 @@ const SinglePHero = () => {
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-12 h-0.5 bg-[#F49611]"></div>
                 <span className="text-[#F49611] font-medium uppercase tracking-wider text-sm">
-                  Emigration Financial Planning. Secure Your Global Financial Future.
+                  Securing Futures, Strengthening Families.
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Financial Planning For Those Emigrating From India
+                Financial Planning For Single Parent
               </h1>
               <p className="text-xl text-white/80">
-                Emigrating from India brings fresh financial landscapes. Our expert guidance ensures smooth transitions, maximizing financial stability abroad while leveraging tax-efficient strategies specially designed for Indian emigrants.
+                Single parenting poses unique financial challenges. With tailored strategies, expert advisories, and tax-efficient planning, we help single parents build a resilient financial foundation for their households.
               </p>
             </div>
             <div className="flex gap-4">
@@ -57,23 +57,23 @@ const SinglePHero = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FeatureCard 
               Icon={Globe}
-              title="Cross-border Investments"
-              description="Craft a diversified portfolio balancing assets in India and abroad."
+              title="Portfolio Advisory"
+              description="Achieve an optimal mix of investments that secure your child's financial future, with our guidance."
             />
             <FeatureCard 
               Icon={FileText}
-              title="Estate Planning Advisory"
-              description="Ensure your legacy is efficiently managed and passed on, irrespective of geographies."
+              title="Investment Counselling"
+              description="Our expert advisors offer precise recommendations designed for the financial needs of single parents."
             />
             <FeatureCard 
               Icon={Calculator}
-              title="Taxation Advisory"
-              description="Navigating dual taxation and other emigration tax challenges become simpler with our guidance."
+              title="Custom Financial Plans"
+              description="Get bespoke financial blueprints that address the unique challenges faced by single parent households."
             />
             <FeatureCard 
               Icon={ShieldCheck}
-              title="Insurance Guidance"
-              description="Secure yourself with the right insurance plans suitable"
+              title="Insurance Consultation"
+              description="Comprehensive coverage solutions ensuring peace of mind"
             />
           </div>
         </div>

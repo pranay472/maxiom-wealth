@@ -31,28 +31,28 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "How is financial planning for doctors unique?",
-      answer: "Medical professionals often have varied income streams and longer educational paths. Tailored financial planning understands these nuances, ensuring optimal financial health."
+      question: "How do single mothers benefit from tailored financial planning?",
+      answer: "Tailored planning addresses specific challenges and goals of single moms, ensuring stability and future security. Our expertise is in making this journey smoother."
     },
     {
-      question: "Can I protect against malpractice suits?",
-      answer: "Definetly. Our insurance advisory can guide you on policies that safeguard against potential liabilities, giving you peace of mind."
+      question: "What investment strategies do you recommend?",
+      answer: "For single mothers, we blend safety with returns, ensuring a stable financial future without undue risks."
     },
     {
-      question: "How do regulatory changes impact me?",
-      answer: "The healthcare sector has its regulations. We stay updated, ensuring your financial plans remain compliant and advantageous."
+      question: "Is tax planning different for single moms?",
+      answer: "Yes, single mothers can access specific tax-efficient strategies which maximise savings."
     },
     {
-      question: "Is retirement planning necessary?",
-      answer: "Absolutely. Ensuring a comfortable retirement after years of service is crucial. Our strategies make this a reality."
+      question: "How do you prioritise child-centric budgeting?",
+      answer: "We emphasise milestones like education, healthcare, and overall well-being in our financial strategies for single mothers."
     },
     {
-      question: "Do you offer digital solutions?",
-      answer: "Yes. Our integrated mobile and webapp offers a seamless experience from planning to execution and tracking."
+      question: "Do single mothers need specific insurance plans?",
+      answer: "Insurance needs for single mothers differ. We guide you to ensure comprehensive protection for both mother and child."
     },
     {
-      question: "How are investment decisions made?",
-      answer: "Without third-party bias, our proprietary data analytics platform rates stocks and mutual funds, ensuring your interests are paramount."
+      question: "How can I ensure my child's financial security?",
+      answer: "Our goal-driven plans, coupled with expert advice, aim at securing your child's future every step of the way."
     }
   ];
 
@@ -63,10 +63,10 @@ const FAQ = () => {
           <div className="sticky top-8">
             <div className="w-12 h-0.5 bg-[#F49611] mb-3"></div>
             <h2 className="text-4xl font-bold text-[#113262] mb-6">
-              Frequently Asked Questions About Doctors' Financial Planning
+              Frequently Asked Questions About Single Mother Financial Planning
             </h2>
             <p className="text-gray-600 mb-8">
-              Get answers to common questions about financial planning for medical professionals. 
+              Get answers to common questions about financial planning for single mothers. 
               For more detailed guidance, our experts are here to help.
             </p>
             <button className="flex items-center text-[#F49611] font-semibold hover:gap-2 transition-all">
