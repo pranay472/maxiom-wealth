@@ -77,6 +77,16 @@ import SportsP from './Components/FinancialAdvisory/FinancialPlanning/FPProfessi
 import RBEmp from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/RBEmp/RBEmp';
 import Doctors from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/Doctors/Doctors';
 import EntreP from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/EntreP/EntreP';
+import ChildBirth from './Components/FinancialAdvisory/FinancialPlanning/FPLife/ChildBirth/ChildBirth';
+import ChildMar from './Components/FinancialAdvisory/FinancialPlanning/FPLife/ChildMarriage/ChildMar';
+import DeathIncomeEarner from './Components/FinancialAdvisory/FinancialPlanning/FPLife/DeathIncomeEarner/DeathIncomeEarner';
+import Disability from './Components/FinancialAdvisory/FinancialPlanning/FPLife/Disability/Disability';
+import Divorce from './Components/FinancialAdvisory/FinancialPlanning/FPLife/Divorce/Divorce';
+import SingleParent from './Components/FinancialAdvisory/FinancialPlanning/FPLife/SingleParent/SingleParent';
+import SingleMother from './Components/FinancialAdvisory/FinancialPlanning/FPLife/SingleMother/SingleMother';
+import RetIndia from './Components/FinancialAdvisory/FinancialPlanning/FPLife/RetIndia/RetIndia';
+import MigIndia from './Components/FinancialAdvisory/FinancialPlanning/FPLife/MigIndia/MigIndia';
+import HealthEme from './Components/FinancialAdvisory/FinancialPlanning/FPLife/HealthEme/HealthEme';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -118,6 +128,16 @@ function App() {
           <Route path="/financial-planning/professionals/financial-planning-for-retired-bank-employees" element={<RBEmp />} />
           <Route path="/financial-planning/professionals/financial-planning-for-doctors" element={<Doctors />} />
           <Route path="/financial-planning/professionals/financial-planning-for-entrepreneurs" element={<EntreP />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-child-birth" element={<ChildBirth />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-child-marriage" element={<ChildMar />} />
+          <Route path="/financial-planning/life-situations/financial-planning-in-case-of-sudden-death-of-income-earner" element={<DeathIncomeEarner />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-disability" element={<Disability />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-divorce" element={<Divorce />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-single-parents" element={<SingleParent />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-single-mothers" element={<SingleMother />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-those-returning-to-india" element={<RetIndia />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-those-migrating-from-india" element={<MigIndia />} />
+          <Route path="/financial-planning/life-situations/financial-planning-for-health-emergency" element={<HealthEme />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />

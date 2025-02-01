@@ -31,7 +31,7 @@ const planTypes = [
     icon: Users,
     bullets: [
       'Financial Planning for Child Birth',
-      'Financial Planning for Child\'s Marriage',
+      'Financial Planning for Child Marriage',
       'Financial Planning for Health Emergency',
       'Financial Planning for Disability',
       'Financial Planning for Single Mothers',
