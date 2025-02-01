@@ -1,112 +1,122 @@
 import React from 'react';
-import '../../Styles/WhyMaxiomCss/WhyChooseUs.css';
-import { Trophy, Target, Shield } from 'lucide-react';
-
-const QuoteIcon = () => (
-  <div className="quote-container">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" fill="none" className="quote-mark">
-      <path fill="#F58024" d="M23.683 16.2c0 1.267-.481 2.356-1.444 3.268-.912.861-2.077 1.292-3.496 1.292-1.57 0-2.888-.557-3.952-1.672-1.064-1.115-1.596-2.71-1.596-4.788 0-4.104 1.039-6.27 3.116-8.5C18.44 3.52 20.77 2.253 23.303 2v3.572c-1.621.355-2.964 1.267-4.028 2.736-1.064 1.47-1.621 2.015-1.672 3.636.355-.253 1.014-.444 1.672-.444 1.318 0 2.407.43 3.268 1.292.862.81 1.14 1.99 1.14 3.408ZM10.683 16.2c0 1.267-.481 2.356-1.444 3.268-.912.861-2.077 1.292-3.496 1.292-1.57 0-2.888-.557-3.952-1.672C.727 17.973.195 16.378.195 14.3c0-4.104 1.039-6.27 3.116-8.5C5.44 3.52 7.77 2.253 10.303 2v3.572c-1.621.355-2.964 1.267-4.028 2.736-1.064 1.47-1.621 2.015-1.672 3.636.355-.253 1.014-.444 1.672-.444 1.318 0 2.407.43 3.268 1.292.862.81 1.14 1.99 1.14 3.408Z" />
-    </svg>
-    <div className="dashed-line"></div>
-  </div>
-);
+import { Trophy, Target, Shield, Users, TrendingUp, BadgeCheck } from 'lucide-react';
 
 const WhyChooseUs = () => {
-  const backgroundPatterns = {
-    geometric: 'repeating-linear-gradient(45deg, #f8fafc, #f8fafc 10px, #f1f5f9 10px, #f1f5f9 20px)',
-    network: 'radial-gradient(circle at 50% 50%, #e2e8f0 1px, transparent 1px), radial-gradient(circle at 0% 0%, #e2e8f0 1px, transparent 1px)',
-    graph: 'linear-gradient(0deg, #f1f5f9 2px, transparent 2px), linear-gradient(90deg, #f1f5f9 2px, transparent 2px)'
-  };
+  const stats = [
+    { icon: Users, label: '1000+ Families', sublabel: 'Trust Our Expertise' },
+    { icon: TrendingUp, label: '450+ Crores', sublabel: 'Assets Under Management' },
+    { icon: BadgeCheck, label: 'SEBI Registered', sublabel: 'Licensed & Regulated' }
+  ];
 
   return (
-    <div className="min-h-screen bg-slate-50 why-choose-us">
-      {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center overflow-hidden hero-section">
-        {/* Hero Background */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transform scale-105 hero-background"
-        >
-          {/* Base Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#113262] via-[#1C52A0] to-[#0A1E3A] opacity-95"></div>
-          
-          {/* Accent Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1C52A0]/20 via-transparent to-[#F49611]/10"></div>
-          
-          {/* Subtle Pattern Overlay */}
-          <div className="absolute inset-0 opacity-5" 
-            style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
-              backgroundSize: '32px 32px'
-            }}>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#113262] to-[#1C52A0]">
+      {/* Hero Section with Stats */}
+      <section className="relative pt-24 pb-32 overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#F49611]/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-[#1C52A0]/20 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
         
-        {/* Content */}
-        <div className="container mx-auto px-6 relative z-10 text-white hero-content">
-          <div className="max-w-3xl content-wrapper pt-24">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative">
+          {/* Main Content */}
+          <div className="max-w-3xl mb-20">
+            <div className="w-12 h-0.5 bg-[#F49611] mb-6"></div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Why Choose Maxiom
+              <span className="block text-[#F49611] text-2xl md:text-3xl mt-2">Your Path to Financial Excellence</span>
             </h1>
-            <p className="text-xl md:text-2xl opacity-90 mb-8 leading-relaxed hero-description">
+            <p className="text-xl text-white/90 leading-relaxed">
               Your trusted partner in building and preserving wealth through scientific and process-driven investing.
             </p>
-            <div className="flex flex-wrap gap-4 stats-container">
-              <div className="flex items-center gap-2 stat-item">
-                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm icon-wrapper">
-                  <Trophy className="h-6 w-6 text-white icon" />
+          </div>
+
+          {/* Stats Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="group">
+                <div className="relative bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 hover:border-[#F49611] transition-all duration-300">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-[#F49611]/10 to-transparent rounded-bl-full transform translate-x-6 -translate-y-6"></div>
+                  
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-4 bg-gradient-to-br from-[#F49611] to-[#955C0A] rounded-xl group-hover:scale-110 transition-transform duration-300">
+                      <stat.icon className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-white">{stat.label}</h3>
+                      <p className="text-white/70">{stat.sublabel}</p>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-lg">1000+ Families</span>
               </div>
-              <div className="flex items-center gap-2 stat-item">
-                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm icon-wrapper">
-                  <Target className="h-6 w-6 text-white icon" />
-                </div>
-                <span className="text-lg">450+ Crores Assets</span>
-              </div>
-              <div className="flex items-center gap-2 stat-item">
-                <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm icon-wrapper">
-                  <Shield className="h-6 w-6 text-white icon" />
-                </div>
-                <span className="text-lg">SEBI Registered</span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="values-section">
-        <div className="values-content">
-          <div className="values-intro">
-            <div className="card-icon-wrapper">
-              <Target className="card-icon h-6 w-6 text-blue-900" />
-            </div>
-            <h2>Our Values</h2>
-            <QuoteIcon />
-            <p className="values-description">
-              Founded on the principles of transparency and client-first philosophy, Maxiom Wealth emerged as a response to the need for honest, effective wealth management. Our journey began with a simple question: How can we make investing more rewarding for our clients? This quest led to the creation of a company that puts clients' interests at the heart of everything we do.
-            </p>
+      {/* Values Section */}
+      <section className="relative py-24 bg-white">
+        <div className="container max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="flex flex-col items-center justify-center mb-16">
+            <div className="w-12 h-0.5 bg-[#F49611] mb-6"></div>
+            <h2 className="text-4xl font-bold text-[#113262] relative mb-8 drop-shadow-md group">
+              Our Core Values
+              <span className="absolute -bottom-2 left-1/2 w-3/5 h-[3px] bg-gradient-to-r from-transparent via-[#1C52A0] to-transparent -translate-x-1/2 group-hover:w-4/5 transition-all duration-300"></span>
+            </h2>
           </div>
 
-          <div className="vision-mission-container">
-            <div className="vision-box">
-              <div className="card-icon-wrapper">
-                <Shield className="card-icon h-6 w-6 text-blue-900" />
+          {/* Values Cards */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Vision Card */}
+            <div className="group">
+              <div className="h-full relative bg-gradient-to-br from-[#E8EEF6] to-white p-8 rounded-xl border-2 border-[#E8EEF6] hover:border-[#1C52A0] transition-all duration-300">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#1C52A0]/20 to-transparent rounded-bl-full transform translate-x-8 -translate-y-8"></div>
+                
+                <div className="flex items-center mb-6">
+                  <div className="p-4 bg-gradient-to-br from-[#1C52A0] to-[#0A1E3A] rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#113262] ml-6">Vision</h3>
+                </div>
+                
+                <p className="text-gray-700 leading-relaxed">
+                  To be India's most trusted and client-centric wealth advisory, helping people achieve financial independence & financial well-being, grow & preserve wealth.
+                </p>
               </div>
-              <h3>Vision</h3>
-              <QuoteIcon />
-              <p>
-                To be India's most trusted and client-centric wealth advisory, helping people achieve financial independence & financial well-being, grow & preserve wealth.
-              </p>
             </div>
 
-            <div className="mission-box">
-              <div className="card-icon-wrapper">
-                <Trophy className="card-icon h-6 w-6 text-blue-900" />
+            {/* Mission Card */}
+            <div className="group">
+              <div className="h-full relative bg-gradient-to-br from-[#E8EEF6] to-white p-8 rounded-xl border-2 border-[#E8EEF6] hover:border-[#1C52A0] transition-all duration-300">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#F49611]/20 to-transparent rounded-bl-full transform translate-x-8 -translate-y-8"></div>
+                
+                <div className="flex items-center mb-6">
+                  <div className="p-4 bg-gradient-to-br from-[#F49611] to-[#955C0A] rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    <Trophy className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#113262] ml-6">Mission</h3>
+                </div>
+                
+                <p className="text-gray-700 leading-relaxed">
+                  Enable better investing advised by industry experts & unbiased research powered by machine learning algorithms, operating on a transparent & fee-based model free of hidden costs.
+                </p>
               </div>
-              <h3>Mission</h3>
-              <QuoteIcon />
-              <p>
-                Enable better investing advised by industry experts & unbiased research powered by machine learning algorithms, operating on a transparent & fee-based model free of hidden costs.
+            </div>
+          </div>
+
+          {/* Values Description */}
+          <div className="mt-12 relative bg-gradient-to-br from-[#113262] to-[#1C52A0] p-8 rounded-xl text-white overflow-hidden">
+            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#F49611]/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            
+            <div className="relative">
+              <div className="flex items-center mb-6">
+                <div className="p-4 bg-white/10 backdrop-blur-sm rounded-xl">
+                  <Shield className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white ml-6">Our Values</h3>
+              </div>
+              
+              <p className="text-white/90 leading-relaxed text-lg">
+                Founded on the principles of transparency and client-first philosophy, Maxiom Wealth emerged as a response to the need for honest, effective wealth management. Our journey began with a simple question: How can we make investing more rewarding for our clients? This quest led to the creation of a company that puts clients' interests at the heart of everything we do.
               </p>
             </div>
           </div>

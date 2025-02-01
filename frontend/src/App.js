@@ -11,6 +11,7 @@ import PMS from './Components/WealthManagement/PMS/PMS';
 import GEM from './Components/WealthManagement/PMS/GEM/GEM';
 import EMERALDE from './Components/WealthManagement/PMS/EMERALDE/EMERALDE';
 import EMERALDNE from './Components/WealthManagement/PMS/EMERALDNE/EMERALDNE';
+import Diamond from './Components/WealthManagement/PMS/Diamond/Diamond';
 import Calculators from './Components/Resources/Calculators/Calculators';
 import CAGR from './Components/Resources/Calculators/calculate/CAGR/CAGR';
 import CompoundInterest from './Components/Resources/Calculators/calculate/CompoundInterest/CompoundInterest';
@@ -103,6 +104,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/why-maxiom" element={<WhyMaxiom />} />
           <Route path="/wealth-services/alternate-investments" element={<AlternateInvestments />} />
+          <Route path="/wealth-services/portfolio-management" element={<PMS />}/>
           <Route path="/wealth-services/tax-planning" element={<TaxPlanning />} />
           <Route path="/wealth-services/estate-planning" element={<EstatePlanning />} />
           <Route path="/wealth-services/offshore-products" element={<OffshoreProducts />} />
@@ -149,6 +151,7 @@ function App() {
           <Route path="/pms/gem" element={<GEM />} />
           <Route path="/pms/emerald-equity" element={<EMERALDE />} />
           <Route path="/pms/emerald-non-equity" element={<EMERALDNE />} />
+          <Route path="/pms/diamond" element={<Diamond />} />
           <Route path="/resources/calculators" element={<Calculators />} />
           <Route path="/resources/calculators/cagr" element={<CAGR />} />
           <Route path="/resources/calculators/compound-interest" element={<CompoundInterest />} />
