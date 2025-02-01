@@ -38,27 +38,27 @@ const StatisticCard = ({ value, label }) => (
   </div>
 );
 
-const DoctorsSolutions = () => {
+const EntreSolutions = () => {
   return (
     <div className="relative bg-[#113262]">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         {/* Main heading with accent */}
         <div className="flex items-center gap-4 mb-16">
           <div className="w-20 h-1 bg-[#F49611]" />
-          <h2 className="text-4xl md:text-5xl font-bold text-white">Why Doctors' Financial Planning Matters?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white">Why is Entrepreneur Financial Planning Crucial?</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <div className="md:col-span-2">
             <p className="text-2xl text-white/90 leading-relaxed">
-              Medicine presents unique financial hurdles. Tailored financial strategies help doctors navigate these challenges, ensuring long-term financial health.
+              Every business is distinct, and so is its financial roadmap. Customized solutions drive success.
             </p>
           </div>
           
           {/* Statistics cards */}
           <div className="grid grid-cols-2 gap-4">
             <StatisticCard value="20+" label="Years Experience" />
-            <StatisticCard value="1000+" label="Doctors Served" />
+            <StatisticCard value="1000+" label="Entrepreneurs Served" />
           </div>
         </div>
 
@@ -67,40 +67,40 @@ const DoctorsSolutions = () => {
           {/* Large feature */}
           <FeatureCard
             icon={TrendingUp}
-            title="Intrinsic Challenges"
-            description="Medicine presents unique financial hurdles. Tailored financial strategies help doctors navigate these challenges, ensuring long-term financial health."
+            title="Tailored Solutions"
+            description="Every business is distinct, and so is its financial roadmap. Customized solutions drive success."
             isLarge={true}
           />
           
           {/* Regular features */}
           <FeatureCard
             icon={Shield}
-            title="High Earnings Management"
-            description="With potential high earnings, doctors need strategies to manage, grow, and protect their wealth optimally."
+            title="Wealth Maximisation"
+            description="Entrepreneurs deserve their hard-earned profits. Effective planning ensures it multiplies."
           />
           
           <FeatureCard
             icon={Calculator}
-            title="Changing Regulations"
-            description="The healthcare sector often sees regulatory shifts. Stay ahead with our proactive financial planning."
+            title="Tax Efficiency"
+            description="Tax-efficient strategies ensure business owners retain more of their earnings."
           />
           
           <FeatureCard
             icon={Globe}
-            title="Investment Diversification"
-            description="Diversifying investments ensures doctors' wealth grows steadily without undue risks."
+            title="Asset Protection"
+            description="Safeguarding personal and business assets is paramount for long-term success."
           />
 
           <FeatureCard
             icon={Users}
-            title="Retirement Assurance"
-            description="While doctors serve long hours, a well-planned retirement is essential. Our strategies guarantee peaceful retirements."
+            title="Future Security"
+            description="Planning now ensures a brighter and more stable financial future."
           />
 
           <FeatureCard
             icon={GraduationCap}
-            title="Liability Protection"
-            description="Malpractice suits, though rare, can be hefty. Financial planning can shield doctors from unforeseen liabilities."
+            title="Expert Guidance"
+            description="Advisors familiar with entrepreneurial needs can make all the difference."
           />
         </div>
       </div>
@@ -108,4 +108,4 @@ const DoctorsSolutions = () => {
   );
 };
 
-export default DoctorsSolutions;
+export default EntreSolutions;

@@ -63,39 +63,39 @@ const MainContent = () => {
       <div className="max-w-7xl mx-auto px-4">
         <SectionTitle
           subtitle="Our Approach"
-          title="How our unique approach elevates Doctors"
+          title="How our unique approach elevates Entrepreneurs"
         />
         <div className="grid md:grid-cols-2 gap-8">
           {[
             {
               icon: TrendingUp,
-              title: "Deep Expertise",
-              description: "Our deep knowledge in stocks and mutual funds ensures optimal investments. We understand the nuances of the medical profession."
+              title: "Stocks Expertise",
+              description: "Deep expertise in stocks and mutual funds ensures your money works for you."
             },
             {
               icon: Smartphone,
-              title: "Integrated Platform",
-              description: "Our mobile and webapp seamlessly integrates financial planning with investment strategies. Effortlessly move from planning to execution."
+              title: "Integrated Solutions",
+              description: "Our webapp seamlessly integrates financial planning with investment strategies."
             },
             {
               icon: Award,
               title: "Certified Excellence",
-              description: "ISO 9001 processes ensuring top-notch services, from financial planning to investment strategies. Consistent and quality advice."
+              description: "ISO 9001 certified processes mean you're getting the best in business."
             },
             {
               icon: ShieldCheck,
-              title: "Trusted Fiduciary",
-              description: "SEBI-registered advisor and portfolio manager; trust is at our core. Your interests always come first."
+              title: "Fiduciary Trust",
+              description: "Registered with SEBI, we prioritise your interests above all."
             },
             {
               icon: Target,
-              title: "Goal Mapping",
-              description: "Our unique financial plan assurance aligns assets and investments with your goals. Every rupee is accounted for."
+              title: "Assured Plans",
+              description: "Our unique approach maps all assets to your business goals."
             },
             {
               icon: LineChart,
-              title: "One-stop Solution",
-              description: "From advisory to execution, experience stellar customer service. Leave the complexities to us."
+              title: "Unbiased Decisions",
+              description: "Proprietary data analytics rate stocks and mutual funds without third-party influences."
             }
           ].map((approach, index) => (
             <ApproachCard
@@ -115,30 +115,30 @@ const MainContent = () => {
         <div className="relative max-w-7xl mx-auto px-4 py-24">
           <SectionTitle
             subtitle="Key Benefits"
-            title="Key Benefits of Doctors' Financial Planning"
+            title="Benefits of Entrepreneur Financial Planning"
             align="center"
           />
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: BarChart3,
-                title: "In-depth Industry Insight",
-                description: "We understand the unique financial challenges faced by doctors. Our specialized advice ensures a secure, prosperous future."
+                title: "Robust Financial Growth",
+                description: "Streamline finances, optimize investments, and watch your business wealth multiply. Benefit from expert-guided strategies."
               },
               {
                 icon: ShieldCheck,
-                title: "Streamlined Wealth Growth",
-                description: "Capitalise on your earnings. Experience consistent growth with strategies tailored for medical professionals."
+                title: "Tailored Solutions",
+                description: "Every entrepreneur's journey is unique. Get financial strategies custom-crafted for your business aspirations."
               },
               {
                 icon: Target,
-                title: "Holistic Financial Health",
-                description: "From tax planning to insurance, get a 360-degree view of your financial landscape, ensuring no aspect is overlooked."
+                title: "Secure Future",
+                description: "Plan today for a flourishing tomorrow. Ensure sustained profitability and long-term financial stability."
               },
               {
                 icon: DollarSign,
-                title: "Absolute Peace of Mind",
-                description: "With our expertise, doctors can focus on their profession, knowing their financial future is in good hands."
+                title: "Informed Decision Making",
+                description: "Leverage actionable insights. Make financial choices that resonate with your business vision."
               }
             ].map((benefit, index) => (
               <BenefitCard

@@ -31,28 +31,28 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "How is financial planning for doctors unique?",
-      answer: "Medical professionals often have varied income streams and longer educational paths. Tailored financial planning understands these nuances, ensuring optimal financial health."
+      question: "Why tailored financial plans?",
+      answer: "Every entrepreneur's journey is unique. Tailored financial plans cater to specific business needs, ensuring more effective outcomes. Maxiom Wealth understands these nuances and crafts strategies just for you."
     },
     {
-      question: "Can I protect against malpractice suits?",
-      answer: "Definetly. Our insurance advisory can guide you on policies that safeguard against potential liabilities, giving you peace of mind."
+      question: "Are tax strategies essential?",
+      answer: "Absolutely. Effective tax strategies can significantly increase your net profit. With our expertise, we help entrepreneurs navigate complex tax landscapes efficiently."
     },
     {
-      question: "How do regulatory changes impact me?",
-      answer: "The healthcare sector has its regulations. We stay updated, ensuring your financial plans remain compliant and advantageous."
+      question: "How does Maxiom Wealth differ?",
+      answer: "Our deep expertise, certified processes, and fiduciary commitments set us apart. We're in this journey with you, prioritising your success at every step."
     },
     {
-      question: "Is retirement planning necessary?",
-      answer: "Absolutely. Ensuring a comfortable retirement after years of service is crucial. Our strategies make this a reality."
+      question: "Is insurance crucial for entrepreneurs?",
+      answer: "Yes, insurance mitigates potential risks, ensuring business continuity. We guide you in choosing the best protection for your assets."
     },
     {
-      question: "Do you offer digital solutions?",
-      answer: "Yes. Our integrated mobile and webapp offers a seamless experience from planning to execution and tracking."
+      question: "What about future financial goals?",
+      answer: "Our unique assurance approach ensures that all your assets and plans align with your long-term goals, securing your business's future."
     },
     {
-      question: "How are investment decisions made?",
-      answer: "Without third-party bias, our proprietary data analytics platform rates stocks and mutual funds, ensuring your interests are paramount."
+      question: "How unbiased is your advice?",
+      answer: "Entirely. We rely on our proprietary data platform to rate investments. There's no external influence, just data-driven insights."
     }
   ];
 
@@ -63,10 +63,10 @@ const FAQ = () => {
           <div className="sticky top-8">
             <div className="w-12 h-0.5 bg-[#F49611] mb-3"></div>
             <h2 className="text-4xl font-bold text-[#113262] mb-6">
-              Frequently Asked Questions About Doctors' Financial Planning
+              Frequently Asked Questions About Entrepreneur Financial Planning
             </h2>
             <p className="text-gray-600 mb-8">
-              Get answers to common questions about financial planning for medical professionals. 
+              Get answers to common questions about financial planning for entrepreneurs. 
               For more detailed guidance, our experts are here to help.
             </p>
             <button className="flex items-center text-[#F49611] font-semibold hover:gap-2 transition-all">

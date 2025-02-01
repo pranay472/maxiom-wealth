@@ -63,39 +63,39 @@ const MainContent = () => {
       <div className="max-w-7xl mx-auto px-4">
         <SectionTitle
           subtitle="Our Approach"
-          title="How our unique approach elevates Doctors"
+          title="How our unique approach benefits retired bank employees"
         />
         <div className="grid md:grid-cols-2 gap-8">
           {[
             {
               icon: TrendingUp,
               title: "Deep Expertise",
-              description: "Our deep knowledge in stocks and mutual funds ensures optimal investments. We understand the nuances of the medical profession."
+              description: "With vast knowledge in stocks and mutual funds, we offer the best investment strategies."
             },
             {
               icon: Smartphone,
               title: "Integrated Platform",
-              description: "Our mobile and webapp seamlessly integrates financial planning with investment strategies. Effortlessly move from planning to execution."
+              description: "Our mobile and web app makes financial planning to execution seamless."
             },
             {
               icon: Award,
               title: "Certified Excellence",
-              description: "ISO 9001 processes ensuring top-notch services, from financial planning to investment strategies. Consistent and quality advice."
+              description: "Acting as a fiduciary, ensuring your interests always come first."
             },
             {
               icon: ShieldCheck,
-              title: "Trusted Fiduciary",
-              description: "SEBI-registered advisor and portfolio manager; trust is at our core. Your interests always come first."
+              title: "SEBI Registered",
+              description: "As an SEBI registered entity, we uphold the highest standards in investment advice."
             },
             {
               icon: Target,
-              title: "Goal Mapping",
-              description: "Our unique financial plan assurance aligns assets and investments with your goals. Every rupee is accounted for."
+              title: "Goal-Mapped Plans",
+              description: "Unique approach linking assets and investments to your goals."
             },
             {
               icon: LineChart,
-              title: "One-stop Solution",
-              description: "From advisory to execution, experience stellar customer service. Leave the complexities to us."
+              title: "Unbiased Advise",
+              description: "Proprietary data analytics rate stocks and mutual funds, keeping third-party influences at bay."
             }
           ].map((approach, index) => (
             <ApproachCard
@@ -115,30 +115,30 @@ const MainContent = () => {
         <div className="relative max-w-7xl mx-auto px-4 py-24">
           <SectionTitle
             subtitle="Key Benefits"
-            title="Key Benefits of Doctors' Financial Planning"
+            title="Exclusive Benefits for Bank Retirees"
             align="center"
           />
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 icon: BarChart3,
-                title: "In-depth Industry Insight",
-                description: "We understand the unique financial challenges faced by doctors. Our specialized advice ensures a secure, prosperous future."
+                title: "Tax Efficiency",
+                description: "Understand tax nuances specific to bank retirees. Save more with our tax-efficient strategies."
               },
               {
                 icon: ShieldCheck,
-                title: "Streamlined Wealth Growth",
-                description: "Capitalise on your earnings. Experience consistent growth with strategies tailored for medical professionals."
+                title: "Expertise Matters",
+                description: "Gain from our deep expertise, especially beneficial for retired bank employees."
               },
               {
                 icon: Target,
-                title: "Holistic Financial Health",
-                description: "From tax planning to insurance, get a 360-degree view of your financial landscape, ensuring no aspect is overlooked."
+                title: "Tailored Solutions",
+                description: "Financial planning specifically crafted for your unique needs as a bank retiree."
               },
               {
                 icon: DollarSign,
-                title: "Absolute Peace of Mind",
-                description: "With our expertise, doctors can focus on their profession, knowing their financial future is in good hands."
+                title: "Secure Future",
+                description: "Ensure a comfortable post-retirement life with our comprehensive financial solutions."
               }
             ].map((benefit, index) => (
               <BenefitCard

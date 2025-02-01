@@ -14,7 +14,7 @@ const FeatureCard = ({ Icon, title, description }) => (
   </div>
 );
 
-const DoctorsHero = () => {
+const RBEmpHero = () => {
   return (
     <div className="relative bg-[#113262] overflow-hidden">
       {/* Background Pattern */}
@@ -31,16 +31,15 @@ const DoctorsHero = () => {
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-12 h-0.5 bg-[#F49611]"></div>
                 <span className="text-[#F49611] font-medium uppercase tracking-wider text-sm">
-                  Medical Financial Planning
+                  Retired Bank Employee Financial Planning
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Financial Planning For Doctors
+                Financial Planning For Retired Bank Employees
               </h1>
               <p className="text-xl text-white/80">
-                Navigating Finance, Simplifying Medicine's Earnings. Doctors play a crucial role in society, often juggling hectic schedules. 
-                Our financial planning solutions, tailored for medical professionals, help physicians maximize their earnings, ensuring a 
-                tax-efficient and stable financial future.
+                Secure, Smart, and Strategic Financial Solutions. For retired bank professionals, navigating post-retirement finances can be challenging. 
+                With tailored financial planning, tax-efficient strategies, and expert guidance, we ensure a comfortable and maximised retirement income.
               </p>
             </div>
             <div className="flex gap-4">
@@ -57,23 +56,23 @@ const DoctorsHero = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FeatureCard 
               Icon={Briefcase}
-              title="Portfolio Diagnostics"
-              description="Dive into the health of your investments. Get a clear picture of your current portfolio's strengths and weaknesses, aiding in future investment decisions."
+              title="Portfolio Management"
+              description="Tailor-made investment strategies for bank retirees. Achieve your financial goals with our expert portfolio management."
             />
             <FeatureCard 
               Icon={LineChart}
-              title="Strategic Wealth Management"
-              description="Optimise your hard-earned money. Receive tailor-made strategies to help your wealth grow consistently, adapting to the market's rhythms."
+              title="Investment Advisory"
+              description="Expert financial advisors cater specifically to retired bank professionals, ensuring maximised returns."
             />
             <FeatureCard 
               Icon={Calculator}
-              title="Comprehensive Tax Planning"
-              description="Navigate the tax maze with ease. Benefit from specialized strategies to minimise tax liabilities and maximise savings, particularly designed for doctors."
+              title="Personalised Financial Planning"
+              description="Customized financial plans focusing on maximizing retirement income for retired bank employees."
             />
             <FeatureCard 
               Icon={ShieldCheck}
-              title="Risk Cover Consultation"
-              description="Protect what you've built. Expert advice on insurance solutions, ensuring your assets and practice are secure against unforeseen challenges."
+              title="Insurance Advisory"
+              description="Choose the best insurance options, ensuring comprehensive coverage in your golden years."
             />
           </div>
         </div>
@@ -82,4 +81,4 @@ const DoctorsHero = () => {
   );
 };
 
-export default DoctorsHero;
+export default RBEmpHero;

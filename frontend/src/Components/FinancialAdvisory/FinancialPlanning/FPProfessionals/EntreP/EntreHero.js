@@ -14,7 +14,7 @@ const FeatureCard = ({ Icon, title, description }) => (
   </div>
 );
 
-const DoctorsHero = () => {
+const EntreHero = () => {
   return (
     <div className="relative bg-[#113262] overflow-hidden">
       {/* Background Pattern */}
@@ -31,16 +31,16 @@ const DoctorsHero = () => {
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-12 h-0.5 bg-[#F49611]"></div>
                 <span className="text-[#F49611] font-medium uppercase tracking-wider text-sm">
-                  Medical Financial Planning
+                  Entrepreneur Financial Planning Essentials
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Financial Planning For Doctors
+                Financial Planning For Entrepreneurs
               </h1>
               <p className="text-xl text-white/80">
-                Navigating Finance, Simplifying Medicine's Earnings. Doctors play a crucial role in society, often juggling hectic schedules. 
-                Our financial planning solutions, tailored for medical professionals, help physicians maximize their earnings, ensuring a 
-                tax-efficient and stable financial future.
+                Crafting success, safeguarding wealth. Entrepreneurs face unique financial challenges and opportunities. 
+                Customized financial planning for business owners not only maximises profits and wealth but also provides 
+                tax-efficient strategies. An expert financial advisor familiar with entrepreneurial challenges is essential.
               </p>
             </div>
             <div className="flex gap-4">
@@ -57,23 +57,23 @@ const DoctorsHero = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FeatureCard 
               Icon={Briefcase}
-              title="Portfolio Diagnostics"
-              description="Dive into the health of your investments. Get a clear picture of your current portfolio's strengths and weaknesses, aiding in future investment decisions."
+              title="Portfolio Optimisation"
+              description="Determine the right mix of investments tailored for entrepreneurial ventures. Ensure robust growth and risk management."
             />
             <FeatureCard 
               Icon={LineChart}
-              title="Strategic Wealth Management"
-              description="Optimise your hard-earned money. Receive tailor-made strategies to help your wealth grow consistently, adapting to the market's rhythms."
+              title="Advisory Excellence"
+              description="Get expert insights on making sound financial decisions. Drive profitability with informed strategies."
             />
             <FeatureCard 
               Icon={Calculator}
-              title="Comprehensive Tax Planning"
-              description="Navigate the tax maze with ease. Benefit from specialized strategies to minimise tax liabilities and maximise savings, particularly designed for doctors."
+              title="Holistic Financial Planning"
+              description="Craft a comprehensive strategy that aligns with your business objectives. Navigate financial challenges effectively."
             />
             <FeatureCard 
               Icon={ShieldCheck}
-              title="Risk Cover Consultation"
-              description="Protect what you've built. Expert advice on insurance solutions, ensuring your assets and practice are secure against unforeseen challenges."
+              title="Risk Management & Insurance"
+              description="Safeguard your venture against unforeseen risks. Ensure business continuity with the right insurance solutions."
             />
           </div>
         </div>
@@ -82,4 +82,4 @@ const DoctorsHero = () => {
   );
 };
 
-export default DoctorsHero;
+export default EntreHero;
