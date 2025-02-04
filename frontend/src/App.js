@@ -24,6 +24,12 @@ import SIP from './Components/Resources/Calculators/calculate/SIP/SIP';
 import SIPDelay from './Components/Resources/Calculators/calculate/SIPDelay/SIPDelay';
 import SIPGrowth from './Components/Resources/Calculators/calculate/SIPGrowth/SIPGrowth';
 import WeightedReturns from './Components/Resources/Calculators/calculate/WeightedReturns/WeightedReturns';
+import MF from './Components/Resources/Calculators/calculate/MF/MF';
+import ELSS from './Components/Resources/Calculators/calculate/ELSS/ELSS';
+import LSum from './Components/Resources/Calculators/calculate/LSum/LSum';
+import SWP from './Components/Resources/Calculators/calculate/SWP/SWP';
+import FV from './Components/Resources/Calculators/calculate/FV/FV';
+import EPF from './Components/Resources/Calculators/calculate/EPF/EPF';
 import AgingParents from './Components/Resources/Calculators/GoalsCalculate/AgingParents/AgingParents';
 import ChildEducation from './Components/Resources/Calculators/GoalsCalculate/ChildEducation/ChildEducation';
 import ChildMarriage from './Components/Resources/Calculators/GoalsCalculate/ChildMarriage/ChildMarriage';
@@ -165,6 +171,12 @@ function App() {
           <Route path="/resources/calculators/sip-delay" element={<SIPDelay />} />
           <Route path="/resources/calculators/sip-growth" element={<SIPGrowth />} />
           <Route path="/resources/calculators/weighted-returns" element={<WeightedReturns />} />
+          <Route path="/resources/calculators/mutual-fund" element={<MF/>}/>
+          <Route path="/resources/calculators/elss" element={<ELSS/>}/>
+          <Route path="/resources/calculators/lumpsum" element={<LSum/>}/>
+          <Route path="/resources/calculators/swp" element={<SWP/>}/>
+          <Route path="/resources/calculators/fv" element={<FV/>}/>
+          <Route path="/resources/calculators/epf" element={<EPF/>}/>
           <Route path="/resources/calculators/aging-parents" element={<AgingParents />} />
           <Route path="/resources/calculators/child-education" element={<ChildEducation />} />
           <Route path="/resources/calculators/child-marriage" element={<ChildMarriage />} />
@@ -189,6 +201,7 @@ function App() {
           <Route path="/resources/calculators/travel-budget" element={<TravelBudget />} />
           <Route path="/resources/calculators/wedding-budget" element={<WeddingBudget />} />
           <Route path="/resources/calculators/home-renovation-budget" element={<HomeRenovation />} />
+          <Route path="/resources/learning-center" element={<Blogs />} />
           <Route path="/header" element={
             <>
               <Header />

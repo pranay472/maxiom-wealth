@@ -17,8 +17,13 @@ const PMSPricing = () => {
 
         <div className="grid grid-cols-4 gap-8">
           {/* Benefits Column */}
-          <div className="pt-20">
-            <h3 className="text-lg font-semibold mb-8 text-blue-900">Benefits</h3>
+          <div className="border rounded-lg p-6 border-transparent">
+            <h3 className="text-xl font-bold mb-2 text-blue-900">Benefits</h3>
+            <div className="mb-6">
+              <span className="text-3xl font-bold text-transparent">0</span>
+              <span className="text-transparent">placeholder</span>
+            </div>
+            <div className="h-8 mb-8"></div>
             <div className="space-y-6">
               <div className="h-12">Fee structure</div>
               <div className="h-12">Management fee</div>
@@ -51,60 +56,54 @@ const PMSPricing = () => {
               <div className="h-12 flex items-center">
                 <span>Real-time portfolio tracking</span>
               </div>
-              <div className="h-12 flex items-center">
-                <span>Direct market execution</span>
-              </div>
             </div>
           </div>
 
-          {/* Performance-Based Plan */}
+          {/* Hybrid Plan */}
           <div className="border rounded-lg p-6 bg-blue-50 border-blue-200">
-            <h3 className="text-xl font-bold mb-2 text-blue-900">Performance-Based</h3>
+            <h3 className="text-xl font-bold mb-2 text-blue-900">Hybrid</h3>
             <div className="mb-6">
-              <span className="text-3xl font-bold text-blue-900">0%</span>
-              <span className="text-gray-600"> management fee</span>
+              <span className="text-3xl font-bold text-blue-900">1%</span>
+              <span className="text-gray-600"> + performance fee</span>
             </div>
             <button className="w-full bg-blue-900 text-white py-2 px-4 rounded-md mb-8 hover:bg-blue-800 transition-colors">
-              Choose Performance Plan
+              Choose Hybrid Plan
             </button>
             <div className="space-y-6">
-              <div className="h-12">Pure performance-based</div>
-              <div className="h-12">0% per annum</div>
-              <div className="h-12">20% of profits above hurdle rate</div>
-              <div className="h-12">₹50 lakhs</div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 text-center">Combined fee structure</div>
+              <div className="h-12 text-center">1% per annum</div>
+              <div className="h-12 text-center">10% profits above hurdle rate</div>
+              <div className="h-12 text-center">₹50 lakhs</div>
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
-                <Check className="text-blue-600 h-5 w-5" />
-              </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
             </div>
-            <div className="mt-6 text-sm text-blue-700">
-              We earn only when you profit above the threshold
+            <div className="mt-6 text-sm text-gray-600">
+              Balanced approach with lower fixed fee plus performance incentive
             </div>
           </div>
 
@@ -119,38 +118,35 @@ const PMSPricing = () => {
               Choose Fixed Fee Plan
             </button>
             <div className="space-y-6">
-              <div className="h-12">Fixed management fee</div>
-              <div className="h-12">2.25% per annum</div>
-              <div className="h-12">No performance fee</div>
-              <div className="h-12">₹50 lakhs</div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 text-center">Fixed management fee</div>
+              <div className="h-12 text-center">2.25% per annum</div>
+              <div className="h-12 text-center">No performance fee</div>
+              <div className="h-12 text-center">₹50 lakhs</div>
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
-                <Check className="text-blue-600 h-5 w-5" />
-              </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
             </div>
@@ -159,54 +155,51 @@ const PMSPricing = () => {
             </div>
           </div>
 
-          {/* Hybrid Plan */}
+          {/* Performance-Based Plan */}
           <div className="border rounded-lg p-6">
-            <h3 className="text-xl font-bold mb-2 text-blue-900">Hybrid</h3>
+            <h3 className="text-xl font-bold mb-2 text-blue-900">Performance-Based</h3>
             <div className="mb-6">
-              <span className="text-3xl font-bold text-blue-900">1%</span>
-              <span className="text-gray-600"> + performance fee</span>
+              <span className="text-3xl font-bold text-blue-900">0%</span>
+              <span className="text-gray-600"> management fee</span>
             </div>
-            <button className="w-full border border-blue-900 text-blue-900 py-2 px-4 rounded-md mb-8 hover:bg-blue-50 transition-colors">
-              Choose Hybrid Plan
+            <button className="w-full border border-blue-900 text-blue-900 py-2 px-2 rounded-md mb-8 hover:bg-blue-50 transition-colors">
+              Choose Performance Plan
             </button>
             <div className="space-y-6">
-              <div className="h-12">Combined fee structure</div>
-              <div className="h-12">1% per annum</div>
-              <div className="h-12">10% of profits above hurdle rate</div>
-              <div className="h-12">₹50 lakhs</div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 text-center">Pure performance-based</div>
+              <div className="h-12 text-center">0% per annum</div>
+              <div className="h-12 text-center">20% of profits above hurdle rate</div>
+              <div className="h-12 text-center">₹50 lakhs</div>
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
-                <Check className="text-blue-600 h-5 w-5" />
-              </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
             </div>
             <div className="mt-6 text-sm text-gray-600">
-              Balanced approach with lower fixed fee plus performance incentive
+              We earn only when you profit above the threshold
             </div>
           </div>
         </div>

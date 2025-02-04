@@ -70,40 +70,37 @@ const StocksPricing = () => {
               Start With Advisory
             </button>
             <div className="space-y-6">
-              <div className="h-12">SEBI RIA guided investing</div>
-              <div className="h-12">₹5,00,000</div>
-              <div className="h-12">Advanced platform</div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 text-center">SEBI RIA guided investing</div>
+              <div className="h-12 text-center">₹5,00,000</div>
+              <div className="h-12 text-center">Advanced platform</div>
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
-                <Check className="text-blue-600 h-5 w-5" />
-              </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
             </div>
@@ -123,40 +120,37 @@ const StocksPricing = () => {
               Start Basic Trading
             </button>
             <div className="space-y-6">
-              <div className="h-12">Self-directed trading</div>
-              <div className="h-12">₹0</div>
-              <div className="h-12">Basic platform</div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 text-center">Self-directed trading</div>
+              <div className="h-12 text-center">₹0</div>
+              <div className="h-12 text-center">Basic platform</div>
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Minus className="text-gray-400 h-5 w-5" />
               </div>
-              <div className="h-12 flex items-center">
-                <Minus className="text-gray-400 h-5 w-5" />
-              </div>
-              <div className="h-12 flex items-center">
+              <div className="h-12 flex items-center justify-center">
                 <Check className="text-blue-600 h-5 w-5" />
               </div>
             </div>

@@ -116,20 +116,12 @@ export const calculatorData = [
     path: '/resources/calculators/elss'
   },
   {
-    id: 'nps',
-    title: 'NPS Calculator',
-    description: 'Calculate returns on National Pension System investments',
-    Icon: PiggyBank,
-    category: 'Investment',
-    path: '/resources/calculators/nps'
-  },
-  {
     id: 'lumpsum-investment',
     title: 'Lumpsum Investment Calculator',
     description: 'Calculate returns on one-time investment amounts',
     Icon: Wallet,
     category: 'Investment',
-    path: '/resources/calculators/lumpsum-investment'
+    path: '/resources/calculators/lumpsum'
   },
   {
     id: 'swp',
@@ -145,7 +137,7 @@ export const calculatorData = [
     description: 'Calculate the future value of your investments',
     Icon: Target,
     category: 'Investment',
-    path: '/resources/calculators/future-value'
+    path: '/resources/calculators/fv'
   },
   {
     id:'custom-goal',
@@ -154,6 +146,100 @@ export const calculatorData = [
     Icon: Target,
     category:'Investment',
     path:'/resources/calculators/custom-goals'
+  },
+  {
+    id: 'epf-calculator',
+    title: 'EPF Calculator',
+    description: 'Calculate your Employee Provident Fund returns',
+    Icon: PiggyBank,
+    category: 'Investment',
+    path: '/resources/calculators/epf'
+  },
+  {
+    id: 'sukanya-samriddhi',
+    title: 'Sukanya Samruddi Yojana',
+    description: 'Calculate returns from Sukanya Samriddhi Yojana investment',
+    Icon: Heart,
+    category: 'Investment',
+    path: '/resources/calculators/sukanya-samriddhi'
+  },
+  {
+    id: 'portfolio-rebalancing',
+    title: 'Portfolio Rebalancing Calculator',
+    description: 'Analyze investments with this rebalancing calculator.',
+    Icon: Heart,
+    category: 'Investment',
+    path: '/resources/calculators/portfolio-rebalancing'
+  },
+  {
+    id: 'stock-return',
+    title: 'Stock Return Calculator',
+    description: 'Calculate returns from stock investments',
+    Icon: Heart,
+    category: 'Investment',
+    path: '/resources/calculators/stock-return'
+  },
+  {
+    id: 'dividend-yield',
+    title: 'Dividend Yield Calculator',
+    description: 'Estimate dividend yields with this calculator.',
+    Icon: Heart,
+    category: 'Investment',
+    path: '/resources/calculators/dividend-yield'
+  },{
+    id: 'gold-investment',
+    title: 'Gold Investment Calculator',
+    description: 'Calculate gold returns with this calculator.',
+    Icon: Heart,
+    category: 'Investment',
+    path: '/resources/calculators/gold-investment'
+  },{
+    id: 'better-funds-checker',
+    title: 'Better Funds Checker',
+    description: 'Check impact of getting stuck in bad investmetns with Better Funds Calculator',
+    Icon: Heart,
+    category: 'Investment',
+    path: '/resources/calculators/better-funds-checker'
+  },
+  {
+    id: 'savings-goal',
+    title: 'Savings Goal Calculator',
+    description: 'Estimate savings with this calculator.',
+    Icon: Heart,
+    category: 'personal-fin',
+    path: '/resources/calculators/savingsgoal'
+  },
+  {
+    id: 'emergency-fund',
+    title: 'Emergency Fund Calculator',
+    description: 'Determine emergency savings with this calculator.',
+    Icon: Heart,
+    category: 'personal-fin',
+    path: '/resources/calculators/emergencyfund'
+  },
+  {
+    id: 'debt-repay',
+    title: 'Debt Repayment Calculator',
+    description: 'Plan debt repayments with this calculator.',
+    Icon: Heart,
+    category: 'personal-fin',
+    path: '/resources/calculators/debt-repay'
+  },
+  {
+    id: 'credit-card',
+    title: 'Credit Card Payoff Calculator',
+    description: 'Calculate credit card payoff with this calculator.',
+    Icon: Heart,
+    category: 'personal-fin',
+    path: '/resources/calculators/credit-card'
+  },
+  {
+    id: 'net-worth',
+    title: 'Net Worth Calculator',
+    description: 'Assess financial health with this calculator.',
+    Icon: Heart,
+    category: 'personal-fin',
+    path: '/resources/calculators/net-worth'
   },
   {
     id:'aging-parents',
@@ -315,12 +401,28 @@ export const calculatorData = [
     path: '/resources/calculators/marriage-loan'
   },
   {
-    id: 'epf-calculator',
-    title: 'EPF Calculator',
-    description: 'Calculate your Employee Provident Fund returns',
-    Icon: PiggyBank,
-    category: 'Miscellaneous',
-    path: '/resources/calculators/epf'
+    id: 'loan-eligibility',
+    title: 'Loan Eligibility Calculator',
+    description: 'Assess loan eligibility with this calculator.',
+    Icon: Calendar,
+    category: 'Loan',
+    path: '/resources/calculators/loan-eligibility'
+  },
+  {
+    id: 'top-up-loan',
+    title: 'Top-Up Loan Calculator',
+    description: 'Calculate loan EMI for top-up expenses',
+    Icon: Calendar,
+    category: 'Loan',
+    path: '/resources/calculators/top-up-loan'
+  },
+  {
+    id: 'balance-transfer',
+    title: 'Balance Transfer Calculator',
+    description: 'Calculate loan EMI for balance transfer expenses',
+    Icon: Calendar,
+    category: 'Loan',
+    path: '/resources/calculators/balance-transfer'
   },
   {
     id: 'inflation',
@@ -329,14 +431,6 @@ export const calculatorData = [
     Icon: TrendingUp,
     category: 'Miscellaneous',
     path: '/resources/calculators/inflation'
-  },
-  {
-    id: 'irregular-cash-flow',
-    title: 'Irregular Cash Flow',
-    description: 'Calculate returns for irregular cash flow investments',
-    Icon: Repeat,
-    category: 'Miscellaneous',
-    path: '/resources/calculators/irregular-cash-flow'
   },
   {
     id: 'single-amount',
@@ -387,22 +481,6 @@ export const calculatorData = [
     path: '/resources/calculators/ebidta-margin'
   },
   {
-    id: 'rental-yield',
-    title: 'Rental Yield Calculator',
-    description: 'Calculate the yield from your rental property',
-    Icon: Home,
-    category: 'Miscellaneous',
-    path: '/resources/calculators/rental-yield'
-  },
-  {
-    id: 'sukanya-samriddhi',
-    title: 'Sukanya Samruddi Yojana',
-    description: 'Calculate returns from Sukanya Samriddhi Yojana investment',
-    Icon: Heart,
-    category: 'Miscellaneous',
-    path: '/resources/calculators/sukanya-samriddhi'
-  },
-  {
     id: 'fund-switch',
     title: 'Moving from poor funds to better funds',
     description: 'Calculate the benefit of switching from underperforming to better performing funds',
@@ -435,11 +513,139 @@ export const calculatorData = [
     path: '/resources/calculators/fire'
   },
   {
+    id: 'gratuity',
+    title: 'Gratuity Estimator',
+    description: 'Know how much you will get from your employer with Gratuity Calculator',
+    Icon: Rocket,
+    category: 'Retirement',
+    path: '/resources/calculators/gratuity'
+  },
+  {
+    id: 'pension',
+    title: 'Pension Calculator',
+    description: 'Estimate retirement pensions with this calculator.',
+    Icon: PiggyBank,
+    category: 'Retirement',
+    path: '/resources/calculators/pension'
+  },
+  {
+    id: 'post-retirement-expenses',
+    title: 'Post-Retirement Expenses Calculator',
+    description: 'Plan retirement expenses with this calculator.',
+    Icon: PiggyBank,
+    category: 'Retirement',
+    path: '/resources/calculators/post-retirement-expenses'
+  },
+  {
+    id: 'reverse-mortgage',
+    title: 'Reverse Mortgage Calculator',
+    description: 'Evaluate reverse mortgage benefits with this calculator.',
+    Icon: Rocket,
+    category: 'Retirement',
+    path: '/resources/calculators/reverse-mortgage'
+  },
+  {
     id: 'nps-reinvestment',
     title: 'NPS Reinvestment in annuity',
     description: 'Calculate returns on NPS reinvestment in annuity schemes',
     Icon: Repeat,
     category: 'Retirement',
     path: '/resources/calculators/nps-reinvestment'
-  }
+  },
+  {
+    id: 'nps',
+    title: 'NPS Calculator',
+    description: 'Calculate returns on National Pension System investments',
+    Icon: PiggyBank,
+    category: 'Retirement',
+    path: '/resources/calculators/nps'
+  },
+  {
+    id: 'student-loan',
+    title: 'Student Loan Calculator',
+    description: 'Plan student loan repayments with this calculator.',
+    Icon: PiggyBank,
+    category: 'EducationCareer',
+    path: '/resources/calculators/student-loan'
+  },
+  {
+    id: 'career-growth-planner',
+    title: 'Career Growth Planner',
+    description: 'Estimate career growth benefits with this calculator.',
+    Icon: PiggyBank,
+    category: 'EducationCareer',
+    path: '/resources/calculators/career-growth-planner'
+  },
+  {
+    id: 'gst',
+    title: 'GST Calculator',
+    description: 'Calculate GST amounts with this calculator.',
+    Icon: PiggyBank,
+    category: 'Tax',
+    path: '/resources/calculators/gst'
+  },
+  {
+    id: 'hra-exemption',
+    title: 'HRA Exemption Calculator',
+    description: 'Maximize HRA exemptions with this calculator.',
+    Icon: PiggyBank,
+    category: 'Tax',
+    path: '/resources/calculators/hra-exemption'
+  },
+  {
+    id: 'capital-gains-tax',
+    title: 'Capital Gains Tax Calculator',
+    description: 'Calculate capital gains taxes with this calculator..',
+    Icon: PiggyBank,
+    category: 'Tax',
+    path: '/resources/calculators/capital-gains-tax'
+  },
+  {
+    id: 'freelancer-income-tax',
+    title: 'Freelancer Income Tax Calculator',
+    description: 'Calculate freelancer taxes with this calculator.',
+    Icon: PiggyBank,
+    category: 'Tax',
+    path: '/resources/calculators/freelancer-income-tax'
+  },
+  {
+    id: 'irregular-cash-flow',
+    title: 'Irregular Cash Flow',
+    description: 'Calculate returns for irregular cash flow investments',
+    Icon: Repeat,
+    category: 'Incomeflow',
+    path: '/resources/calculators/irregular-cash-flow'
+  },
+  {
+    id: 'rental-yield',
+    title: 'Rental Yield Calculator',
+    description: 'Calculate the yield from your rental property',
+    Icon: Home,
+    category: 'Incomeflow',
+    path: '/resources/calculators/rental-yield'
+  },
+  {
+    id: 'rental-yield',
+    title: 'Brokerage Cost Tool',
+    description: 'Know costs of trading with Brokerage Calculator',
+    Icon: Home,
+    category: 'Trading',
+    path: '/resources/calculators/brokerage-cost-tool'
+  },
+  {
+    id: 'margin',
+    title: 'Margin Calculator',
+    description: 'Plan your trading better with Margin Calculator',
+    Icon: Sigma,
+    category: 'Trading',
+    path: '/resources/calculators/margin'
+  },
+  {
+    id: 'option-value',
+    title: 'Option Value Estimator',
+    description: 'Plan your derivatives better with Option Value Calculator',
+    Icon: Target,
+    category: 'Trading',
+    path: '/resources/calculators/option-value'
+  },
 ];

@@ -58,17 +58,25 @@ const blogCategories = [
 const BlogCategoryCard = ({ category }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { icon: Icon, title, description, topics, frequency, focus, id, accentColor } = category;
-  const navigate = useNavigate();
 
-  const handleExplore = () => {
-    navigate(`/blogs/${id}`);
+  const urlMap = {
+    'trends': 'https://maxiomwealth.com/askguru/',
+    'wealth-insights': 'https://maxiomwealth.com/blog/category/wealth-creation-portfolio-management-pms-investment-advisory/',
+    'planning': 'https://maxiomwealth.com/blog/category/financial-planning-money-matters-investment-advisor/',
+    'learning': 'https://maxiomwealth.com/blog/category/investing-fundamentals-mutual-funds-guide/',
+    'news': 'https://maxiomwealth.com/blog/category/investing-fundamentals-mutual-funds-guide/'
+  };
+
+  const handleRedirect = () => {
+    window.location.href = urlMap[id];
   };
   
   return (
     <div 
-      className="group relative"
+      className="group relative cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleRedirect}
     >
       {/* Card Background with animated gradient */}
       <div className="absolute inset-0 rounded-2xl transition-all duration-500 group-hover:scale-[1.02] overflow-hidden">
@@ -129,9 +137,12 @@ const BlogCategoryCard = ({ category }) => {
           </div>
         </div>
 
-        {/* Enhanced CTA Button */}
+        {/* Call to Action */}
         <button 
-          onClick={handleExplore}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent card click from triggering
+            handleRedirect();
+          }}
           className="mt-6 w-full bg-white/10 hover:bg-white/20 text-white py-3 rounded-xl font-semibold 
             transition-all duration-300 flex items-center justify-center group/btn"
         >

@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import { Share, ChevronDown } from 'lucide-react';
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
 
 const SIPDelayCalculator = () => {
-  const [monthlySIP, setMonthlySIP] = useState('25000');
-  const [sipPeriod, setSIPPeriod] = useState('10');
-  const [expectedReturns, setExpectedReturns] = useState('12');
-  const [delayPeriod, setDelayPeriod] = useState('10');
+  const [monthlySIP, setMonthlySIP] = useState(25000);
+  const [sipPeriod, setSIPPeriod] = useState(10);
+  const [expectedReturns, setExpectedReturns] = useState(12);
+  const [delayPeriod, setDelayPeriod] = useState(10);
   const [showShareToast, setShowShareToast] = useState(false);
 
-  // Calculate SIP returns with and without delay
   const calculateSIP = () => {
-    const P = Number(monthlySIP.replace(/,/g, '')); // Monthly Investment
-    const t = Number(sipPeriod); // Investment Period in years
-    const r = Number(expectedReturns) / 100 / 12; // Monthly return rate
-    const d = Number(delayPeriod); // Delay in months
-    const n = t * 12; // Total number of installments
-    
-    // Calculate amount without delay (Total corpus if started immediately)
+    const P = monthlySIP;
+    const t = sipPeriod;
+    const r = expectedReturns / 100 / 12;
+    const d = delayPeriod;
+    const n = t * 12;
+
     const withoutDelay = P * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
-    
-    // Calculate projected value (what you'll get with delay)
     const projectedValue = P * ((Math.pow(1 + r, n - d) - 1) / r) * (1 + r);
-    
-    // Calculate cost of delay
     const costOfDelay = withoutDelay - projectedValue;
-    
-    // Calculate required monthly investment with delay to reach same corpus as withoutDelay
     const withDelay = P * (withoutDelay / projectedValue);
 
     return {
@@ -35,24 +36,7 @@ const SIPDelayCalculator = () => {
     };
   };
 
-  // Update URL parameters when inputs change
-  useEffect(() => {
-    const newUrl = new URL(window.location.href);
-    newUrl.searchParams.set('sip', monthlySIP);
-    newUrl.searchParams.set('period', sipPeriod);
-    newUrl.searchParams.set('returns', expectedReturns);
-    newUrl.searchParams.set('delay', delayPeriod);
-    window.history.replaceState({}, '', newUrl);
-  }, [monthlySIP, sipPeriod, expectedReturns, delayPeriod]);
-
-  // Read URL parameters on load
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('sip')) setMonthlySIP(urlParams.get('sip'));
-    if (urlParams.get('period')) setSIPPeriod(urlParams.get('period'));
-    if (urlParams.get('returns')) setExpectedReturns(urlParams.get('returns'));
-    if (urlParams.get('delay')) setDelayPeriod(urlParams.get('delay'));
-  }, []);
+  const results = calculateSIP();
 
   const handleShare = async () => {
     try {
@@ -64,176 +48,179 @@ const SIPDelayCalculator = () => {
     }
   };
 
-  const results = calculateSIP();
-
   return (
-    <div className="w-full bg-white py-12">
-      {showShareToast && (
-        <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
-          Link copied!
-        </div>
-      )}
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">SIP Delay Cost Calculator</h1>
+        <h2 className="text-lg text-gray-600">Calculate the Cost of Delaying Your Investments</h2>
+      </div>
 
-      <div className="max-w-6xl mx-auto px-6 pt-20">
-        <h1 className="text-3xl font-bold text-gray-900">SIP Delay Cost Calculator</h1>
-        <p className="text-gray-600 mt-2">Calculate how much you would lose if you delayed your SIP investment.</p>
-
-        <div className="mt-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Monthly SIP Amount */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Monthly SIP Amount</label>
-                <p className="text-sm text-gray-600 mt-1">What is the your monthly SIP target value today?</p>
-              </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={monthlySIP.replace(/,/g, '')}
-                  onChange={(e) => setMonthlySIP(Number(e.target.value).toLocaleString('en-IN'))}
-                  min="1000"
-                  max="100000"
-                  step="1000"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">1K</span>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Investment Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Investment Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Monthly SIP Amount</label>
                   <input
-                    type="text"
+                    type="number"
                     value={monthlySIP}
-                    onChange={(e) => setMonthlySIP(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
+                    onChange={(e) => setMonthlySIP(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
                   />
-                  <span className="text-sm text-gray-600">1L</span>
-                </div>
-              </div>
-            </div>
-
-            {/* SIP Period */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">SIP Period</label>
-                <p className="text-sm text-gray-600 mt-1">How many years you wish to continue your SIP?</p>
-              </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={sipPeriod}
-                  onChange={(e) => setSIPPeriod(e.target.value)}
-                  min="1"
-                  max="40"
-                  step="1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">1 year</span>
                   <input
-                    type="text"
-                    value={sipPeriod}
-                    onChange={(e) => setSIPPeriod(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
+                    type="range"
+                    min={1000}
+                    max={100000}
+                    step={1000}
+                    value={monthlySIP}
+                    onChange={(e) => setMonthlySIP(Number(e.target.value))}
+                    className="w-full mt-2"
                   />
-                  <span className="text-sm text-gray-600">40 years</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹1K</span>
+                    <span>₹1L</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Returns (%)</label>
+                  <input
+                    type="number"
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={5}
+                    max={20}
+                    step={1}
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>5%</span>
+                    <span>20%</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Results Card */}
-            <div className="lg:row-span-2">
-              <div className="space-y-6">
-                <div className="bg-[#113262] text-white p-6 rounded-lg">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg">SIP Amount</span>
-                    <button onClick={handleShare}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
-                      </svg>
-                    </button>
-                  </div>
-                  
-                  <div className="text-sm text-center text-white/80 mb-2">Required amount (With Delay)</div>
-              <div className="text-4xl font-bold mb-6">₹{results.amountWithDelay.toLocaleString('en-IN')}</div>
-
-                  <div className="space-y-4">
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Without Delay</span>
-                      <span>₹{results.projectedValue.toLocaleString('en-IN')}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Cost of Delay</span>
-                      <span>₹{results.costOfDelay.toLocaleString('en-IN')}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Projected Value</span>
-                      <span>₹{results.amountWithoutDelay.toLocaleString('en-IN')}</span>
-                    </div>
+            {/* Time Periods */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="bg-white rounded-lg shadow p-4">
+                <h2 className="text-lg font-bold text-gray-900 mb-4">SIP Period</h2>
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Years</label>
+                  <input
+                    type="number"
+                    value={sipPeriod}
+                    onChange={(e) => setSIPPeriod(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={1}
+                    max={40}
+                    value={sipPeriod}
+                    onChange={(e) => setSIPPeriod(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>1 Year</span>
+                    <span>40 Years</span>
                   </div>
                 </div>
+              </div>
 
-                <button className="w-full bg-[#F49611] hover:bg-[#F6A839] text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
-                  Start SIP Now →
+              <div className="bg-white rounded-lg shadow p-4">
+                <h2 className="text-lg font-bold text-gray-900 mb-4">Delay Period</h2>
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Months</label>
+                  <input
+                    type="number"
+                    value={delayPeriod}
+                    onChange={(e) => setDelayPeriod(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={1}
+                    max={100}
+                    value={delayPeriod}
+                    onChange={(e) => setDelayPeriod(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>1 Month</span>
+                    <span>100 Months</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Information Note */}
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <p className="text-sm text-blue-800">
+                Note: Calculations assume monthly compounding. Delay period reduces effective investment tenure.
+              </p>
+            </div>
+          </div>
+
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[360px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">Delay Impact</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
                 </button>
               </div>
             </div>
 
-            {/* Expected Returns */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Expected Returns On Investment</label>
-                <p className="text-sm text-gray-600 mt-1">Your expectation of returns on this planned investment</p>
-              </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={expectedReturns}
-                  onChange={(e) => setExpectedReturns(e.target.value)}
-                  min="5"
-                  max="20"
-                  step="1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">5%</span>
-                  <input
-                    type="text"
-                    value={expectedReturns}
-                    onChange={(e) => setExpectedReturns(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
-                  />
-                  <span className="text-sm text-gray-600">20%</span>
+            <div className="p-4 flex flex-col h-[calc(100%-68px)] justify-between">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold mb-1">
+                    {formatCurrency(results.costOfDelay)}
+                  </div>
+                  <div className="text-sm text-gray-300">Cost of Delay</div>
                 </div>
-              </div>
-            </div>
 
-            {/* Period of Delay */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Period of Delay</label>
-                <p className="text-sm text-gray-600 mt-1">By how many months you wish to delay your SIP?</p>
-              </div>
-              <div className="relative mt-6">
-                <input
-                  type="range"
-                  value={delayPeriod}
-                  onChange={(e) => setDelayPeriod(e.target.value)}
-                  min="1"
-                  max="100"
-                  step="1"
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm text-gray-600">1 month</span>
-                  <input
-                    type="text"
-                    value={delayPeriod}
-                    onChange={(e) => setDelayPeriod(e.target.value)}
-                    className="w-32 text-center border rounded py-1 bg-gray-50"
-                  />
-                  <span className="text-sm text-gray-600">100 months</span>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Without Delay</span>
+                    <span className="font-bold">{formatCurrency(results.amountWithoutDelay)}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">With Delay</span>
+                    <span className="font-bold">{formatCurrency(results.projectedValue)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Required SIP</span>
+                    <span className="font-bold">{formatCurrency(results.amountWithDelay)}</span>
+                  </div>
                 </div>
               </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Start SIP Immediately →
+              </button>
             </div>
           </div>
+
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>
