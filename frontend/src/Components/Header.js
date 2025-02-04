@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/Header.css';
 import Navbar from './Navbar';
+import WealthHorizonLogo from './WealthHorizon.svg';
 
 const Header = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -37,7 +38,7 @@ const Header = () => {
 
       <div className="header-container">
         <Link to="/" className="logo">
-          <img src="https://jamaappprod.s3.ap-south-1.amazonaws.com/Website/maxiom_wealth_logo.svg" alt="Equirus Wealth" />
+          <img src={WealthHorizonLogo} alt="Wealth Horizon" style={{ marginLeft: '1rem' }} />
         </Link>
         
         <Navbar />

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './Components/Home/Home';
+import Blogs from './Components/Blogs/Blogs';
 import WhyMaxiom from './Components/WhyMaxiom/WhyMaxiom';
 import Header from './Components/Header';
 import JEWELTop350 from './Components/WealthManagement/PMS/JEWELTop350/JEWELTop350';
@@ -141,6 +142,7 @@ function App() {
           <Route path="/financial-planning/life-situations/financial-planning-for-those-migrating-from-india" element={<MigIndia />} />
           <Route path="/financial-planning/life-situations/financial-planning-for-health-emergency" element={<HealthEme />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/blogs" element={<Blogs />} />
           <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
           <Route path="/stocks" element={<Stocks />} />
           <Route path="/stocks-pricing" element={<StocksPricing />} />
