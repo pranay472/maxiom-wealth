@@ -161,7 +161,7 @@ export const calculatorData = [
     description: 'Calculate returns from Sukanya Samriddhi Yojana investment',
     Icon: Heart,
     category: 'Investment',
-    path: '/resources/calculators/sukanya-samriddhi'
+    path: '/resources/calculators/sukanya'
   },
   {
     id: 'portfolio-rebalancing',
@@ -169,7 +169,7 @@ export const calculatorData = [
     description: 'Analyze investments with this rebalancing calculator.',
     Icon: Heart,
     category: 'Investment',
-    path: '/resources/calculators/portfolio-rebalancing'
+    path: '/resources/calculators/pr'
   },
   {
     id: 'stock-return',
@@ -177,7 +177,7 @@ export const calculatorData = [
     description: 'Calculate returns from stock investments',
     Icon: Heart,
     category: 'Investment',
-    path: '/resources/calculators/stock-return'
+    path: '/resources/calculators/sr'
   },
   {
     id: 'dividend-yield',

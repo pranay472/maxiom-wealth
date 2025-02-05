@@ -30,6 +30,9 @@ import LSum from './Components/Resources/Calculators/calculate/LSum/LSum';
 import SWP from './Components/Resources/Calculators/calculate/SWP/SWP';
 import FV from './Components/Resources/Calculators/calculate/FV/FV';
 import EPF from './Components/Resources/Calculators/calculate/EPF/EPF';
+import Sukanya from './Components/Resources/Calculators/calculate/Sukanya/Sukanya';
+import PR from './Components/Resources/Calculators/calculate/PR/PR';
+import SR from './Components/Resources/Calculators/calculate/SR/SR';
 import AgingParents from './Components/Resources/Calculators/GoalsCalculate/AgingParents/AgingParents';
 import ChildEducation from './Components/Resources/Calculators/GoalsCalculate/ChildEducation/ChildEducation';
 import ChildMarriage from './Components/Resources/Calculators/GoalsCalculate/ChildMarriage/ChildMarriage';
@@ -177,6 +180,9 @@ function App() {
           <Route path="/resources/calculators/swp" element={<SWP/>}/>
           <Route path="/resources/calculators/fv" element={<FV/>}/>
           <Route path="/resources/calculators/epf" element={<EPF/>}/>
+          <Route path="/resources/calculators/sukanya" element={<Sukanya/>}/>
+          <Route path="/resources/calculators/pr" element={<PR/>}/>
+          <Route path="/resources/calculators/sr" element={<SR/>}/>
           <Route path="/resources/calculators/aging-parents" element={<AgingParents />} />
           <Route path="/resources/calculators/child-education" element={<ChildEducation />} />
           <Route path="/resources/calculators/child-marriage" element={<ChildMarriage />} />
