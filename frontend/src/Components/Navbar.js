@@ -23,21 +23,26 @@ const NavBar = () => {
   }, []);
 
   const handleDropdownClick = (index) => {
-    setActiveDropdown(activeDropdown === index ? null : index);
+    // Immediately update state for better responsiveness
+    requestAnimationFrame(() => {
+      setActiveDropdown(activeDropdown === index ? null : index);
+    });
   };
 
   const handleItemClick = (item) => {
     if (item.route) {
-      const [path, hash] = item.route.split('#');
+      // Immediately close dropdown
+      setActiveDropdown(null);
+      
+      // Get current path and target path
+      const [targetPath] = item.route.split('#');
       const currentPath = window.location.pathname;
 
-      // If we're on the same page, use replace to trigger a location change
-      if (currentPath === path) {
-        navigate(item.route, { replace: true });
-      } else {
-        navigate(item.route);
-      }
-      setActiveDropdown(null);
+      // Navigate with replace to prevent history stack buildup
+      navigate(item.route, { 
+        replace: currentPath === targetPath,
+        state: { instant: true }  // Add state to indicate instant navigation
+      });
     }
   };
 
