@@ -98,6 +98,9 @@ import SingleMother from './Components/FinancialAdvisory/FinancialPlanning/FPLif
 import RetIndia from './Components/FinancialAdvisory/FinancialPlanning/FPLife/RetIndia/RetIndia';
 import MigIndia from './Components/FinancialAdvisory/FinancialPlanning/FPLife/MigIndia/MigIndia';
 import HealthEme from './Components/FinancialAdvisory/FinancialPlanning/FPLife/HealthEme/HealthEme';
+import FPLife from './Components/FinancialAdvisory/FinancialPlanning/FPLife/FPLife';
+import FPP from './Components/FinancialAdvisory/FinancialPlanning/FPProfessionals/FPP';
+import FPEducation from './Components/FinancialAdvisory/FinancialPlanning/FPEducation/FPEducation';
 
 const TransitionHandler = ({ children }) => {
   const location = useLocation();
@@ -147,24 +150,24 @@ function App() {
             <Route path="/financial-advisory/goal-based-investments/dream-home" element={<DreamHomeGoal />} />
             <Route path="/financial-advisory/goal-based-investments/business" element={<BusinessStartGoal />} />
             <Route path="/financial-advisory/goal-based-investments/gold-loan" element={<GoldLoan />} />
-            <Route path="/financial-planning/education-planning/financial-planning-for-ug-education-in-india" element={<UGIndia />} />
-            <Route path="/financial-planning/education-planning/financial-planning-for-ug-education-abroad" element={<UGAbroad />} />
-            <Route path="/financial-planning/education-planning/financial-planning-for-helping-child-overseas" element={<MToChild />} />
-            <Route path="/financial-planning/education-planning/financial-planning-for-masters-education-abroad" element={<PGMasters />} />
-            <Route path="/financial-planning/professionals/financial-planning-for-sportspersons" element={<SportsP />} />
-            <Route path="/financial-planning/professionals/financial-planning-for-retired-bank-employees" element={<RBEmp />} />
-            <Route path="/financial-planning/professionals/financial-planning-for-doctors" element={<Doctors />} />
-            <Route path="/financial-planning/professionals/financial-planning-for-entrepreneurs" element={<EntreP />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-child-birth" element={<ChildBirth />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-child-marriage" element={<ChildMar />} />
-            <Route path="/financial-planning/life-situations/financial-planning-in-case-of-sudden-death-of-income-earner" element={<DeathIncomeEarner />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-disability" element={<Disability />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-divorce" element={<Divorce />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-single-parents" element={<SingleParent />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-single-mothers" element={<SingleMother />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-those-returning-to-india" element={<RetIndia />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-those-migrating-from-india" element={<MigIndia />} />
-            <Route path="/financial-planning/life-situations/financial-planning-for-health-emergency" element={<HealthEme />} />
+            <Route path="/financial-advisory/education-planning/ug-india" element={<UGIndia />} />
+            <Route path="/financial-advisory/education-planning/ug-abroad" element={<UGAbroad />} />
+            <Route path="/financial-advisory/education-planning/child-overseas" element={<MToChild />} />
+            <Route path="/financial-advisory/education-planning/masters-abroad" element={<PGMasters />} />
+            <Route path="/financial-advisory/professionals/sportspersons" element={<SportsP />} />
+            <Route path="/financial-advisory/professionals/retired-bank-employees" element={<RBEmp />} />
+            <Route path="/financial-advisory/professionals/doctors" element={<Doctors />} />
+            <Route path="/financial-advisory/professionals/entrepreneurs" element={<EntreP />} />
+            <Route path="/financial-advisory/life-planning/child-birth" element={<ChildBirth />} />
+            <Route path="/financial-advisory/life-planning/child-marriage" element={<ChildMar />} />
+            <Route path="/financial-advisory/life-planning/sudden-death" element={<DeathIncomeEarner />} />
+            <Route path="/financial-advisory/life-planning/disability" element={<Disability />} />
+            <Route path="/financial-advisory/life-planning/divorce" element={<Divorce />} />
+            <Route path="/financial-advisory/life-planning/single-parents" element={<SingleParent />} />
+            <Route path="/financial-advisory/life-planning/single-mothers" element={<SingleMother />} />
+            <Route path="/financial-advisory/life-planning/return-to-india" element={<RetIndia />} />
+            <Route path="/financial-advisory/life-planning/migration-from-india" element={<MigIndia />} />
+            <Route path="/financial-advisory/life-planning/health-emergency" element={<HealthEme />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
@@ -223,6 +226,9 @@ function App() {
             <Route path="/resources/calculators/wedding-budget" element={<WeddingBudget />} />
             <Route path="/resources/calculators/home-renovation-budget" element={<HomeRenovation />} />
             <Route path="/resources/learning-center" element={<Blogs />} />
+            <Route path="/financial-planning/education" element={<FPEducation />} />
+            <Route path="/financial-planning/professionals" element={<FPP />} />
+            <Route path="/financial-planning/life-situations" element={<FPLife />} />
             <Route path="/header" element={
               <>
                 <Header />
