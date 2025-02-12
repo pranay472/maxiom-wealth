@@ -35,29 +35,25 @@ const Calculators = () => {
     <div>
       <Header />
       <div className="calculators-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-[#113262] mb-4 relative inline-block pt-24">
-            Calculators
-            <span className="absolute -bottom-2 left-1/2 w-3/5 h-[3px] bg-gradient-to-r from-transparent via-[#1C52A0] to-transparent -translate-x-1/2"></span>
-          </h1>
-          <p className="text-lg text-[#666666]">Try our free calculators to plan your investments</p>
-        </div>
-
-        {/* Premium Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12">
-          <div className="relative">
+        <div className="text-center mb-8 relative">
+          <div className="absolute right-0 top-16 w-64">
             <input
               type="text"
               placeholder="Search calculators..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-6 py-4 bg-white border-2 border-[#E6E6E6] rounded-lg pl-14 pr-6 
-                         text-lg text-[#262626] placeholder-[#8A8A8A]
+              className="w-full px-4 py-2 pl-10 bg-white border-2 border-[#E6E6E6] rounded-lg 
+                         text-sm text-[#262626] placeholder-[#8A8A8A]
                          focus:outline-none focus:ring-2 focus:ring-[#1C52A0] focus:border-transparent
                          transition-all duration-300"
             />
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-[#1C52A0]" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#1C52A0]" />
           </div>
+          <h1 className="text-4xl font-bold text-[#113262] mb-4 relative inline-block pt-24">
+            Calculators
+            <span className="absolute -bottom-2 left-1/2 w-3/5 h-[3px] bg-gradient-to-r from-transparent via-[#1C52A0] to-transparent -translate-x-1/2"></span>
+          </h1>
+          <p className="text-lg text-[#666666] mt-4">Try our free calculators to plan your investments</p>
         </div>
 
         {Object.entries(groupedCalculators).map(([category, calculators]) => (

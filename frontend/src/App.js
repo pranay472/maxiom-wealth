@@ -33,6 +33,14 @@ import EPF from './Components/Resources/Calculators/calculate/EPF/EPF';
 import Sukanya from './Components/Resources/Calculators/calculate/Sukanya/Sukanya';
 import PR from './Components/Resources/Calculators/calculate/PR/PR';
 import SR from './Components/Resources/Calculators/calculate/SR/SR';
+import DY from './Components/Resources/Calculators/calculate/DY/DY';
+import GI from './Components/Resources/Calculators/calculate/GI/GI';
+import BFC from './Components/Resources/Calculators/calculate/BFC/BFC';
+import CCPC from './Components/Resources/Calculators/PersonalCalculate/CCPC/CCPC';
+import DRC from './Components/Resources/Calculators/PersonalCalculate/DRC/DRC';
+import EFC from './Components/Resources/Calculators/PersonalCalculate/EFC/EFC';
+import SGC from './Components/Resources/Calculators/PersonalCalculate/SGC/SGC';
+import NWC from './Components/Resources/Calculators/PersonalCalculate/NWC/NWC';
 import AgingParents from './Components/Resources/Calculators/GoalsCalculate/AgingParents/AgingParents';
 import ChildEducation from './Components/Resources/Calculators/GoalsCalculate/ChildEducation/ChildEducation';
 import ChildMarriage from './Components/Resources/Calculators/GoalsCalculate/ChildMarriage/ChildMarriage';
@@ -201,6 +209,14 @@ function App() {
             <Route path="/resources/calculators/sukanya" element={<Sukanya/>}/>
             <Route path="/resources/calculators/pr" element={<PR/>}/>
             <Route path="/resources/calculators/sr" element={<SR/>}/>
+            <Route path="/resources/calculators/dividend-yield" element={<DY/>}/>
+            <Route path="/resources/calculators/gold-investment" element={<GI/>}/>
+            <Route path="/resources/calculators/better-funds-checker" element={<BFC/>}/>
+            <Route path="/resources/calculators/credit-card" element={<CCPC/>}/>
+            <Route path="/resources/calculators/debt-repay" element={<DRC/>}/>
+            <Route path="/resources/calculators/emergencyfund" element={<EFC/>}/>
+            <Route path="/resources/calculators/savingsgoal" element={<SGC/>}/>
+            <Route path="/resources/calculators/net-worth" element={<NWC/>}/>
             <Route path="/resources/calculators/aging-parents" element={<AgingParents />} />
             <Route path="/resources/calculators/child-education" element={<ChildEducation />} />
             <Route path="/resources/calculators/child-marriage" element={<ChildMarriage />} />
