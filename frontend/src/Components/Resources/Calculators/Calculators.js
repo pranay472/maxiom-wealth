@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../Header';
 import Footer from '../../Footer';
 import CalculatorCard from './CalculatorCard';
@@ -6,7 +7,139 @@ import { calculatorData } from './calculatorData';
 import { Search } from 'lucide-react';
 
 const Calculators = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeSection, setActiveSection] = useState(null);
+  const sectionRefs = useRef({});
+
+  // Debug logging function
+  const debugLog = (message, data) => {
+    console.log(`[Calculators Navigation Debug] ${message}`, data || '');
+  };
+
+  // Comprehensive hash extraction and mapping
+  const extractAndNormalizeHash = useCallback(() => {
+    debugLog('Extracting hash from location', { 
+      pathname: location.pathname, 
+      hash: location.hash, 
+      search: location.search 
+    });
+
+    let rawHash = location.hash || window.location.hash;
+    
+    // Remove leading # and any preceding path
+    rawHash = rawHash.replace(/^#\/resources\/calculators#/, '');
+    rawHash = rawHash.replace(/^#/, '');
+    
+    // Mapping to handle potential mismatches
+    const hashMap = {
+      'personal-fin': 'personal-finance-calculators',
+      'investment': 'investment-calculators',
+      'family': 'family-calculators',
+      'retirement': 'retirement-calculators',
+      'educationcareer': 'education-career-calculators',
+      'goals': 'goal-planning-calculators',
+      'tax': 'tax-calculators',
+      'incomeflow': 'income-cashflow-calculators',
+      'trading': 'trading-calculators',
+      'loan': 'loan-calculators',
+      'miscellaneous': 'miscellaneous-calculators'
+    };
+
+    const normalizedHash = hashMap[rawHash.toLowerCase()] || rawHash;
+    debugLog('Normalized hash', { rawHash, normalizedHash });
+    return normalizedHash;
+  }, [location]);
+
+  // Scroll to section function with enhanced logging and error handling
+  const scrollToSection = useCallback((sectionId) => {
+    debugLog('Attempting to scroll to section', { 
+      sectionId, 
+      availableRefs: Object.keys(sectionRefs.current) 
+    });
+
+    const element = sectionRefs.current[sectionId];
+    
+    if (element) {
+      const offset = 150;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      
+      debugLog('Scrolling details', { 
+        elementPosition, 
+        offset, 
+        windowScrollY: window.pageYOffset 
+      });
+
+      window.scrollTo({
+        top: Math.max(0, elementPosition - offset),
+        behavior: 'smooth'
+      });
+
+      // Update active section state
+      setActiveSection(sectionId);
+    } else {
+      debugLog('Section element NOT FOUND', { 
+        sectionId, 
+        allRefs: Object.keys(sectionRefs.current) 
+      });
+    }
+  }, []);
+
+  // Navigation effect
+  useEffect(() => {
+    // Prevent default navigation behavior
+    const handleLinkClick = (event) => {
+      const href = event.target.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        // Update URL without page reload
+        navigate(href, { replace: true });
+
+        // Extract and scroll to section
+        const sectionId = href.replace(/^#/, '');
+        scrollToSection(sectionId);
+      }
+    };
+
+    // Handle hash changes
+    const handleHashChange = (event) => {
+      debugLog('Hash change event', { 
+        oldURL: event.oldURL, 
+        newURL: event.newURL 
+      });
+
+      // Prevent default browser navigation
+      event.preventDefault();
+      
+      const normalizedHash = extractAndNormalizeHash();
+      if (normalizedHash) {
+        scrollToSection(normalizedHash);
+      }
+    };
+
+    // Add event listeners
+    document.addEventListener('click', handleLinkClick, true);
+    window.addEventListener('hashchange', handleHashChange, { passive: false });
+
+    // Initial navigation
+    const initialHash = extractAndNormalizeHash();
+    if (initialHash) {
+      // Use microtask to ensure refs are populated
+      Promise.resolve().then(() => {
+        debugLog('Performing initial scroll', { initialHash });
+        scrollToSection(initialHash);
+      });
+    }
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('click', handleLinkClick, true);
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [extractAndNormalizeHash, scrollToSection, navigate]);
 
   const filteredCalculators = calculatorData.filter(calculator => {
     const searchTerm = searchQuery.toLowerCase();
@@ -59,7 +192,52 @@ const Calculators = () => {
         {Object.entries(groupedCalculators).map(([category, calculators]) => (
           calculators.length > 0 && (
             <div key={category} className="space-y-8 mb-12">
-              <h2 className="text-2xl font-semibold text-[#113262]">
+              <h2 
+                ref={el => {
+                  const sectionId = 
+                    category === 'personal-fin' ? 'personal-finance-calculators' : 
+                    category === 'Family' ? 'family-calculators' : 
+                    category === 'Retirement' ? 'retirement-calculators' : 
+                    category === 'EducationCareer' ? 'education-career-calculators' : 
+                    category === 'Goals' ? 'goal-planning-calculators' : 
+                    category === 'Tax' ? 'tax-calculators' : 
+                    category === 'Incomeflow' ? 'income-cashflow-calculators' : 
+                    category === 'Trading' ? 'trading-calculators' : 
+                    category === 'Loan' ? 'loan-calculators' : 
+                    category === 'Miscellaneous' ? 'miscellaneous-calculators' : 
+                    'investment-calculators';
+                  
+                  sectionRefs.current[sectionId] = el;
+                }}
+                id={
+                  category === 'personal-fin' ? 'personal-finance-calculators' : 
+                  category === 'Family' ? 'family-calculators' : 
+                  category === 'Retirement' ? 'retirement-calculators' : 
+                  category === 'EducationCareer' ? 'education-career-calculators' : 
+                  category === 'Goals' ? 'goal-planning-calculators' : 
+                  category === 'Tax' ? 'tax-calculators' : 
+                  category === 'Incomeflow' ? 'income-cashflow-calculators' : 
+                  category === 'Trading' ? 'trading-calculators' : 
+                  category === 'Loan' ? 'loan-calculators' : 
+                  category === 'Miscellaneous' ? 'miscellaneous-calculators' : 
+                  'investment-calculators'
+                }
+                className={`text-2xl font-semibold ${
+                  activeSection === 
+                  (category === 'personal-fin' ? 'personal-finance-calculators' : 
+                   category === 'Family' ? 'family-calculators' : 
+                   category === 'Retirement' ? 'retirement-calculators' : 
+                   category === 'EducationCareer' ? 'education-career-calculators' : 
+                   category === 'Goals' ? 'goal-planning-calculators' : 
+                   category === 'Tax' ? 'tax-calculators' : 
+                   category === 'Incomeflow' ? 'income-cashflow-calculators' : 
+                   category === 'Trading' ? 'trading-calculators' : 
+                   category === 'Loan' ? 'loan-calculators' : 
+                   category === 'Miscellaneous' ? 'miscellaneous-calculators' : 
+                   'investment-calculators')
+                  ? 'text-[#F49611]' : 'text-[#113262]'
+                }`}
+              >
                 {category === 'personal-fin' ? 'Personal Finance Calculators' : 
                  category === 'Family' ? 'Children & Family Calculators' : 
                  category === 'Retirement' ? 'Retirement Calculators' : 
