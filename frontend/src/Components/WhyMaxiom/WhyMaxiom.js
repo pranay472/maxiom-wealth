@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import WhyChooseUs from './WhyChooseUs';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -12,14 +12,15 @@ import ClientTestimonials from './ClientTestimonials';
 
 const WhyMaxiom = () => {
   const location = useLocation();
+  const { section } = useParams();
 
   useEffect(() => {
     // Function to scroll to section
     const scrollToSection = () => {
-      const hash = location.hash.replace('#', '');
-      if (hash) {
+      const targetSection = section || location.hash.replace('#', '');
+      if (targetSection) {
         setTimeout(() => {
-          const element = document.getElementById(hash);
+          const element = document.getElementById(targetSection);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
@@ -30,19 +31,19 @@ const WhyMaxiom = () => {
     // Call on mount and when location changes
     scrollToSection();
 
-    // Listen for hash changes
+    // Listen for hash changes (for backward compatibility)
     window.addEventListener('hashchange', scrollToSection);
     return () => window.removeEventListener('hashchange', scrollToSection);
-  }, [location]);
+  }, [location, section]);
 
   return (
     <div className="why-maxiom-container">
       <Header />
       <div className="why-maxiom-content space-y-24"> {/* Add vertical spacing between sections */}
-        <div id="whyChooseUs">
+        <div id="about-us">
           <WhyChooseUs />
         </div>
-        <div id="rootsWings">
+        <div id="our-investment-philosophy">
           <RootsWings />
         </div>
         <div id="lsg">

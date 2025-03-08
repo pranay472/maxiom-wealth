@@ -10,19 +10,19 @@ const PMSOfferings = () => {
       title: "JEWEL",
       subtitle: "Flexi Cap Quality-Growth",
       description: "Balanced investment in large, mid, and a few small-cap companies for long-term growth.",
-      link: "/pms/jewel"
+      link: "/jewel-pms-large-midcap-focused"
     },
     {
       title: "SPARK",
       subtitle: "Emerging Quality-Growth",
       description: "Lesser known small-cap companies with strong fundamentals for long-term growth.",
-      link: "/pms/spark"
+      link: "/spark-pms-smallcap-5000-cr-cos"
     },
     {
       title: "GEM",
       subtitle: "Quality-Momentum Strategy",
       description: "Companies with strong price trends and growth momentum across all market caps.",
-      link: "/pms/gem"
+      link: "/gem-pms-quality-momentum"
     },
     {
       title: "EMERALD E",

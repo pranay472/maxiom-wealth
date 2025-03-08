@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Share2 } from 'lucide-react';
+import { Share, ChevronDown } from 'lucide-react';
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
 
 const RetirementCalculator = () => {
-  const [formData, setFormData] = useState({
-    currentAge: 30,
-    retirementAge: 55,
-    monthlyExpense: 100000,
-    inflation: 6,
-    expectedReturns: 12,
-    retirementReturns: 9,
-    lifeExpectancy: 85,
-    hasSavings: false,
-    currentSavings: 0,
-    savingsReturns: 12
-  });
-
+  const [currentAge, setCurrentAge] = useState(30);
+  const [retirementAge, setRetirementAge] = useState(55);
+  const [monthlyExpense, setMonthlyExpense] = useState(100000);
+  const [inflation, setInflation] = useState(6);
+  const [expectedReturns, setExpectedReturns] = useState(12);
+  const [retirementReturns, setRetirementReturns] = useState(9);
+  const [lifeExpectancy, setLifeExpectancy] = useState(85);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showShareToast, setShowShareToast] = useState(false);
+  const [hasSavings, setHasSavings] = useState(false);
+  const [currentSavings, setCurrentSavings] = useState(0);
+  const [savingsReturns, setSavingsReturns] = useState(12);
   const [results, setResults] = useState({
     requiredCorpus: 0,
     monthlyInvestment: 0,
@@ -24,17 +31,17 @@ const RetirementCalculator = () => {
   });
 
   const calculateRetirementNeeds = () => {
-    const yearsToRetirement = formData.retirementAge - formData.currentAge;
-    const retirementDuration = formData.lifeExpectancy - formData.retirementAge;
+    const yearsToRetirement = retirementAge - currentAge;
+    const retirementDuration = lifeExpectancy - retirementAge;
     
     // Calculate monthly expense at retirement with compound inflation
-    const monthlyExpenseAtRetirement = formData.monthlyExpense * 
-      Math.pow(1 + formData.inflation / 100, yearsToRetirement);
+    const monthlyExpenseAtRetirement = monthlyExpense * 
+      Math.pow(1 + inflation / 100, yearsToRetirement);
 
     // Calculate total retirement corpus needed
     // Using a more conservative approach that accounts for post-retirement inflation
-    const postRetirementInflationRate = formData.inflation / 100;
-    const postRetirementReturnRate = formData.retirementReturns / 100;
+    const postRetirementInflationRate = inflation / 100;
+    const postRetirementReturnRate = retirementReturns / 100;
     
     // Calculate the present value of retirement corpus needed
     let retirementCorpus = monthlyExpenseAtRetirement * 12 * 
@@ -45,14 +52,14 @@ const RetirementCalculator = () => {
     retirementCorpus *= 1.1;
 
     // Deduct future value of current savings if any
-    if (formData.hasSavings && formData.currentSavings > 0) {
-      const futureSavings = formData.currentSavings * 
-        Math.pow(1 + formData.savingsReturns / 100, yearsToRetirement);
+    if (hasSavings && currentSavings > 0) {
+      const futureSavings = currentSavings * 
+        Math.pow(1 + savingsReturns / 100, yearsToRetirement);
       retirementCorpus -= futureSavings;
     }
 
     // Calculate required monthly investment
-    const monthlyReturnRate = formData.expectedReturns / 12 / 100;
+    const monthlyReturnRate = expectedReturns / 12 / 100;
     const monthsToRetirement = yearsToRetirement * 12;
     
     const requiredMonthlyInvestment = (retirementCorpus * monthlyReturnRate) / 
@@ -61,7 +68,7 @@ const RetirementCalculator = () => {
     // Calculate yearly and one-time investments
     const yearlyInvestment = requiredMonthlyInvestment * 12;
     const oneTimeInvestment = retirementCorpus / 
-      Math.pow(1 + formData.expectedReturns / 100, yearsToRetirement);
+      Math.pow(1 + expectedReturns / 100, yearsToRetirement);
 
     setResults({
       requiredCorpus: Math.round(retirementCorpus),
@@ -74,435 +81,350 @@ const RetirementCalculator = () => {
 
   useEffect(() => {
     calculateRetirementNeeds();
-  }, [formData]);
-
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-IN', {
-      maximumFractionDigits: 0
-    }).format(amount);
+  }, [
+    currentAge, 
+    retirementAge, 
+    monthlyExpense, 
+    inflation, 
+    expectedReturns, 
+    retirementReturns, 
+    lifeExpectancy, 
+    hasSavings, 
+    currentSavings, 
+    savingsReturns
+  ]);
+  
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShowShareToast(true);
+      setTimeout(() => setShowShareToast(false), 3000);
+    } catch (err) {
+      console.error('Failed to copy URL:', err);
+    }
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="mb-8 pt-36">
-        <h1 className="text-3xl font-bold text-gray-900">Retirement Calculator</h1>
-        <p className="text-gray-600 mt-2">Plan your retirement fund with our calculator.</p>
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">Retirement Calculator</h1>
+        <h2 className="text-lg text-gray-600">Plan your retirement fund with our calculator</h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Left Column - Inputs */}
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Current Age Input */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Current Age</label>
-                <p className="text-sm text-gray-600 mt-1">What is your present age?</p>
-              </div>
-              <div className="relative mt-6">
-                <div className="flex items-center gap-4 mb-2">
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Basic Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Age Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Current Age</label>
                   <input
                     type="number"
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
                     min={20}
                     max={70}
-                    value={formData.currentAge}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      if (value >= 20 && value <= 70) {
-                        setFormData(prev => ({ ...prev, currentAge: value }));
-                      }
-                    }}
-                    className="w-20 px-2 py-1 border rounded"
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full mt-2"
                   />
-                  <span className="text-sm text-gray-600">years</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>20 years</span>
+                    <span>70 years</span>
+                  </div>
                 </div>
-                <input
-                  type="range"
-                  min={20}
-                  max={70}
-                  value={formData.currentAge}
-                  onChange={(e) => setFormData(prev => ({ ...prev, currentAge: Number(e.target.value) }))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-sm text-gray-600 mt-1">
-                  <span>20 years</span>
-                  <span className="font-semibold">{formData.currentAge} years</span>
-                  <span>70 years</span>
-                </div>
-              </div>
-            </div>
 
-            {/* Retirement Age Input */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Planned Retirement Age</label>
-                <p className="text-sm text-gray-600 mt-1">When do you wish to retire?</p>
-              </div>
-              <div className="relative mt-6">
-                <div className="flex items-center gap-4 mb-2">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Retirement Age</label>
                   <input
                     type="number"
-                    min={50}
+                    value={retirementAge}
+                    onChange={(e) => setRetirementAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={45}
                     max={70}
-                    value={formData.retirementAge}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      if (value >= 50 && value <= 70) {
-                        setFormData(prev => ({ ...prev, retirementAge: value }));
-                      }
-                    }}
-                    className="w-20 px-2 py-1 border rounded"
+                    value={retirementAge}
+                    onChange={(e) => setRetirementAge(Number(e.target.value))}
+                    className="w-full mt-2"
                   />
-                  <span className="text-sm text-gray-600">years</span>
-                </div>
-                <input
-                  type="range"
-                  min={50}
-                  max={70}
-                  value={formData.retirementAge}
-                  onChange={(e) => setFormData(prev => ({ ...prev, retirementAge: Number(e.target.value) }))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-sm text-gray-600 mt-1">
-                  <span>50 years</span>
-                  <span className="font-semibold">{formData.retirementAge} years</span>
-                  <span>70 years</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>45 years</span>
+                    <span>70 years</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Monthly Expenditure Input */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Monthly Expenditure</label>
-                <p className="text-sm text-gray-600 mt-1">Monthly expense to maintain your current lifestyle</p>
-              </div>
-              <div className="relative mt-6">
-                <div className="flex items-center gap-4 mb-2">
+            {/* Expense Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Financial Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Monthly Expenses</label>
                   <input
                     type="number"
+                    value={monthlyExpense}
+                    onChange={(e) => setMonthlyExpense(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
                     min={20000}
                     max={500000}
-                    value={formData.monthlyExpense}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      if (value >= 20000 && value <= 500000) {
-                        setFormData(prev => ({ ...prev, monthlyExpense: value }));
-                      }
-                    }}
-                    className="w-32 px-2 py-1 border rounded"
+                    step={5000}
+                    value={monthlyExpense}
+                    onChange={(e) => setMonthlyExpense(Number(e.target.value))}
+                    className="w-full mt-2"
                   />
-                  <span className="text-sm text-gray-600">₹</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹20K</span>
+                    <span>₹5L</span>
+                  </div>
                 </div>
-                <input
-                  type="range"
-                  min={20000}
-                  max={500000}
-                  step={5000}
-                  value={formData.monthlyExpense}
-                  onChange={(e) => setFormData(prev => ({ ...prev, monthlyExpense: Number(e.target.value) }))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-sm text-gray-600 mt-1">
-                  <span>₹20K</span>
-                  <span className="font-semibold">₹{formatCurrency(formData.monthlyExpense)}</span>
-                  <span>₹5L</span>
-                </div>
-              </div>
-            </div>
 
-            {/* Expected Inflation Input */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Expected Inflation</label>
-                <p className="text-sm text-gray-600 mt-1">Your expectation on inflation</p>
-              </div>
-              <div className="relative mt-6">
-                <div className="flex items-center gap-4 mb-2">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Inflation (%)</label>
                   <input
                     type="number"
+                    value={inflation}
+                    onChange={(e) => setInflation(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
                     min={0}
                     max={20}
-                    value={formData.inflation}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      if (value >= 0 && value <= 20) {
-                        setFormData(prev => ({ ...prev, inflation: value }));
-                      }
-                    }}
-                    className="w-20 px-2 py-1 border rounded"
+                    value={inflation}
+                    onChange={(e) => setInflation(Number(e.target.value))}
+                    className="w-full mt-2"
                   />
-                  <span className="text-sm text-gray-600">%</span>
-                </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={20}
-                  value={formData.inflation}
-                  onChange={(e) => setFormData(prev => ({ ...prev, inflation: Number(e.target.value) }))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-sm text-gray-600 mt-1">
-                  <span>0%</span>
-                  <span className="font-semibold">{formData.inflation}%</span>
-                  <span>20%</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0%</span>
+                    <span>20%</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Expected Returns on Investment Input */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Expected Returns On Investment</label>
-                <p className="text-sm text-gray-600 mt-1">Your expectation of returns on this planned investment</p>
-              </div>
-              <div className="relative mt-6">
-                <div className="flex items-center gap-4 mb-2">
+            {/* Investment Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Investment Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Returns Before Retirement (%)</label>
                   <input
                     type="number"
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
                     min={5}
                     max={20}
-                    value={formData.expectedReturns}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      if (value >= 5 && value <= 20) {
-                        setFormData(prev => ({ ...prev, expectedReturns: value }));
-                      }
-                    }}
-                    className="w-20 px-2 py-1 border rounded"
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full mt-2"
                   />
-                  <span className="text-sm text-gray-600">%</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>5%</span>
+                    <span>20%</span>
+                  </div>
                 </div>
-                <input
-                  type="range"
-                  min={5}
-                  max={20}
-                  value={formData.expectedReturns}
-                  onChange={(e) => setFormData(prev => ({ ...prev, expectedReturns: Number(e.target.value) }))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-sm text-gray-600 mt-1">
-                  <span>5%</span>
-                  <span className="font-semibold">{formData.expectedReturns}%</span>
-                  <span>20%</span>
-                </div>
-              </div>
-            </div>
 
-            {/* Expected Returns on Retirement Corpus Input */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Expected Returns on Retirement Corpus</label>
-                <p className="text-sm text-gray-600 mt-1">Your expectation of returns on the retirement corpus</p>
-              </div>
-              <div className="relative mt-6">
-                <div className="flex items-center gap-4 mb-2">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Life Expectancy</label>
                   <input
                     type="number"
-                    min={5}
-                    max={20}
-                    value={formData.retirementReturns}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      if (value >= 5 && value <= 20) {
-                        setFormData(prev => ({ ...prev, retirementReturns: value }));
-                      }
-                    }}
-                    className="w-20 px-2 py-1 border rounded"
+                    value={lifeExpectancy}
+                    onChange={(e) => setLifeExpectancy(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
                   />
-                  <span className="text-sm text-gray-600">%</span>
-                </div>
-                <input
-                  type="range"
-                  min={5}
-                  max={20}
-                  value={formData.retirementReturns}
-                  onChange={(e) => setFormData(prev => ({ ...prev, retirementReturns: Number(e.target.value) }))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-sm text-gray-600 mt-1">
-                  <span>5%</span>
-                  <span className="font-semibold">{formData.retirementReturns}%</span>
-                  <span>20%</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Life Expectancy Input */}
-            <div>
-              <div className="mb-2">
-                <label className="block font-semibold text-gray-800">Life Expectancy</label>
-                <p className="text-sm text-gray-600 mt-1">Years you will live</p>
-              </div>
-              <div className="relative mt-6">
-                <div className="flex items-center gap-4 mb-2">
                   <input
-                    type="number"
+                    type="range"
                     min={70}
                     max={100}
-                    value={formData.lifeExpectancy}
-                    onChange={(e) => {
-                      const value = Number(e.target.value);
-                      if (value >= 70 && value <= 100) {
-                        setFormData(prev => ({ ...prev, lifeExpectancy: value }));
-                      }
-                    }}
-                    className="w-20 px-2 py-1 border rounded"
+                    value={lifeExpectancy}
+                    onChange={(e) => setLifeExpectancy(Number(e.target.value))}
+                    className="w-full mt-2"
                   />
-                  <span className="text-sm text-gray-600">years</span>
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>70 years</span>
+                    <span>100 years</span>
+                  </div>
                 </div>
-                <input
-                  type="range"
-                  min={70}
-                  max={100}
-                  value={formData.lifeExpectancy}
-                  onChange={(e) => setFormData(prev => ({ ...prev, lifeExpectancy: Number(e.target.value) }))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              </div>
+            </div>
+
+            {/* Advanced Settings */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
+              >
+                <h2 className="text-lg font-bold text-gray-900">Advanced Settings</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
+                  size={20}
                 />
-                <div className="flex justify-between text-sm text-gray-600 mt-1">
-                  <span>70 years</span>
-                  <span className="font-semibold">{formData.lifeExpectancy} years</span>
-                  <span>100 years</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Current Savings Section */}
-          <div className="border-t pt-6">
-            <div className="flex items-center mb-4">
-              <input
-                type="checkbox"
-                checked={formData.hasSavings}
-                onChange={(e) => setFormData(prev => ({ ...prev, hasSavings: e.target.checked }))}
-                className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-              />
-              <label className="ml-2 font-semibold text-gray-800">
-                I have some savings for retirement
-              </label>
-            </div>
-
-            {formData.hasSavings && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Current Savings Amount */}
-                <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Current Savings</label>
-                    <p className="text-sm text-gray-600 mt-1">How much have you saved up?</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
+              </button>
+              
+              {showAdvanced && (
+                <div className="p-4 border-t">
+                  <div className="grid grid-cols-1 gap-6 mb-6">
+                    <div>
+                      <label className="block font-medium text-sm mb-1.5">Expected Returns After Retirement (%)</label>
                       <input
                         type="number"
-                        min={0}
-                        max={10000000}
-                        value={formData.currentSavings}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 0 && value <= 10000000) {
-                            setFormData(prev => ({ ...prev, currentSavings: value }));
-                          }
-                        }}
-                        className="w-32 px-2 py-1 border rounded"
+                        value={retirementReturns}
+                        onChange={(e) => setRetirementReturns(Number(e.target.value))}
+                        className="w-full p-1.5 border rounded text-sm"
                       />
-                      <span className="text-sm text-gray-600">₹</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0}
-                      max={10000000}
-                      step={100000}
-                      value={formData.currentSavings}
-                      onChange={(e) => setFormData(prev => ({ ...prev, currentSavings: Number(e.target.value) }))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>₹0</span>
-                      <span className="font-semibold">₹{formatCurrency(formData.currentSavings)}</span>
-                      <span>₹1Cr</span>
+                      <input
+                        type="range"
+                        min={5}
+                        max={20}
+                        value={retirementReturns}
+                        onChange={(e) => setRetirementReturns(Number(e.target.value))}
+                        className="w-full mt-2"
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>5%</span>
+                        <span>20%</span>
+                      </div>
                     </div>
                   </div>
+
+                  <div className="flex items-center gap-2 mb-4">
+                    <input
+                      type="checkbox"
+                      id="hasSavings"
+                      checked={hasSavings}
+                      onChange={(e) => setHasSavings(e.target.checked)}
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="hasSavings" className="text-sm font-medium">
+                      I have some savings for retirement
+                    </label>
+                  </div>
+
+                  {hasSavings && (
+                    <div className="grid grid-cols-2 gap-6">
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Current Savings</label>
+                        <input
+                          type="number"
+                          value={currentSavings}
+                          onChange={(e) => setCurrentSavings(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
+                        <input
+                          type="range"
+                          min={0}
+                          max={10000000}
+                          step={100000}
+                          value={currentSavings}
+                          onChange={(e) => setCurrentSavings(Number(e.target.value))}
+                          className="w-full mt-2"
+                        />
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                          <span>₹0</span>
+                          <span>₹1Cr</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Expected Returns on Savings (%)</label>
+                        <input
+                          type="number"
+                          value={savingsReturns}
+                          onChange={(e) => setSavingsReturns(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
+                        <input
+                          type="range"
+                          min={1}
+                          max={30}
+                          value={savingsReturns}
+                          onChange={(e) => setSavingsReturns(Number(e.target.value))}
+                          className="w-full mt-2"
+                        />
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                          <span>1%</span>
+                          <span>30%</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[500px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">Retirement Plan</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-4 flex flex-col h-[calc(100%-68px)] justify-between">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold mb-1">
+                    {formatCurrency(results.requiredCorpus)}
+                  </div>
+                  <div className="text-sm text-gray-300">Required retirement corpus</div>
                 </div>
 
-                {/* Expected Returns on Savings */}
-                <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Expected Returns on Savings</label>
-                    <p className="text-sm text-gray-600 mt-1">Expected annual returns on your current savings</p>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Monthly Investment</span>
+                    <span className="font-bold">{formatCurrency(results.monthlyInvestment)}</span>
                   </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <input
-                        type="number"
-                        min={1}
-                        max={30}
-                        value={formData.savingsReturns}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 1 && value <= 30) {
-                            setFormData(prev => ({ ...prev, savingsReturns: value }));
-                          }
-                        }}
-                        className="w-20 px-2 py-1 border rounded"
-                      />
-                      <span className="text-sm text-gray-600">%</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={1}
-                      max={30}
-                      value={formData.savingsReturns}
-                      onChange={(e) => setFormData(prev => ({ ...prev, savingsReturns: Number(e.target.value) }))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>1%</span>
-                      <span className="font-semibold">{formData.savingsReturns}%</span>
-                      <span>30%</span>
-                    </div>
+                  
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Yearly Investment</span>
+                    <span className="font-bold">{formatCurrency(results.yearlyInvestment)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">One Time Investment</span>
+                    <span className="font-bold">{formatCurrency(results.oneTimeInvestment)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Monthly Expense (At Retirement)</span>
+                    <span className="font-bold">{formatCurrency(results.monthlyExpenseAtRetirement)}</span>
                   </div>
                 </div>
               </div>
-            )}
-          </div>
-        </div>
 
-        {/* Right Column - Results */}
-        <div className="bg-[#113262] text-white p-6 rounded-lg h-fit">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-xl font-bold">Retirement Plan</h3>
-            <button className="p-2 hover:bg-[#1e3a8a] rounded">
-              <Share2 size={20} />
-            </button>
-          </div>
-
-          <div className="mb-8">
-            <div className="text-4xl font-bold mb-2">₹{formatCurrency(results.requiredCorpus)}</div>
-            <div className="text-gray-300">Required retirement corpus</div>
-          </div>
-
-          <div className="space-y-4">
-            <h4 className="font-medium text-gray-300">New Investment Required<br/>(By frequency)</h4>
-            
-            <div className="flex justify-between py-2 border-t border-white/20">
-              <span>Monthly</span>
-              <span className="font-bold">₹{formatCurrency(results.monthlyInvestment)}</span>
-            </div>
-            
-            <div className="flex justify-between py-2 border-t border-white/20">
-              <span>Yearly</span>
-              <span className="font-bold">₹{formatCurrency(results.yearlyInvestment)}</span>
-            </div>
-            
-            <div className="flex justify-between py-2 border-t border-white/20">
-              <span>One Time</span>
-              <span className="font-bold">₹{formatCurrency(results.oneTimeInvestment)}</span>
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Get Started →
+              </button>
             </div>
           </div>
 
-          <button className="w-full bg-[#fb923c] text-white py-3 rounded-lg mt-8 hover:bg-[#f97316] transition-colors">
-            Get Started →
-          </button>
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>

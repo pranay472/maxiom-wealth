@@ -11,7 +11,7 @@ const lifeTypes = [
     timeframe: '0-5 Years',
     riskProfile: 'Conservative',
     minInvestment: '₹10L',
-    path: '/financial-advisory/life-planning/child-birth'
+    path: '/services/financial-planning-for-life-situations-child-birth'
   },
   {
     id: 'child-marriage',
@@ -21,7 +21,7 @@ const lifeTypes = [
     timeframe: '5-15 Years',
     riskProfile: 'Moderate',
     minInvestment: '₹25L',
-    path: '/financial-advisory/life-planning/child-marriage'
+    path: '/services/financial-planning-for-life-situations-childs-marriage'
   },
   {
     id: 'health-emergency',
@@ -31,7 +31,7 @@ const lifeTypes = [
     timeframe: 'Ongoing',
     riskProfile: 'Balanced',
     minInvestment: '₹15L',
-    path: '/financial-advisory/life-planning/health-emergency'
+    path: '/services/financial-planning-for-life-situations-health-emergency'
   },
   {
     id: 'disability',
@@ -41,7 +41,7 @@ const lifeTypes = [
     timeframe: 'Long-term',
     riskProfile: 'Conservative',
     minInvestment: '₹20L',
-    path: '/financial-advisory/life-planning/disability'
+    path: '/services/financial-planning-for-life-situations-disability'
   },
   {
     id: 'single-mothers',
@@ -51,7 +51,7 @@ const lifeTypes = [
     timeframe: 'Ongoing',
     riskProfile: 'Moderate Conservative',
     minInvestment: '₹12L',
-    path: '/financial-advisory/life-planning/single-mothers'
+    path: '/services/financial-planning-for-life-situations-single-mothers'
   },
   {
     id: 'single-parents',
@@ -61,7 +61,7 @@ const lifeTypes = [
     timeframe: 'Ongoing',
     riskProfile: 'Moderate',
     minInvestment: '₹15L',
-    path: '/financial-advisory/life-planning/single-parents'
+    path: '/services/financial-planning-for-single-parent'
   },
   {
     id: 'sudden-death',
@@ -71,7 +71,7 @@ const lifeTypes = [
     timeframe: 'Long-term',
     riskProfile: 'Conservative',
     minInvestment: '₹30L',
-    path: '/financial-advisory/life-planning/sudden-death'
+    path: '/services/financial-planning-in-case-of-sudden-death-of-income-earner'
   },
   {
     id: 'divorce',
@@ -81,7 +81,7 @@ const lifeTypes = [
     timeframe: '1-3 Years',
     riskProfile: 'Balanced',
     minInvestment: '₹20L',
-    path: '/financial-advisory/life-planning/divorce'
+    path: '/services/financial-planning-for-life-situations-divorce'
   },
   {
     id: 'migration-from-india',
@@ -91,7 +91,7 @@ const lifeTypes = [
     timeframe: '2-5 Years',
     riskProfile: 'Moderate Aggressive',
     minInvestment: '₹50L',
-    path: '/financial-advisory/life-planning/migration-from-india'
+    path: '/services/financial-planning-for-life-situations-those-emigrating-from-india'
   },
   {
     id: 'return-to-india',
@@ -101,7 +101,7 @@ const lifeTypes = [
     timeframe: '1-3 Years',
     riskProfile: 'Moderate',
     minInvestment: '₹25L',
-    path: '/financial-advisory/life-planning/return-to-india'
+    path: '/services/financial-planning-for-those-returning-to-india'
   }
 ];
 

@@ -11,7 +11,7 @@ const professionalTypes = [
     timeframe: '10-15 Years',
     riskProfile: 'Moderate Aggressive',
     minInvestment: '₹25L',
-    path: '/financial-advisory/professionals/sportspersons'
+    path: '/services/customised-financial-planning-for-professionals-sports-persons'
   },
   {
     id: 'doctors',
@@ -21,7 +21,7 @@ const professionalTypes = [
     timeframe: '5-10 Years',
     riskProfile: 'Moderate',
     minInvestment: '₹20L',
-    path: '/financial-advisory/professionals/doctors'
+    path: '/services/customised-financial-planning-for-professionals-doctors'
   },
   {
     id: 'retired-bank-employees',
@@ -31,7 +31,7 @@ const professionalTypes = [
     timeframe: '15-20 Years',
     riskProfile: 'Conservative',
     minInvestment: '₹15L',
-    path: '/financial-advisory/professionals/retired-bank-employees'
+    path: '/services/customised-financial-planning-for-professionals-retired-bank-employees'
   },
   {
     id: 'entrepreneurs',
@@ -41,7 +41,7 @@ const professionalTypes = [
     timeframe: '5-10 Years',
     riskProfile: 'Moderate Aggressive',
     minInvestment: '₹30L',
-    path: '/financial-advisory/professionals/entrepreneurs'
+    path: '/services/customised-financial-planning-for-professionals-enterpreneurs'
   }
 ];
 

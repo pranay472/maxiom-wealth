@@ -1,69 +1,84 @@
 import React, { useState, useEffect } from 'react';
-import { Share } from 'lucide-react';
+import { Share, ChevronDown } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
+
 const SuperannuationCalculator = () => {
-  const [values, setValues] = useState({
-    currentAge: 30,
-    retirementAge: 60,
-    currentBalance: 500000,
-    annualSalary: 800000,
-    employerContribution: 10,
-    personalContribution: 5,
-    investmentReturn: 7,
-    inflationRate: 2.5
-  });
+  const [currentAge, setCurrentAge] = useState(30);
+  const [retirementAge, setRetirementAge] = useState(60);
+  const [currentBalance, setCurrentBalance] = useState(500000);
+  const [annualSalary, setAnnualSalary] = useState(800000);
+  const [employerContribution, setEmployerContribution] = useState(10);
+  const [personalContribution, setPersonalContribution] = useState(5);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showShareToast, setShowShareToast] = useState(false);
+  const [investmentReturn, setInvestmentReturn] = useState(7);
+  const [inflationRate, setInflationRate] = useState(2.5);
   const [chartData, setChartData] = useState([]);
-  const [result, setResult] = useState({});
+  const [result, setResult] = useState({
+    projectedBalance: 0,
+    yearlyContribution: 0,
+    totalContributions: 0,
+    totalReturns: 0
+  });
 
   useEffect(() => {
     const result = calculateSuperannuation();
     setChartData(result.chartData);
     setResult(result);
-  }, [values]);
-
-  const handleChange = (key, value) => {
-    setValues(prev => ({
-      ...prev,
-      [key]: value
-    }));
-  };
+  }, [
+    currentAge, 
+    retirementAge, 
+    currentBalance, 
+    annualSalary, 
+    employerContribution, 
+    personalContribution, 
+    investmentReturn, 
+    inflationRate
+  ]);
 
   const calculateSuperannuation = () => {
-    const yearsToRetirement = values.retirementAge - values.currentAge;
-    let balance = values.currentBalance;
+    const yearsToRetirement = retirementAge - currentAge;
+    let balance = currentBalance;
     let yearlyData = [];
 
     // Calculate data points at larger intervals for smoother rendering
     const interval = Math.max(1, Math.floor(yearsToRetirement / 20)); // Show max 20 points
     
     for (let year = 0; year <= yearsToRetirement; year += interval) {
-      const totalSalary = values.annualSalary * Math.pow(1 + values.inflationRate / 100, year);
-      const yearlyEmployerContribution = totalSalary * (values.employerContribution / 100);
-      const yearlyPersonalContribution = totalSalary * (values.personalContribution / 100);
-      const returns = balance * (values.investmentReturn / 100);
+      const totalSalary = annualSalary * Math.pow(1 + inflationRate / 100, year);
+      const yearlyEmployerContribution = totalSalary * (employerContribution / 100);
+      const yearlyPersonalContribution = totalSalary * (personalContribution / 100);
+      const returns = balance * (investmentReturn / 100);
       
       balance = balance + yearlyEmployerContribution + yearlyPersonalContribution + returns;
       
       yearlyData.push({
-        age: values.currentAge + year,
+        age: currentAge + year,
         balance: Math.round(balance),
         salary: Math.round(totalSalary)
       });
     }
 
     // Always include the final year if not already included
-    if (yearlyData[yearlyData.length - 1].age !== values.retirementAge) {
+    if (yearlyData[yearlyData.length - 1].age !== retirementAge) {
       const year = yearsToRetirement;
-      const totalSalary = values.annualSalary * Math.pow(1 + values.inflationRate / 100, year);
-      const yearlyEmployerContribution = totalSalary * (values.employerContribution / 100);
-      const yearlyPersonalContribution = totalSalary * (values.personalContribution / 100);
-      const returns = balance * (values.investmentReturn / 100);
+      const totalSalary = annualSalary * Math.pow(1 + inflationRate / 100, year);
+      const yearlyEmployerContribution = totalSalary * (employerContribution / 100);
+      const yearlyPersonalContribution = totalSalary * (personalContribution / 100);
+      const returns = balance * (investmentReturn / 100);
       
       balance = balance + yearlyEmployerContribution + yearlyPersonalContribution + returns;
       
       yearlyData.push({
-        age: values.currentAge + year,
+        age: currentAge + year,
         balance: Math.round(balance),
         salary: Math.round(totalSalary)
       });
@@ -71,252 +86,360 @@ const SuperannuationCalculator = () => {
 
     return {
       projectedBalance: balance,
-      yearlyContribution: (values.employerContribution + values.personalContribution) * values.annualSalary / 100,
-      totalContributions: yearlyData.reduce((acc, curr) => acc + (curr.salary * (values.employerContribution + values.personalContribution) / 100), 0),
-      totalReturns: balance - values.currentBalance - yearlyData.reduce((acc, curr) => acc + (curr.salary * (values.employerContribution + values.personalContribution) / 100), 0),
+      yearlyContribution: (employerContribution + personalContribution) * annualSalary / 100,
+      totalContributions: yearlyData.reduce((acc, curr) => acc + (curr.salary * (employerContribution + personalContribution) / 100), 0),
+      totalReturns: balance - currentBalance - yearlyData.reduce((acc, curr) => acc + (curr.salary * (employerContribution + personalContribution) / 100), 0),
       chartData: yearlyData
     };
   };
 
-  const formatCurrency = (amount) => {
-    const numStr = Math.abs(amount).toFixed(0);
-    const lastThree = numStr.substring(numStr.length - 3);
-    const otherNums = numStr.substring(0, numStr.length - 3);
-    const formatted = otherNums !== '' 
-      ? otherNums.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree 
-      : lastThree;
-    return '₹' + (amount < 0 ? '-' : '') + formatted;
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShowShareToast(true);
+      setTimeout(() => setShowShareToast(false), 3000);
+    } catch (err) {
+      console.error('Failed to copy URL:', err);
+    }
   };
 
-  const InputField = ({ label, value, onChange, min, max, unit, step = 1, helpText }) => (
-    <div className="mb-4">
-      <label className="block font-semibold text-gray-800 mb-1 text-sm">{label}</label>
-      {helpText && <p className="text-xs text-gray-600 mb-1">{helpText}</p>}
-      <div className="flex gap-2">
-        <input 
-          type="number" 
-          value={value} 
-          onChange={e => {
-            const val = parseFloat(e.target.value);
-            if (!isNaN(val) && val >= min && val <= max) {
-              onChange(val);
-            }
-          }}
-          className="w-32 px-2 py-1 border rounded text-sm" 
-        />
-        <span className="text-sm text-gray-600">{unit}</span>
-      </div>
-      <div className="mt-2">
-        <input 
-          type="range" 
-          min={min} 
-          max={max} 
-          step={step} 
-          value={value}
-          onChange={e => onChange(parseFloat(e.target.value))}
-          className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer" 
-        />
-        <div className="flex justify-between text-xs text-gray-500 mt-1">
-          <span>{unit === 'years' || unit === '%' ? min : formatCurrency(min)}</span>
-          <span>{unit === 'years' || unit === '%' ? max : formatCurrency(max)}</span>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
-      <div className="container mx-auto">
-        <div className="mb-4 pt-24">
-          <h1 className="text-2xl font-bold text-gray-900">Superannuation Calculator</h1>
-          <p className="text-sm text-gray-600 mt-1">Plan your retirement with our superannuation calculator</p>
-        </div>
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">Superannuation Calculator</h1>
+        <h2 className="text-lg text-gray-600">Plan your retirement with our superannuation calculator</h2>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
-          <div className="lg:col-span-2 space-y-3">
-            <div className="grid grid-cols-2 gap-6">
-              <InputField 
-                label="Current Age" 
-                value={values.currentAge}
-                onChange={v => handleChange('currentAge', v)}
-                min={18}
-                max={75}
-                unit="years"
-                helpText="What is your current age?"
-              />
-              <InputField 
-                label="Retirement Age" 
-                value={values.retirementAge}
-                onChange={v => handleChange('retirementAge', v)}
-                min={45}
-                max={75}
-                unit="years"
-                helpText="At what age do you plan to retire?"
-              />
-              <InputField 
-                label="Current Balance" 
-                value={values.currentBalance}
-                onChange={v => handleChange('currentBalance', v)}
-                min={0}
-                max={10000000}
-                unit="₹"
-                step={10000}
-                helpText="What is your current superannuation balance?"
-              />
-              <InputField 
-                label="Annual Salary" 
-                value={values.annualSalary}
-                onChange={v => handleChange('annualSalary', v)}
-                min={100000}
-                max={10000000}
-                unit="₹"
-                step={10000}
-                helpText="What is your current annual salary?"
-              />
-              <InputField 
-                label="Employer Contribution" 
-                value={values.employerContribution}
-                onChange={v => handleChange('employerContribution', v)}
-                min={0}
-                max={30}
-                unit="%"
-                step={0.5}
-                helpText="What percentage does your employer contribute?"
-              />
-              <InputField 
-                label="Personal Contribution" 
-                value={values.personalContribution}
-                onChange={v => handleChange('personalContribution', v)}
-                min={0}
-                max={30}
-                unit="%"
-                step={0.5}
-                helpText="What percentage do you contribute personally?"
-              />
-              <InputField 
-                label="Investment Return" 
-                value={values.investmentReturn}
-                onChange={v => handleChange('investmentReturn', v)}
-                min={1}
-                max={15}
-                unit="%"
-                step={0.5}
-                helpText="Expected annual return on investment"
-              />
-              <InputField 
-                label="Inflation Rate" 
-                value={values.inflationRate}
-                onChange={v => handleChange('inflationRate', v)}
-                min={1}
-                max={10}
-                unit="%"
-                step={0.5}
-                helpText="Expected annual inflation rate"
-              />
-            </div>
-          </div>
-
-          <div className="bg-[#113262] text-white p-4 rounded-lg">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold">Projected Balance at Retirement</h3>
-              <button className="p-1.5 hover:bg-[#1e3a8a] rounded">
-                <Share size={18} />
-              </button>
-            </div>
-
-            <div className="mb-6">
-              <div className="text-3xl font-bold mb-1">{formatCurrency(result.projectedBalance)}</div>
-              <div className="text-sm text-gray-300">Estimated balance at retirement</div>
-            </div>
-
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-gray-300">Contribution Breakdown</h4>
-              
-              <div className="space-y-2">
-                <div className="flex justify-between py-1.5 border-t border-white/20">
-                  <span className="text-sm">Yearly Contribution</span>
-                  <span className="font-bold">{formatCurrency(result.yearlyContribution)}</span>
-                </div>
-                
-                <div className="flex justify-between py-1.5 border-t border-white/20">
-                  <span className="text-sm">Total Contributions</span>
-                  <span className="font-bold">{formatCurrency(result.totalContributions)}</span>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Age Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Age Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Current Age</label>
+                  <input
+                    type="number"
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={18}
+                    max={75}
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>18 years</span>
+                    <span>75 years</span>
+                  </div>
                 </div>
 
-                <div className="flex justify-between py-1.5 border-t border-white/20">
-                  <span className="text-sm">Investment Returns</span>
-                  <span className="font-bold">{formatCurrency(result.totalReturns)}</span>
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Retirement Age</label>
+                  <input
+                    type="number"
+                    value={retirementAge}
+                    onChange={(e) => setRetirementAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={45}
+                    max={75}
+                    value={retirementAge}
+                    onChange={(e) => setRetirementAge(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>45 years</span>
+                    <span>75 years</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <button className="w-full bg-[#fb923c] text-white py-2 rounded-lg mt-6 text-sm hover:bg-[#f97316] transition-colors">
-              Start Planning →
-            </button>
-          </div>
-        </div>
+            {/* Financial Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Financial Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Current Balance</label>
+                  <input
+                    type="number"
+                    value={currentBalance}
+                    onChange={(e) => setCurrentBalance(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={10000000}
+                    step={10000}
+                    value={currentBalance}
+                    onChange={(e) => setCurrentBalance(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹0</span>
+                    <span>₹1Cr</span>
+                  </div>
+                </div>
 
-        <div className="mt-8 bg-white p-6 rounded-lg shadow">
-          <h3 className="text-lg font-bold mb-6">Balance Progression Over Time</h3>
-          <div className="h-[400px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart 
-                data={chartData} 
-                margin={{ top: 20, right: 30, left: 65, bottom: 20 }}
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Annual Salary</label>
+                  <input
+                    type="number"
+                    value={annualSalary}
+                    onChange={(e) => setAnnualSalary(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={100000}
+                    max={10000000}
+                    step={10000}
+                    value={annualSalary}
+                    onChange={(e) => setAnnualSalary(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹1L</span>
+                    <span>₹1Cr</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Contribution Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Contribution Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Employer Contribution (%)</label>
+                  <input
+                    type="number"
+                    value={employerContribution}
+                    onChange={(e) => setEmployerContribution(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={30}
+                    step={0.5}
+                    value={employerContribution}
+                    onChange={(e) => setEmployerContribution(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0%</span>
+                    <span>30%</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Personal Contribution (%)</label>
+                  <input
+                    type="number"
+                    value={personalContribution}
+                    onChange={(e) => setPersonalContribution(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={30}
+                    step={0.5}
+                    value={personalContribution}
+                    onChange={(e) => setPersonalContribution(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0%</span>
+                    <span>30%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Settings */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
-                <XAxis 
-                  dataKey="age" 
-                  label={{ 
-                    value: 'Age (Years)', 
-                    position: 'bottom', 
-                    offset: 0,
-                    style: { textAnchor: 'middle' }
-                  }}
-                  tick={{ fontSize: 12 }}
-                  tickMargin={10}
-                  interval="preserveStartEnd"
+                <h2 className="text-lg font-bold text-gray-900">Advanced Settings</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
+                  size={20}
                 />
-                <YAxis 
-                  tickFormatter={(value) => {
-                    if (value === 0) return '₹0';
-                    const formattedValue = (value / 100000).toFixed(2);
-                    return `₹${formattedValue}L`;
-                  }}
-                  label={{ 
-                    value: 'Balance (in Lakhs)', 
-                    angle: -90, 
-                    position: 'insideLeft',
-                    offset: -50,
-                    style: { textAnchor: 'middle' }
-                  }}
-                  tick={{ fontSize: 12 }}
-                  tickMargin={10}
-                />
-                <Tooltip 
-                  formatter={(value) => {
-                    const formattedValue = (value / 100000).toFixed(2);
-                    return [`₹${formattedValue} Lakhs`, 'Balance'];
-                  }}
-                  labelFormatter={(value) => `Age: ${value} years`}
-                  contentStyle={{
-                    backgroundColor: '#fff',
-                    border: '1px solid #e5e7eb',
-                    padding: '8px',
-                    fontSize: '12px'
-                  }}
-                />
-                <Line 
-                  type="monotone" 
-                  dataKey="balance" 
-                  stroke="#113262" 
-                  strokeWidth={2}
-                  dot={false}
-                  activeDot={{ r: 6, fill: "#113262" }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+              </button>
+              
+              {showAdvanced && (
+                <div className="p-4 border-t">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <label className="block font-medium text-sm mb-1.5">Investment Return (%)</label>
+                      <input
+                        type="number"
+                        value={investmentReturn}
+                        onChange={(e) => setInvestmentReturn(Number(e.target.value))}
+                        className="w-full p-1.5 border rounded text-sm"
+                      />
+                      <input
+                        type="range"
+                        min={1}
+                        max={15}
+                        step={0.5}
+                        value={investmentReturn}
+                        onChange={(e) => setInvestmentReturn(Number(e.target.value))}
+                        className="w-full mt-2"
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>1%</span>
+                        <span>15%</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block font-medium text-sm mb-1.5">Inflation Rate (%)</label>
+                      <input
+                        type="number"
+                        value={inflationRate}
+                        onChange={(e) => setInflationRate(Number(e.target.value))}
+                        className="w-full p-1.5 border rounded text-sm"
+                      />
+                      <input
+                        type="range"
+                        min={1}
+                        max={10}
+                        step={0.5}
+                        value={inflationRate}
+                        onChange={(e) => setInflationRate(Number(e.target.value))}
+                        className="w-full mt-2"
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>1%</span>
+                        <span>10%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Chart */}
+            <div className="bg-white rounded-lg shadow p-4 lg:col-span-2">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Balance Progression Over Time</h2>
+              <div className="h-[300px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart 
+                    data={chartData} 
+                    margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                    <XAxis 
+                      dataKey="age" 
+                      label={{ 
+                        value: 'Age (Years)', 
+                        position: 'bottom', 
+                        offset: 0,
+                        style: { textAnchor: 'middle' }
+                      }}
+                      tick={{ fontSize: 12 }}
+                      tickMargin={10}
+                      interval="preserveStartEnd"
+                    />
+                    <YAxis 
+                      tickFormatter={(value) => {
+                        if (value === 0) return '₹0';
+                        const formattedValue = (value / 100000).toFixed(1);
+                        return `₹${formattedValue}L`;
+                      }}
+                      tick={{ fontSize: 12 }}
+                      tickMargin={10}
+                    />
+                    <Tooltip 
+                      formatter={(value) => {
+                        return [formatCurrency(value), 'Balance'];
+                      }}
+                      labelFormatter={(value) => `Age: ${value} years`}
+                      contentStyle={{
+                        backgroundColor: '#fff',
+                        border: '1px solid #e5e7eb',
+                        padding: '8px',
+                        fontSize: '12px'
+                      }}
+                    />
+                    <Line 
+                      type="monotone" 
+                      dataKey="balance" 
+                      stroke="#113262" 
+                      strokeWidth={2}
+                      dot={false}
+                      activeDot={{ r: 6, fill: "#113262" }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </div>
+
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[500px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">Retirement Projection</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-4 flex flex-col h-[calc(100%-68px)] justify-between">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold mb-1">
+                    {formatCurrency(result.projectedBalance)}
+                  </div>
+                  <div className="text-sm text-gray-300">Projected balance at retirement</div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Yearly Contribution</span>
+                    <span className="font-bold">{formatCurrency(result.yearlyContribution)}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Total Contributions</span>
+                    <span className="font-bold">{formatCurrency(result.totalContributions)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Investment Returns</span>
+                    <span className="font-bold">{formatCurrency(result.totalReturns)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Start Planning →
+              </button>
+            </div>
+          </div>
+
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>

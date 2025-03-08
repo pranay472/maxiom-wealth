@@ -57,19 +57,19 @@ const GoalCard = ({ goal }) => {
   const handleLearnMore = () => {
     switch(id) {
       case 'car-purchase':
-        navigate('/financial-advisory/goal-based-investments/car-purchase');
+        navigate('/services/financial-planning-for-specific-goals-car-purchase');
         break;
       case 'home-loan':
-        navigate('/financial-advisory/goal-based-investments/home-loan');
+        navigate('/services/financial-planning-for-life-situations-home-loan-prepayment');
         break;
       case 'dream-home':
-        navigate('/financial-advisory/goal-based-investments/dream-home');
+        navigate('/services/financial-planning-for-specific-goals-dream-home-purchase');
         break;
       case 'business':
-        navigate('/financial-advisory/goal-based-investments/business');
+        navigate('/services/invest-now-starting-a-business');
         break;
       case 'gold-loan':
-        navigate('/financial-advisory/goal-based-investments/gold-loan');
+        navigate('/services/financial-planning-for-specific-goals-foreclosure-of-a-gold-loan');
         break;
       default:
         break;

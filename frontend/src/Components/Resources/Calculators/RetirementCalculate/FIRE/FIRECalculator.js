@@ -1,251 +1,382 @@
 import React, { useState, useEffect } from 'react';
-import { Share } from 'lucide-react';
+import { Share, ChevronDown } from 'lucide-react';
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
 
 const FIRECalculator = () => {
-  const [values, setValues] = useState({
-    currentAge: 30,
-    targetRetirementAge: 45,
-    currentSavings: 2000000,
-    monthlyExpenses: 50000,
-    monthlyIncome: 150000,
-    expectedReturnRate: 12,
-    inflationRate: 6,
-    withdrawalRate: 4
+  const [currentAge, setCurrentAge] = useState(30);
+  const [targetRetirementAge, setTargetRetirementAge] = useState(45);
+  const [currentSavings, setCurrentSavings] = useState(2000000);
+  const [monthlyExpenses, setMonthlyExpenses] = useState(50000);
+  const [monthlyIncome, setMonthlyIncome] = useState(150000);
+  const [expectedReturnRate, setExpectedReturnRate] = useState(12);
+  const [inflationRate, setInflationRate] = useState(6);
+  const [withdrawalRate, setWithdrawalRate] = useState(4);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showShareToast, setShowShareToast] = useState(false);
+  const [result, setResult] = useState({
+    requiredCorpus: 0,
+    currentSavingsRate: 0,
+    yearlyExpensesAtRetirement: 0,
+    yearlySavingsNeeded: 0,
+    finalBalance: 0,
+    yearsSavedByHigherSavings: 0
   });
 
-  const handleChange = (key, value) => {
-    setValues(prev => ({
-      ...prev,
-      [key]: value
-    }));
-  };
-
   const calculateFIRE = () => {
-    const yearsToRetirement = values.targetRetirementAge - values.currentAge;
-    const monthlyExpensesAtRetirement = values.monthlyExpenses * 
-      Math.pow(1 + values.inflationRate / 100, yearsToRetirement);
+    const yearsToRetirement = targetRetirementAge - currentAge;
+    const monthlyExpensesAtRetirement = monthlyExpenses * 
+      Math.pow(1 + inflationRate / 100, yearsToRetirement);
     
     // Calculate required corpus using the 4% rule (or user-defined withdrawal rate)
     const annualExpensesAtRetirement = monthlyExpensesAtRetirement * 12;
-    const requiredCorpus = (annualExpensesAtRetirement * 100) / values.withdrawalRate;
+    const requiredCorpus = (annualExpensesAtRetirement * 100) / withdrawalRate;
     
     // Calculate monthly savings needed
-    const monthlySavings = values.monthlyIncome - values.monthlyExpenses;
+    const monthlySavings = monthlyIncome - monthlyExpenses;
     
-    let currentBalance = values.currentSavings;
+    let balance = currentSavings;
     let yearsSavedByHigherSavings = 0;
 
     // Calculate year by year progression
     for (let year = 0; year <= yearsToRetirement; year++) {
-      const yearlyReturn = currentBalance * (values.expectedReturnRate / 100);
+      const yearlyReturn = balance * (expectedReturnRate / 100);
       const yearlySavings = monthlySavings * 12;
-      currentBalance = currentBalance + yearlyReturn + yearlySavings;
+      balance = balance + yearlyReturn + yearlySavings;
 
       // Check if FIRE target is reached earlier
-      if (currentBalance >= requiredCorpus && yearsSavedByHigherSavings === 0) {
+      if (balance >= requiredCorpus && yearsSavedByHigherSavings === 0) {
         yearsSavedByHigherSavings = yearsToRetirement - year;
       }
     }
 
-    const savingsRate = (monthlySavings / values.monthlyIncome) * 100;
+    const savingsRate = (monthlySavings / monthlyIncome) * 100;
 
     return {
       requiredCorpus,
       currentSavingsRate: savingsRate,
       yearlyExpensesAtRetirement: annualExpensesAtRetirement,
       yearlySavingsNeeded: monthlySavings * 12,
-      finalBalance: currentBalance,
+      finalBalance: balance,
       yearsSavedByHigherSavings
     };
   };
 
-  const [result, setResult] = useState(calculateFIRE());
-
   useEffect(() => {
     setResult(calculateFIRE());
-  }, [values]);
+  }, [
+    currentAge, 
+    targetRetirementAge, 
+    currentSavings, 
+    monthlyExpenses, 
+    monthlyIncome, 
+    expectedReturnRate, 
+    inflationRate, 
+    withdrawalRate
+  ]);
 
-  const formatCurrency = (amount) => {
-    const numStr = Math.abs(amount).toFixed(0);
-    const lastThree = numStr.substring(numStr.length - 3);
-    const otherNums = numStr.substring(0, numStr.length - 3);
-    const formatted = otherNums !== '' 
-      ? otherNums.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree 
-      : lastThree;
-    return '₹' + (amount < 0 ? '-' : '') + formatted;
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShowShareToast(true);
+      setTimeout(() => setShowShareToast(false), 3000);
+    } catch (err) {
+      console.error('Failed to copy URL:', err);
+    }
   };
 
-  const InputField = ({ label, value, onChange, min, max, unit, step = 1, helpText }) => (
-    <div className="mb-4">
-      <label className="block font-semibold text-gray-800 mb-1 text-sm">{label}</label>
-      {helpText && <p className="text-xs text-gray-600 mb-1">{helpText}</p>}
-      <div className="flex gap-2">
-        <input 
-          type="number" 
-          value={value} 
-          onChange={e => {
-            const val = parseFloat(e.target.value);
-            if (!isNaN(val) && val >= min && val <= max) {
-              onChange(val);
-            }
-          }}
-          className="w-32 px-2 py-1 border rounded text-sm" 
-        />
-        <span className="text-sm text-gray-600">{unit}</span>
-      </div>
-      <div className="mt-2">
-        <input 
-          type="range" 
-          min={min} 
-          max={max} 
-          step={step} 
-          value={value}
-          onChange={e => onChange(parseFloat(e.target.value))}
-          className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer" 
-        />
-        <div className="flex justify-between text-xs text-gray-500 mt-1">
-          <span>{unit === 'years' || unit === '%' ? min : formatCurrency(min)}</span>
-          <span>{unit === 'years' || unit === '%' ? max : formatCurrency(max)}</span>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
-      <div className="container mx-auto">
-        <div className="mb-4 pt-36">
-          <h1 className="text-2xl font-bold text-gray-900">FIRE Calculator</h1>
-          <p className="text-sm text-gray-600 mt-1">Plan your early retirement with our FIRE calculator</p>
-        </div>
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">FIRE Calculator</h1>
+        <h2 className="text-lg text-gray-600">Plan your Financial Independence and Early Retirement</h2>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          <div className="lg:col-span-2 space-y-3">
-            <div className="grid grid-cols-2 gap-6">
-              <InputField 
-                label="Current Age" 
-                value={values.currentAge}
-                onChange={v => handleChange('currentAge', v)}
-                min={18}
-                max={60}
-                unit="years"
-                helpText="What is your current age?"
-              />
-              <InputField 
-                label="Target FIRE Age" 
-                value={values.targetRetirementAge}
-                onChange={v => handleChange('targetRetirementAge', v)}
-                min={35}
-                max={65}
-                unit="years"
-                helpText="At what age do you want to achieve FIRE?"
-              />
-              <InputField 
-                label="Current Savings" 
-                value={values.currentSavings}
-                onChange={v => handleChange('currentSavings', v)}
-                min={0}
-                max={50000000}
-                unit="₹"
-                step={100000}
-                helpText="What are your current total savings?"
-              />
-              <InputField 
-                label="Monthly Income" 
-                value={values.monthlyIncome}
-                onChange={v => handleChange('monthlyIncome', v)}
-                min={30000}
-                max={1000000}
-                unit="₹"
-                step={5000}
-                helpText="What is your current monthly income?"
-              />
-              <InputField 
-                label="Monthly Expenses" 
-                value={values.monthlyExpenses}
-                onChange={v => handleChange('monthlyExpenses', v)}
-                min={10000}
-                max={500000}
-                unit="₹"
-                step={5000}
-                helpText="What are your current monthly expenses?"
-              />
-              <InputField 
-                label="Expected Return Rate" 
-                value={values.expectedReturnRate}
-                onChange={v => handleChange('expectedReturnRate', v)}
-                min={4}
-                max={15}
-                unit="%"
-                step={0.5}
-                helpText="Expected annual return on investments"
-              />
-              <InputField 
-                label="Inflation Rate" 
-                value={values.inflationRate}
-                onChange={v => handleChange('inflationRate', v)}
-                min={2}
-                max={10}
-                unit="%"
-                step={0.5}
-                helpText="Expected annual inflation rate"
-              />
-              <InputField 
-                label="Withdrawal Rate" 
-                value={values.withdrawalRate}
-                onChange={v => handleChange('withdrawalRate', v)}
-                min={2}
-                max={6}
-                unit="%"
-                step={0.1}
-                helpText="Annual withdrawal rate after retirement (4% is standard)"
-              />
-            </div>
-          </div>
-
-          <div className="bg-[#113262] text-white p-3 rounded-lg h-fit">
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="text-base font-bold">FIRE Target Corpus</h3>
-              <button className="p-1 hover:bg-[#1e3a8a] rounded">
-                <Share size={16} />
-              </button>
-            </div>
-
-            <div className="mb-3">
-              <div className="text-2xl font-bold">{formatCurrency(result.requiredCorpus)}</div>
-              <div className="text-xs text-gray-300">Required corpus for FIRE</div>
-            </div>
-
-            <div>
-              <h4 className="text-xs font-medium text-gray-300 mb-1">Key Metrics</h4>
-              
-              <div>
-                <div className="flex justify-between py-1 border-t border-white/20">
-                  <span className="text-xs">Current Savings Rate</span>
-                  <span className="font-medium text-sm">{result.currentSavingsRate.toFixed(1)}%</span>
-                </div>
-                
-                <div className="flex justify-between py-1 border-t border-white/20">
-                  <span className="text-xs">Yearly Expenses at FIRE</span>
-                  <span className="font-medium text-sm">{formatCurrency(result.yearlyExpensesAtRetirement)}</span>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Age Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Age Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Current Age</label>
+                  <input
+                    type="number"
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={18}
+                    max={60}
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>18 years</span>
+                    <span>60 years</span>
+                  </div>
                 </div>
 
-                <div className="flex justify-between py-1 border-t border-white/20">
-                  <span className="text-xs">Required Yearly Savings</span>
-                  <span className="font-medium text-sm">{formatCurrency(result.yearlySavingsNeeded)}</span>
-                </div>
-
-                <div className="flex justify-between py-1 border-t border-white/20">
-                  <span className="text-xs">Potential Years Saved</span>
-                  <span className="font-medium text-sm">{result.yearsSavedByHigherSavings} years</span>
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Target FIRE Age</label>
+                  <input
+                    type="number"
+                    value={targetRetirementAge}
+                    onChange={(e) => setTargetRetirementAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={35}
+                    max={65}
+                    value={targetRetirementAge}
+                    onChange={(e) => setTargetRetirementAge(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>35 years</span>
+                    <span>65 years</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <button className="w-full bg-[#fb923c] text-white py-1.5 rounded-lg mt-3 text-sm hover:bg-[#f97316] transition-colors">
-              Start Planning →
-            </button>
+            {/* Financial Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Financial Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Current Savings</label>
+                  <input
+                    type="number"
+                    value={currentSavings}
+                    onChange={(e) => setCurrentSavings(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={50000000}
+                    step={100000}
+                    value={currentSavings}
+                    onChange={(e) => setCurrentSavings(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹0</span>
+                    <span>₹5Cr</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Monthly Income</label>
+                  <input
+                    type="number"
+                    value={monthlyIncome}
+                    onChange={(e) => setMonthlyIncome(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={30000}
+                    max={1000000}
+                    step={5000}
+                    value={monthlyIncome}
+                    onChange={(e) => setMonthlyIncome(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹30K</span>
+                    <span>₹10L</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Expense Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Expense Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Monthly Expenses</label>
+                  <input
+                    type="number"
+                    value={monthlyExpenses}
+                    onChange={(e) => setMonthlyExpenses(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={10000}
+                    max={500000}
+                    step={5000}
+                    value={monthlyExpenses}
+                    onChange={(e) => setMonthlyExpenses(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹10K</span>
+                    <span>₹5L</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Return Rate (%)</label>
+                  <input
+                    type="number"
+                    value={expectedReturnRate}
+                    onChange={(e) => setExpectedReturnRate(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={4}
+                    max={15}
+                    step={0.5}
+                    value={expectedReturnRate}
+                    onChange={(e) => setExpectedReturnRate(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>4%</span>
+                    <span>15%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Settings */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
+              >
+                <h2 className="text-lg font-bold text-gray-900">Advanced Settings</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
+                  size={20}
+                />
+              </button>
+              
+              {showAdvanced && (
+                <div className="p-4 border-t">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <label className="block font-medium text-sm mb-1.5">Inflation Rate (%)</label>
+                      <input
+                        type="number"
+                        value={inflationRate}
+                        onChange={(e) => setInflationRate(Number(e.target.value))}
+                        className="w-full p-1.5 border rounded text-sm"
+                      />
+                      <input
+                        type="range"
+                        min={2}
+                        max={10}
+                        step={0.5}
+                        value={inflationRate}
+                        onChange={(e) => setInflationRate(Number(e.target.value))}
+                        className="w-full mt-2"
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>2%</span>
+                        <span>10%</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block font-medium text-sm mb-1.5">Withdrawal Rate (%)</label>
+                      <input
+                        type="number"
+                        value={withdrawalRate}
+                        onChange={(e) => setWithdrawalRate(Number(e.target.value))}
+                        className="w-full p-1.5 border rounded text-sm"
+                      />
+                      <input
+                        type="range"
+                        min={2}
+                        max={6}
+                        step={0.1}
+                        value={withdrawalRate}
+                        onChange={(e) => setWithdrawalRate(Number(e.target.value))}
+                        className="w-full mt-2"
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>2%</span>
+                        <span>6%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
+
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[500px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">FIRE Target Corpus</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
+                </button>
+              </div>
+            </div>
+
+            <div className="p-4 flex flex-col h-[calc(100%-68px)] justify-between">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold mb-1">
+                    {formatCurrency(result.requiredCorpus)}
+                  </div>
+                  <div className="text-sm text-gray-300">Required corpus for FIRE</div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Current Savings Rate</span>
+                    <span className="font-bold">{result.currentSavingsRate.toFixed(1)}%</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Yearly Expenses at FIRE</span>
+                    <span className="font-bold">{formatCurrency(result.yearlyExpensesAtRetirement)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Required Yearly Savings</span>
+                    <span className="font-bold">{formatCurrency(result.yearlySavingsNeeded)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Potential Years Saved</span>
+                    <span className="font-bold">{result.yearsSavedByHigherSavings} years</span>
+                  </div>
+                </div>
+              </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Start Planning →
+              </button>
+            </div>
+          </div>
+
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -3,15 +3,6 @@ import { TrendingUp, LineChart, Compass, Book, Newspaper, ArrowRight } from 'luc
 
 const blogCategories = [
   {
-    id: 'trends',
-    title: 'Aakguru - trends in fin',
-    icon: TrendingUp,
-    description: 'Discover latest market trends, investment insights, and real-time financial analysis to make informed decisions.',
-    topics: '50+ Articles',
-    focus: 'Market Analysis',
-    accentColor: '#1C52A0'
-  },
-  {
     id: 'wealth-insights',
     title: 'Insights on Wealth Creation',
     icon: LineChart,
@@ -28,15 +19,6 @@ const blogCategories = [
     topics: '75+ Articles',
     focus: 'Financial Goals',
     accentColor: '#113262'
-  },
-  {
-    id: 'news',
-    title: 'In the News / Media Coverage',
-    icon: Newspaper,
-    description: 'Stay informed with our expert analysis and insights featured across leading financial media platforms.',
-    topics: '150+ Features',
-    focus: 'Media Analysis',
-    accentColor: '#F49611'
   }
 ];
 

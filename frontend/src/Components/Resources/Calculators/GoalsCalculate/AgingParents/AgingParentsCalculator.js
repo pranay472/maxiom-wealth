@@ -1,5 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Share } from 'lucide-react';
+import React, { useState } from 'react';
+import { Share, ChevronDown } from 'lucide-react';
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
 
 const AgingParentsCalculator = () => {
   const [currentAge, setCurrentAge] = useState(50);
@@ -9,9 +17,11 @@ const AgingParentsCalculator = () => {
   const [expectedReturns, setExpectedReturns] = useState(12);
   const [expectedReturnsCorpus, setExpectedReturnsCorpus] = useState(9);
   const [lifeExpectancy, setLifeExpectancy] = useState(85);
-  const [showSavings, setShowSavings] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showShareToast, setShowShareToast] = useState(false);
   const [currentSavings, setCurrentSavings] = useState(0);
   const [expectedReturnsSavings, setExpectedReturnsSavings] = useState(12);
+  const [showSavings, setShowSavings] = useState(false);
 
   const calculateCorpus = () => {
     const timeToStart = plannedSupportAge - currentAge;
@@ -69,344 +79,240 @@ const AgingParentsCalculator = () => {
     };
   };
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-IN', {
-      maximumFractionDigits: 0
-    }).format(amount);
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShowShareToast(true);
+      setTimeout(() => setShowShareToast(false), 3000);
+    } catch (err) {
+      console.error('Failed to copy URL:', err);
+    }
   };
 
-  const { corpus, monthlyExpenseAfterRetirement, inflationAdjustedAmount } = calculateCorpus();
+  const { corpus, monthlyExpenseAfterRetirement } = calculateCorpus();
   const investments = calculateInvestments(corpus);
 
   return (
-    <div className="w-full bg-white py-12">
-      <div className="max-w-6xl mx-auto px-6 pt-20">
-        <h1 className="text-3xl font-bold text-gray-900">Aging Parents Calculator</h1>
-        <p className="text-gray-600 mt-2">Calculate the investment required to secure your parents' future.</p>
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">Aging Parents Calculator</h1>
+        <h2 className="text-lg text-gray-600">Calculate the investment required to secure your parents' future</h2>
+      </div>
 
-        <div className="mt-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left Column Inputs */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Current Age */}
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Basic Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Basic Details</h2>
+              <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Current Age of Your Parent</label>
-                    <p className="text-sm text-gray-600 mt-1">What is your parent's present age?</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <input
-                        type="number"
-                        min={40}
-                        max={100}
-                        value={currentAge}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 40 && value <= 100) {
-                            setCurrentAge(value);
-                          }
-                        }}
-                        className="w-20 px-2 py-1 border rounded"
-                      />
-                      <span className="text-sm text-gray-600">years</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={40}
-                      max={100}
-                      step={1}
-                      value={currentAge}
-                      onChange={(e) => setCurrentAge(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>40 years</span>
-                      <span className="font-semibold">{currentAge} years</span>
-                      <span>100 years</span>
-                    </div>
+                  <label className="block font-medium text-sm mb-1.5">Current Age of Your Parent</label>
+                  <input
+                    type="number"
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={40}
+                    max={100}
+                    value={currentAge}
+                    onChange={(e) => setCurrentAge(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>40 years</span>
+                    <span>100 years</span>
                   </div>
                 </div>
 
-                {/* Planned Support Age */}
                 <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Planned Support Age</label>
-                    <p className="text-sm text-gray-600 mt-1">When do you wish to start supporting?</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <input
-                        type="number"
-                        min={50}
-                        max={100}
-                        value={plannedSupportAge}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 50 && value <= 100) {
-                            setPlannedSupportAge(value);
-                          }
-                        }}
-                        className="w-20 px-2 py-1 border rounded"
-                      />
-                      <span className="text-sm text-gray-600">years</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={50}
-                      max={100}
-                      step={1}
-                      value={plannedSupportAge}
-                      onChange={(e) => setPlannedSupportAge(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>50 years</span>
-                      <span className="font-semibold">{plannedSupportAge} years</span>
-                      <span>100 years</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Monthly Expenditure */}
-                <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Monthly Expenditure</label>
-                    <p className="text-sm text-gray-600 mt-1">Monthly expenses to maintain lifestyle</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <span className="text-sm text-gray-600">₹</span>
-                      <input
-                        type="number"
-                        min={20000}
-                        max={5000000}
-                        value={monthlyExpenditure}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 20000 && value <= 5000000) {
-                            setMonthlyExpenditure(value);
-                          }
-                        }}
-                        className="w-32 px-2 py-1 border rounded"
-                      />
-                    </div>
-                    <input
-                      type="range"
-                      min={20000}
-                      max={5000000}
-                      step={10000}
-                      value={monthlyExpenditure}
-                      onChange={(e) => setMonthlyExpenditure(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>₹20K</span>
-                      <span className="font-semibold">₹{formatCurrency(monthlyExpenditure)}</span>
-                      <span>₹5 Lac</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Expected Inflation */}
-                <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Expected Inflation</label>
-                    <p className="text-sm text-gray-600 mt-1">Your expectation on inflation</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <input
-                        type="number"
-                        min={0}
-                        max={20}
-                        value={expectedInflation}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 0 && value <= 20) {
-                            setExpectedInflation(value);
-                          }
-                        }}
-                        className="w-20 px-2 py-1 border rounded"
-                      />
-                      <span className="text-sm text-gray-600">%</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0}
-                      max={20}
-                      step={1}
-                      value={expectedInflation}
-                      onChange={(e) => setExpectedInflation(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>0%</span>
-                      <span className="font-semibold">{expectedInflation}%</span>
-                      <span>20%</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Expected Returns */}
-                <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Expected Returns</label>
-                    <p className="text-sm text-gray-600 mt-1">Expected returns on investment</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <input
-                        type="number"
-                        min={5}
-                        max={20}
-                        value={expectedReturns}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 5 && value <= 20) {
-                            setExpectedReturns(value);
-                          }
-                        }}
-                        className="w-20 px-2 py-1 border rounded"
-                      />
-                      <span className="text-sm text-gray-600">%</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={5}
-                      max={20}
-                      step={1}
-                      value={expectedReturns}
-                      onChange={(e) => setExpectedReturns(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>5%</span>
-                      <span className="font-semibold">{expectedReturns}%</span>
-                      <span>20%</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Expected Returns Corpus */}
-                <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Expected Returns on Corpus</label>
-                    <p className="text-sm text-gray-600 mt-1">Expected returns on the corpus</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <input
-                        type="number"
-                        min={0}
-                        max={20}
-                        value={expectedReturnsCorpus}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 0 && value <= 20) {
-                            setExpectedReturnsCorpus(value);
-                          }
-                        }}
-                        className="w-20 px-2 py-1 border rounded"
-                      />
-                      <span className="text-sm text-gray-600">%</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={0}
-                      max={20}
-                      step={1}
-                      value={expectedReturnsCorpus}
-                      onChange={(e) => setExpectedReturnsCorpus(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>0%</span>
-                      <span className="font-semibold">{expectedReturnsCorpus}%</span>
-                      <span>20%</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Life Expectancy */}
-                <div>
-                  <div className="mb-2">
-                    <label className="block font-semibold text-gray-800">Life Expectancy</label>
-                    <p className="text-sm text-gray-600 mt-1">Years your parents will live</p>
-                  </div>
-                  <div className="relative mt-6">
-                    <div className="flex items-center gap-4 mb-2">
-                      <input
-                        type="number"
-                        min={70}
-                        max={100}
-                        value={lifeExpectancy}
-                        onChange={(e) => {
-                          const value = Number(e.target.value);
-                          if (value >= 70 && value <= 100) {
-                            setLifeExpectancy(value);
-                          }
-                        }}
-                        className="w-20 px-2 py-1 border rounded"
-                      />
-                      <span className="text-sm text-gray-600">years</span>
-                    </div>
-                    <input
-                      type="range"
-                      min={70}
-                      max={100}
-                      step={1}
-                      value={lifeExpectancy}
-                      onChange={(e) => setLifeExpectancy(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                    />
-                    <div className="flex justify-between text-sm text-gray-600 mt-1">
-                      <span>70 years</span>
-                      <span className="font-semibold">{lifeExpectancy} years</span>
-                      <span>100 years</span>
-                    </div>
+                  <label className="block font-medium text-sm mb-1.5">Planned Support Age</label>
+                  <input
+                    type="number"
+                    value={plannedSupportAge}
+                    onChange={(e) => setPlannedSupportAge(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={50}
+                    max={100}
+                    value={plannedSupportAge}
+                    onChange={(e) => setPlannedSupportAge(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>50 years</span>
+                    <span>100 years</span>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Savings Section */}
-              <div className="mt-8">
-                <div className="flex items-center gap-2 mb-4">
+            {/* Financial Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Financial Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Monthly Expenditure</label>
                   <input
-                    type="checkbox"
-                    checked={showSavings}
-                    onChange={(e) => setShowSavings(e.target.checked)}
-                    className="w-4 h-4"
+                    type="number"
+                    value={monthlyExpenditure}
+                    onChange={(e) => setMonthlyExpenditure(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
                   />
-                  <label className="text-sm font-medium">Do You Have Any Existing Savings?</label>
+                  <input
+                    type="range"
+                    min={20000}
+                    max={500000}
+                    step={5000}
+                    value={monthlyExpenditure}
+                    onChange={(e) => setMonthlyExpenditure(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹20K</span>
+                    <span>₹5L</span>
+                  </div>
                 </div>
 
-                {showSavings && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Current Savings */}
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Inflation (%)</label>
+                  <input
+                    type="number"
+                    value={expectedInflation}
+                    onChange={(e) => setExpectedInflation(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={20}
+                    value={expectedInflation}
+                    onChange={(e) => setExpectedInflation(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0%</span>
+                    <span>20%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Investment Settings */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Investment Settings</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Returns (%)</label>
+                  <input
+                    type="number"
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={5}
+                    max={20}
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>5%</span>
+                    <span>20%</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Life Expectancy</label>
+                  <input
+                    type="number"
+                    value={lifeExpectancy}
+                    onChange={(e) => setLifeExpectancy(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={70}
+                    max={100}
+                    value={lifeExpectancy}
+                    onChange={(e) => setLifeExpectancy(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>70 years</span>
+                    <span>100 years</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Advanced Settings */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
+              >
+                <h2 className="text-lg font-bold text-gray-900">Advanced Settings</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
+                  size={20}
+                />
+              </button>
+              
+              {showAdvanced && (
+                <div className="p-4 border-t">
+                  <div className="grid grid-cols-1 gap-6 mb-6">
                     <div>
-                      <div className="mb-2">
-                        <label className="block font-semibold text-gray-800">Current Savings</label>
-                        <p className="text-sm text-gray-600 mt-1">Your existing savings</p>
+                      <label className="block font-medium text-sm mb-1.5">Expected Returns on Corpus (%)</label>
+                      <input
+                        type="number"
+                        value={expectedReturnsCorpus}
+                        onChange={(e) => setExpectedReturnsCorpus(Number(e.target.value))}
+                        className="w-full p-1.5 border rounded text-sm"
+                      />
+                      <input
+                        type="range"
+                        min={0}
+                        max={20}
+                        value={expectedReturnsCorpus}
+                        onChange={(e) => setExpectedReturnsCorpus(Number(e.target.value))}
+                        className="w-full mt-2"
+                      />
+                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>0%</span>
+                        <span>20%</span>
                       </div>
-                      <div className="relative mt-6">
-                        <div className="flex items-center gap-4 mb-2">
-                          <span className="text-sm text-gray-600">₹</span>
-                          <input
-                            type="number"
-                            min={0}
-                            max={5000000}
-                            value={currentSavings}
-                            onChange={(e) => {
-                              const value = Number(e.target.value);
-                              if (value >= 0 && value <= 5000000) {
-                                setCurrentSavings(value);
-                              }
-                            }}
-                            className="w-32 px-2 py-1 border rounded"
-                          />
-                        </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 mb-4">
+                    <input
+                      type="checkbox"
+                      checked={showSavings}
+                      onChange={(e) => setShowSavings(e.target.checked)}
+                      className="w-4 h-4"
+                    />
+                    <label className="text-sm font-medium">Do You Have Any Existing Savings?</label>
+                  </div>
+
+                  {showSavings && (
+                    <div className="grid grid-cols-2 gap-6">
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Current Savings</label>
+                        <input
+                          type="number"
+                          value={currentSavings}
+                          onChange={(e) => setCurrentSavings(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
                         <input
                           type="range"
                           min={0}
@@ -414,101 +320,96 @@ const AgingParentsCalculator = () => {
                           step={10000}
                           value={currentSavings}
                           onChange={(e) => setCurrentSavings(Number(e.target.value))}
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          className="w-full mt-2"
                         />
-                        <div className="flex justify-between text-sm text-gray-600 mt-1">
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
                           <span>₹0</span>
-                          <span className="font-semibold">₹{currentSavings.toLocaleString()}</span>
                           <span>₹50L</span>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Expected Returns on Savings */}
-                    <div>
-                      <div className="mb-2">
-                        <label className="block font-semibold text-gray-800">Expected Returns on Savings</label>
-                        <p className="text-sm text-gray-600 mt-1">Expected returns on current savings</p>
-                      </div>
-                      <div className="relative mt-6">
-                        <div className="flex items-center gap-4 mb-2">
-                          <input
-                            type="number"
-                            min={0}
-                            max={20}
-                            value={expectedReturnsSavings}
-                            onChange={(e) => {
-                              const value = Number(e.target.value);
-                              if (value >= 0 && value <= 20) {
-                                setExpectedReturnsSavings(value);
-                              }
-                            }}
-                            className="w-20 px-2 py-1 border rounded"
-                          />
-                          <span className="text-sm text-gray-600">%</span>
-                        </div>
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Expected Returns on Savings (%)</label>
+                        <input
+                          type="number"
+                          value={expectedReturnsSavings}
+                          onChange={(e) => setExpectedReturnsSavings(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
                         <input
                           type="range"
                           min={0}
                           max={20}
-                          step={1}
                           value={expectedReturnsSavings}
                           onChange={(e) => setExpectedReturnsSavings(Number(e.target.value))}
-                          className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                          className="w-full mt-2"
                         />
-                        <div className="flex justify-between text-sm text-gray-600 mt-1">
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
                           <span>0%</span>
-                          <span className="font-semibold">{expectedReturnsSavings}%</span>
                           <span>20%</span>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Result Card */}
-            <div className="lg:col-span-1">
-              <div className="space-y-6">
-                <div className="bg-[#113262] text-white p-6 rounded-lg">
-                  <div className="flex justify-between items-center mb-4">
-                    <span className="text-lg">AGING PARENTS CORPUS</span>
-                    <Share className="w-5 h-5 cursor-pointer" />
-                  </div>
-                  
-                  <div className="text-4xl font-bold mb-2">₹{formatCurrency(corpus)}</div>
-                  <div className="text-sm mb-6">Required amount (inflation adjusted)</div>
-
-                  <div className="space-y-2">
-                    <div className="text-sm font-medium mb-2">New Investment Required</div>
-                    <div className="text-sm text-gray-300 mb-1">(By frequency)</div>
-                      
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Monthly</span>
-                      <span>₹{formatCurrency(investments.monthly)}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Yearly</span>
-                      <span>₹{formatCurrency(investments.yearly)}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>One Time</span>
-                      <span>₹{formatCurrency(investments.oneTime)}</span>
-                    </div>
-                    <div className="flex justify-between py-2 border-t border-white/20">
-                      <span>Monthly Expense after retirement</span>
-                      <span>₹{formatCurrency(monthlyExpenseAfterRetirement)}</span>
-                    </div>
-                  </div>
+                  )}
                 </div>
+              )}
+            </div>
+          </div>
 
-                <button className="w-full bg-[#F49611] hover:bg-[#F6A839] text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
-                  Get Started →
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[500px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">AGING PARENTS CORPUS</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
                 </button>
               </div>
             </div>
+
+            <div className="p-4 flex flex-col h-[calc(100%-68px)] justify-between">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold mb-1">
+                    {formatCurrency(corpus)}
+                  </div>
+                  <div className="text-sm text-gray-300">Required Amount (inflation adjusted)</div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Monthly Investment</span>
+                    <span className="font-bold">{formatCurrency(investments.monthly)}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Yearly Investment</span>
+                    <span className="font-bold">{formatCurrency(investments.yearly)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">One Time Investment</span>
+                    <span className="font-bold">{formatCurrency(investments.oneTime)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Monthly Expense (After Retirement)</span>
+                    <span className="font-bold">{formatCurrency(monthlyExpenseAfterRetirement)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Get Started →
+              </button>
+            </div>
           </div>
+
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>

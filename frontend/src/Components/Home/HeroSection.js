@@ -203,14 +203,12 @@ const HeroSection = () => {
               <a href="#" className="flex items-center space-x-2 bg-gradient-to-br from-[#113262] to-[#1C52A0] text-white px-4 py-2 rounded-lg hover:from-[#1C52A0] hover:to-[#113262] transition-all duration-300 shadow-lg hover:shadow-xl">
                 <FaApple className="w-6 h-6" />
                 <div className="flex flex-col items-start">
-                  <span className="text-[10px] opacity-80">Download on the</span>
                   <span className="text-sm font-semibold leading-tight">App Store</span>
                 </div>
               </a>
               <a href="#" className="flex items-center space-x-2 bg-gradient-to-br from-[#113262] to-[#1C52A0] text-white px-4 py-2 rounded-lg hover:from-[#1C52A0] hover:to-[#113262] transition-all duration-300 shadow-lg hover:shadow-xl">
                 <FaGooglePlay className="w-5 h-5" />
                 <div className="flex flex-col items-start">
-                  <span className="text-[10px] opacity-80">GET IT ON</span>
                   <span className="text-sm font-semibold leading-tight">Google Play</span>
                 </div>
               </a>

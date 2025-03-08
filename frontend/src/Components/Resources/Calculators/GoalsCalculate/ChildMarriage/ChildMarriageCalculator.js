@@ -1,32 +1,27 @@
 import React, { useState } from 'react';
-import { Share } from 'lucide-react';
+import { Share, ChevronDown } from 'lucide-react';
+
+const formatCurrency = (amount) => {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(amount);
+};
 
 const ChildMarriageCalculator = () => {
-  const [values, setValues] = useState({
-    weddingCost: 1000000,
-    yearsToWedding: 3,
-    expectedReturns: 12,
-    expectedInflation: 6,
-    showSavings: false,
-    currentSavings: 0,
-    expectedReturnsSavings: 12,
-    savingsGrowth: 9
-  });
-
-  const handleChange = (key, value) => {
-    console.log('Changing:', key, 'to:', value);
-    console.log('Previous values:', values);
-    setValues(prev => {
-      const newValues = { ...prev, [key]: value };
-      console.log('New values:', newValues);
-      return newValues;
-    });
-  };
+  const [weddingCost, setWeddingCost] = useState(1000000);
+  const [yearsToWedding, setYearsToWedding] = useState(3);
+  const [expectedReturns, setExpectedReturns] = useState(12);
+  const [expectedInflation, setExpectedInflation] = useState(6);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showShareToast, setShowShareToast] = useState(false);
+  const [showSavings, setShowSavings] = useState(false);
+  const [currentSavings, setCurrentSavings] = useState(0);
+  const [expectedReturnsSavings, setExpectedReturnsSavings] = useState(12);
+  const [savingsGrowth, setSavingsGrowth] = useState(9);
 
   const calculateWeddingFund = () => {
-    const { weddingCost, yearsToWedding, expectedReturns, expectedInflation, 
-            showSavings, currentSavings, expectedReturnsSavings, savingsGrowth } = values;
-            
     // Calculate inflation adjusted wedding cost (with 10x multiplier for total wedding expenses)
     const inflatedWeddingCost = weddingCost * Math.pow((1 + expectedInflation/100), yearsToWedding) * 10;
     
@@ -38,20 +33,10 @@ const ChildMarriageCalculator = () => {
       
       // Apply compound interest with total rate
       futureValueSavings = currentSavings * Math.pow(1 + totalRate, yearsToWedding);
-      
-      console.log('Savings calculation:', {
-        currentSavings,
-        savingsGrowth,
-        expectedReturnsSavings,
-        totalRate,
-        yearsToWedding,
-        futureValueSavings
-      });
     }
     
     // Calculate required amount after considering savings
     const requiredAmount = Math.max(0, inflatedWeddingCost - futureValueSavings);
-    console.log('Required amount:', requiredAmount);
     
     // Calculate monthly investment
     const monthlyRate = expectedReturns / (12 * 100);
@@ -62,137 +47,290 @@ const ChildMarriageCalculator = () => {
     const monthlyInvestment = requiredAmount / 
       ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
     
-    const result = {
+    return {
       inflationAdjustedAmount: Math.round(inflatedWeddingCost),
       monthly: Math.round(monthlyInvestment),
       yearly: Math.round(monthlyInvestment * 12),
       oneTime: Math.round(requiredAmount / Math.pow(1 + annualRate, yearsToWedding))
     };
-    
-    console.log('Final result:', result);
-    return result;
   };
 
-  const formatCurrency = amount => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(amount);
-
-  const InputField = ({ label, value, onChange, min, max, unit, step = 1 }) => (
-    <div className="mb-3">
-      <label className="block font-semibold text-gray-800 mb-1 text-sm">{label}</label>
-      <div className="flex gap-2">
-        <input 
-          type="number" 
-          value={value} 
-          onChange={e => {
-            const val = parseFloat(e.target.value);
-            if (!isNaN(val) && val >= min && val <= max) {
-              onChange(val);
-            }
-          }} 
-          className="w-24 px-2 py-1 border rounded text-sm" 
-        />
-        <span className="text-sm text-gray-600">{unit}</span>
-      </div>
-      <input 
-        type="range" 
-        min={min} 
-        max={max} 
-        step={step} 
-        value={value}
-        onChange={e => {
-          const val = parseFloat(e.target.value);
-          if (!isNaN(val) && val >= min && val <= max) {
-            onChange(val);
-          }
-        }}
-        className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer mt-1" 
-      />
-    </div>
-  );
+  const handleShare = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setShowShareToast(true);
+      setTimeout(() => setShowShareToast(false), 3000);
+    } catch (err) {
+      console.error('Failed to copy URL:', err);
+    }
+  };
 
   const results = calculateWeddingFund();
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
-      <div className="mb-4 pt-36">
-        <h1 className="text-2xl font-bold text-gray-900">Child Marriage Plan Calculator</h1>
-        <p className="text-sm text-gray-600 mt-1">Plan your investments for your child's wedding</p>
+    <div className="calculator-container pt-24">
+      <div className="calculator-header text-center mb-8">
+        <h1 className="text-2xl font-semibold text-[#113262] mb-2">Child Marriage Calculator</h1>
+        <h2 className="text-lg text-gray-600">Plan your investments for your child's wedding expenses</h2>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        <div className="lg:col-span-2 space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            <InputField label="Wedding Cost (Today)" value={values.weddingCost}
-              onChange={v => handleChange('weddingCost', v)} min={50000} max={10000000}
-              unit="₹" step={10000} />
-            <InputField label="Years to Wedding" value={values.yearsToWedding}
-              onChange={v => handleChange('yearsToWedding', v)} min={1} max={30}
-              unit="years" />
-            <InputField label="Expected Returns" value={values.expectedReturns}
-              onChange={v => handleChange('expectedReturns', v)} min={0} max={30}
-              unit="%" />
-            <InputField label="Expected Inflation" value={values.expectedInflation}
-              onChange={v => handleChange('expectedInflation', v)} min={0} max={20}
-              unit="%" />
-          </div>
+      <div className="max-w-5xl mx-auto p-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Sections */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Cost Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Wedding Details</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Wedding Cost (Today)</label>
+                  <input
+                    type="number"
+                    value={weddingCost}
+                    onChange={(e) => setWeddingCost(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={50000}
+                    max={10000000}
+                    step={10000}
+                    value={weddingCost}
+                    onChange={(e) => setWeddingCost(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>₹50K</span>
+                    <span>₹1Cr</span>
+                  </div>
+                </div>
 
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <input type="checkbox" id="haveSavings" checked={values.showSavings}
-                onChange={e => handleChange('showSavings', e.target.checked)}
-                className="w-3.5 h-3.5 text-green-600" />
-              <label htmlFor="haveSavings" className="text-sm font-semibold text-gray-800">
-                I have existing savings
-              </label>
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Years to Wedding</label>
+                  <input
+                    type="number"
+                    value={yearsToWedding}
+                    onChange={(e) => setYearsToWedding(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={1}
+                    max={30}
+                    value={yearsToWedding}
+                    onChange={(e) => setYearsToWedding(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>1 year</span>
+                    <span>30 years</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {values.showSavings && (
-              <div className="grid grid-cols-2 gap-3">
-                <InputField label="Current Savings" value={values.currentSavings}
-                  onChange={v => handleChange('currentSavings', v)} min={0}
-                  max={values.weddingCost} unit="₹" step={10000} />
-                <InputField label="Expected Returns on Savings" value={values.expectedReturnsSavings}
-                  onChange={v => handleChange('expectedReturnsSavings', v)} min={0}
-                  max={30} unit="%" />
-                <InputField label="Savings Growth" value={values.savingsGrowth}
-                  onChange={v => {
-                    if (v >= 0 && v <= 30) handleChange('savingsGrowth', v);
-                  }} min={0}
-                  max={30} unit="%" />
+            {/* Financial Details */}
+            <div className="bg-white rounded-lg shadow p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Financial Assumptions</h2>
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Returns (%)</label>
+                  <input
+                    type="number"
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={30}
+                    value={expectedReturns}
+                    onChange={(e) => setExpectedReturns(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0%</span>
+                    <span>30%</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-medium text-sm mb-1.5">Expected Inflation (%)</label>
+                  <input
+                    type="number"
+                    value={expectedInflation}
+                    onChange={(e) => setExpectedInflation(Number(e.target.value))}
+                    className="w-full p-1.5 border rounded text-sm"
+                  />
+                  <input
+                    type="range"
+                    min={0}
+                    max={20}
+                    value={expectedInflation}
+                    onChange={(e) => setExpectedInflation(Number(e.target.value))}
+                    className="w-full mt-2"
+                  />
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>0%</span>
+                    <span>20%</span>
+                  </div>
+                </div>
               </div>
-            )}
-          </div>
-        </div>
+            </div>
 
-        <div className="bg-[#113262] text-white p-4 rounded-lg">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-bold">Your Child's Wedding</h3>
-            <button className="p-1.5 hover:bg-[#1e3a8a] rounded">
-              <Share size={18} />
-            </button>
+            {/* Advanced Settings */}
+            <div className="bg-white rounded-lg shadow">
+              <button
+                onClick={() => setShowAdvanced(!showAdvanced)}
+                className="w-full p-4 flex justify-between items-center hover:bg-gray-50"
+              >
+                <h2 className="text-lg font-bold text-gray-900">Advanced Settings</h2>
+                <ChevronDown 
+                  className={`transform transition-transform ${showAdvanced ? 'rotate-180' : ''}`}
+                  size={20}
+                />
+              </button>
+              
+              {showAdvanced && (
+                <div className="p-4 border-t">
+                  <div className="flex items-center gap-2 mb-4">
+                    <input
+                      type="checkbox"
+                      id="haveSavings"
+                      checked={showSavings}
+                      onChange={(e) => setShowSavings(e.target.checked)}
+                      className="w-4 h-4"
+                    />
+                    <label htmlFor="haveSavings" className="text-sm font-medium">
+                      I have existing savings
+                    </label>
+                  </div>
+
+                  {showSavings && (
+                    <div className="grid grid-cols-2 gap-6">
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Current Savings</label>
+                        <input
+                          type="number"
+                          value={currentSavings}
+                          onChange={(e) => setCurrentSavings(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
+                        <input
+                          type="range"
+                          min={0}
+                          max={weddingCost}
+                          step={10000}
+                          value={currentSavings}
+                          onChange={(e) => setCurrentSavings(Number(e.target.value))}
+                          className="w-full mt-2"
+                        />
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                          <span>₹0</span>
+                          <span>{formatCurrency(weddingCost)}</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Expected Returns on Savings (%)</label>
+                        <input
+                          type="number"
+                          value={expectedReturnsSavings}
+                          onChange={(e) => setExpectedReturnsSavings(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
+                        <input
+                          type="range"
+                          min={0}
+                          max={30}
+                          value={expectedReturnsSavings}
+                          onChange={(e) => setExpectedReturnsSavings(Number(e.target.value))}
+                          className="w-full mt-2"
+                        />
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                          <span>0%</span>
+                          <span>30%</span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block font-medium text-sm mb-1.5">Savings Growth (%)</label>
+                        <input
+                          type="number"
+                          value={savingsGrowth}
+                          onChange={(e) => setSavingsGrowth(Number(e.target.value))}
+                          className="w-full p-1.5 border rounded text-sm"
+                        />
+                        <input
+                          type="range"
+                          min={0}
+                          max={30}
+                          value={savingsGrowth}
+                          onChange={(e) => setSavingsGrowth(Number(e.target.value))}
+                          className="w-full mt-2"
+                        />
+                        <div className="flex justify-between text-xs text-gray-500 mt-1">
+                          <span>0%</span>
+                          <span>30%</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="mb-6">
-            <div className="text-3xl font-bold mb-1">₹{formatCurrency(results.inflationAdjustedAmount)}</div>
-            <div className="text-sm text-gray-300">Required amount (inflation adjusted)</div>
-          </div>
-
-          <div className="space-y-3">
-            <h4 className="text-sm font-medium text-gray-300">Investment Required</h4>
-            {[
-              ['Monthly', results.monthly],
-              ['Yearly', results.yearly],
-              ['One Time', results.oneTime]
-            ].map(([label, value]) => (
-              <div key={label} className="flex justify-between py-1.5 border-t border-white/20">
-                <span className="text-sm">{label}</span>
-                <span className="font-bold">₹{formatCurrency(value)}</span>
+          {/* Results Section */}
+          <div className="bg-[#113262] text-white rounded-lg h-[500px] sticky top-6">
+            <div className="p-4 border-b border-white/20">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xl font-bold">Your Child's Wedding</h3>
+                <button onClick={handleShare} className="p-1 hover:bg-blue-700 rounded">
+                  <Share size={18} />
+                </button>
               </div>
-            ))}
+            </div>
+
+            <div className="p-4 flex flex-col h-[calc(100%-68px)] justify-between">
+              <div className="space-y-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold mb-1">
+                    {formatCurrency(results.inflationAdjustedAmount)}
+                  </div>
+                  <div className="text-sm text-gray-300">Required amount (inflation adjusted)</div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Monthly Investment</span>
+                    <span className="font-bold">{formatCurrency(results.monthly)}</span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">Yearly Investment</span>
+                    <span className="font-bold">{formatCurrency(results.yearly)}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-2 border-t border-white/20">
+                    <span className="text-sm">One Time Investment</span>
+                    <span className="font-bold">{formatCurrency(results.oneTime)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <button className="w-full bg-orange-400 text-white py-2 rounded-lg mt-4 hover:bg-orange-500 transition-colors text-sm">
+                Get Started →
+              </button>
+            </div>
           </div>
 
-          <button className="w-full bg-[#fb923c] text-white py-2 rounded-lg mt-6 text-sm hover:bg-[#f97316] transition-colors">
-            Get Started →
-          </button>
+          {showShareToast && (
+            <div className="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded shadow-lg">
+              Link copied!
+            </div>
+          )}
         </div>
       </div>
     </div>

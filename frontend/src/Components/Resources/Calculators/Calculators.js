@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Header from '../../Header';
 import Footer from '../../Footer';
 import CalculatorCard from './CalculatorCard';
@@ -9,6 +9,7 @@ import { Search } from 'lucide-react';
 const Calculators = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { section } = useParams();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeSection, setActiveSection] = useState(null);
   const sectionRefs = useRef({});
@@ -17,40 +18,6 @@ const Calculators = () => {
   const debugLog = (message, data) => {
     console.log(`[Calculators Navigation Debug] ${message}`, data || '');
   };
-
-  // Comprehensive hash extraction and mapping
-  const extractAndNormalizeHash = useCallback(() => {
-    debugLog('Extracting hash from location', { 
-      pathname: location.pathname, 
-      hash: location.hash, 
-      search: location.search 
-    });
-
-    let rawHash = location.hash || window.location.hash;
-    
-    // Remove leading # and any preceding path
-    rawHash = rawHash.replace(/^#\/resources\/calculators#/, '');
-    rawHash = rawHash.replace(/^#/, '');
-    
-    // Mapping to handle potential mismatches
-    const hashMap = {
-      'personal-fin': 'personal-finance-calculators',
-      'investment': 'investment-calculators',
-      'family': 'family-calculators',
-      'retirement': 'retirement-calculators',
-      'educationcareer': 'education-career-calculators',
-      'goals': 'goal-planning-calculators',
-      'tax': 'tax-calculators',
-      'incomeflow': 'income-cashflow-calculators',
-      'trading': 'trading-calculators',
-      'loan': 'loan-calculators',
-      'miscellaneous': 'miscellaneous-calculators'
-    };
-
-    const normalizedHash = hashMap[rawHash.toLowerCase()] || rawHash;
-    debugLog('Normalized hash', { rawHash, normalizedHash });
-    return normalizedHash;
-  }, [location]);
 
   // Scroll to section function with enhanced logging and error handling
   const scrollToSection = useCallback((sectionId) => {
@@ -88,58 +55,58 @@ const Calculators = () => {
 
   // Navigation effect
   useEffect(() => {
-    // Prevent default navigation behavior
-    const handleLinkClick = (event) => {
-      const href = event.target.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        event.preventDefault();
-        event.stopPropagation();
+    debugLog('Navigation effect triggered', { section, hash: location.hash });
 
-        // Update URL without page reload
-        navigate(href, { replace: true });
-
-        // Extract and scroll to section
-        const sectionId = href.replace(/^#/, '');
-        scrollToSection(sectionId);
+    // Function to determine target section
+    const getTargetSection = () => {
+      // First try URL parameter
+      if (section) {
+        debugLog('Using section from URL params', { section });
+        return section;
       }
+      // Then try hash (for backward compatibility)
+      if (location.hash) {
+        const hashSection = location.hash.replace('#', '');
+        debugLog('Using section from hash', { hashSection });
+        return hashSection;
+      }
+      // Default to investment section if no section specified
+      debugLog('Using default section');
+      return 'investment-calculators';
     };
 
-    // Handle hash changes
-    const handleHashChange = (event) => {
-      debugLog('Hash change event', { 
-        oldURL: event.oldURL, 
-        newURL: event.newURL 
-      });
-
-      // Prevent default browser navigation
-      event.preventDefault();
-      
-      const normalizedHash = extractAndNormalizeHash();
-      if (normalizedHash) {
-        scrollToSection(normalizedHash);
+    // Handle navigation with delay to ensure refs are ready
+    const handleNavigation = () => {
+      const targetSection = getTargetSection();
+      if (targetSection) {
+        // Small delay to ensure DOM is ready
+        setTimeout(() => {
+          debugLog('Navigating to section', { targetSection });
+          scrollToSection(targetSection);
+        }, 100);
       }
     };
-
-    // Add event listeners
-    document.addEventListener('click', handleLinkClick, true);
-    window.addEventListener('hashchange', handleHashChange, { passive: false });
 
     // Initial navigation
-    const initialHash = extractAndNormalizeHash();
-    if (initialHash) {
-      // Use microtask to ensure refs are populated
-      Promise.resolve().then(() => {
-        debugLog('Performing initial scroll', { initialHash });
-        scrollToSection(initialHash);
-      });
-    }
+    handleNavigation();
 
-    // Cleanup
-    return () => {
-      document.removeEventListener('click', handleLinkClick, true);
-      window.removeEventListener('hashchange', handleHashChange);
-    };
-  }, [extractAndNormalizeHash, scrollToSection, navigate]);
+    // Listen for hash changes (for backward compatibility)
+    window.addEventListener('hashchange', handleNavigation);
+    return () => window.removeEventListener('hashchange', handleNavigation);
+  }, [location, section, scrollToSection]);
+
+  // Function to handle section navigation
+  const handleSectionClick = useCallback((sectionId) => {
+    debugLog('Section clicked', { sectionId });
+    
+    // Update URL to reflect new section
+    navigate(`/resources/calculators/${sectionId}`);
+    
+    // Scroll to section with a small delay
+    setTimeout(() => {
+      scrollToSection(sectionId);
+    }, 50);
+  }, [navigate, scrollToSection]);
 
   const filteredCalculators = calculatorData.filter(calculator => {
     const searchTerm = searchQuery.toLowerCase();
@@ -222,6 +189,20 @@ const Calculators = () => {
                   category === 'Miscellaneous' ? 'miscellaneous-calculators' : 
                   'investment-calculators'
                 }
+                onClick={() => handleSectionClick(
+                  category === 'personal-fin' ? 'personal-finance-calculators' : 
+                  category === 'Family' ? 'family-calculators' : 
+                  category === 'Retirement' ? 'retirement-calculators' : 
+                  category === 'EducationCareer' ? 'education-career-calculators' : 
+                  category === 'Goals' ? 'goal-planning-calculators' : 
+                  category === 'Tax' ? 'tax-calculators' : 
+                  category === 'Incomeflow' ? 'income-cashflow-calculators' : 
+                  category === 'Trading' ? 'trading-calculators' : 
+                  category === 'Loan' ? 'loan-calculators' : 
+                  category === 'Miscellaneous' ? 'miscellaneous-calculators' : 
+                  'investment-calculators'
+                )}
+                style={{ cursor: 'pointer' }}
                 className={`text-2xl font-semibold ${
                   activeSection === 
                   (category === 'personal-fin' ? 'personal-finance-calculators' : 
@@ -236,7 +217,7 @@ const Calculators = () => {
                    category === 'Miscellaneous' ? 'miscellaneous-calculators' : 
                    'investment-calculators')
                   ? 'text-[#F49611]' : 'text-[#113262]'
-                }`}
+                } hover:text-[#F49611] transition-colors duration-300`}
               >
                 {category === 'personal-fin' ? 'Personal Finance Calculators' : 
                  category === 'Family' ? 'Children & Family Calculators' : 

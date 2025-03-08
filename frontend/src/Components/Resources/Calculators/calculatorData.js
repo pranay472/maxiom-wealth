@@ -529,12 +529,12 @@ export const calculatorData = [
     path: '/resources/calculators/pension'
   },
   {
-    id: 'post-retirement-expenses',
+    id: 'postretirementexpenses',
     title: 'Post-Retirement Expenses Calculator',
     description: 'Plan retirement expenses with this calculator.',
     Icon: PiggyBank,
     category: 'Retirement',
-    path: '/resources/calculators/post-retirement-expenses'
+    path: '/resources/calculators/postretirementexpenses'
   },
   {
     id: 'reverse-mortgage',

@@ -39,13 +39,13 @@ const RetirementTypeCard = ({ plan }) => {
   const handleExplore = () => {
     switch(id) {
       case 'traditional-retirement':
-        navigate('/financial-advisory/retirement-planning/traditional');
+        navigate('/services/retirement-planning-services');
         break;
       case 'post-retirement':
-        navigate('/financial-advisory/retirement-planning/post');
+        navigate('/services/post-retirement-solutions');
         break;
       case 'fire':
-        navigate('/financial-advisory/retirement-planning/fire');
+        navigate('/services/financial-independence-early-retirement-planning-fire');
         break;
       default:
         break;

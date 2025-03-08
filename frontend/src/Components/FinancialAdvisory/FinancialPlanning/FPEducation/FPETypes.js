@@ -11,7 +11,7 @@ const educationTypes = [
     timeframe: '3-5 Years',
     riskProfile: 'Moderate Aggressive',
     minInvestment: '₹35L',
-    path: '/financial-advisory/education-planning/ug-abroad'
+    path: '/services/financial-planning-for-education-undergraduate-education-abroad'
   },
   {
     id: 'ug-india',
@@ -21,7 +21,7 @@ const educationTypes = [
     timeframe: '2-4 Years',
     riskProfile: 'Moderate',
     minInvestment: '₹15L',
-    path: '/financial-advisory/education-planning/ug-india'
+    path: '/services/financial-planning-for-education-undergraduate-education-in-india'
   },
   {
     id: 'masters-abroad',
@@ -31,7 +31,7 @@ const educationTypes = [
     timeframe: '2-3 Years',
     riskProfile: 'Moderate Balanced',
     minInvestment: '₹45L',
-    path: '/financial-advisory/education-planning/masters-abroad'
+    path: '/services/financial-planning-for-education-masters-education-abroad'
   },
   {
     id: 'child-overseas',
@@ -41,7 +41,7 @@ const educationTypes = [
     timeframe: '5-10 Years',
     riskProfile: 'Moderate Conservative',
     minInvestment: '₹50L',
-    path: '/financial-advisory/education-planning/child-overseas'
+    path: '/services/financial-planning-for-leducation-tips-on-sending-money-to-child-overseas'
   }
 ];
 

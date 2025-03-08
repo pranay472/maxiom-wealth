@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import Home from './Components/Home/Home';
 import Blogs from './Components/Blogs/Blogs';
@@ -63,6 +63,13 @@ import MarriageLoan from './Components/Resources/Calculators/LoansCalculate/Marr
 import RetirementPlan from './Components/Resources/Calculators/RetirementCalculate/RetirementPlan/RetirementPlan';
 import Superannuation from './Components/Resources/Calculators/RetirementCalculate/Superannuation/Superannuation';
 import FIRE from './Components/Resources/Calculators/RetirementCalculate/FIRE/FIRE';
+import GratuityEstimator from './Components/Resources/Calculators/RetirementCalculate/GratuityEstimator/GratuityEstimator';
+import StudentLoan from './Components/Resources/Calculators/CareerCalculate/StudentLoan/StudentLoan';
+import CareerGrowth from './Components/Resources/Calculators/CareerCalculate/CareerGrowth/CareerGrowth';
+import CapitalGains from './Components/Resources/Calculators/TaxCalculate/CapitalGains/CapitalGains';
+import HRA from './Components/Resources/Calculators/TaxCalculate/HRA/HRA';
+import GST from './Components/Resources/Calculators/TaxCalculate/GST/GST';
+import Freelancer from './Components/Resources/Calculators/TaxCalculate/Freelancer/Freelancer';
 import TravelBudget from './Components/Resources/Calculators/GoalsCalculate/TravelBudget/TravelBudget';
 import WeddingBudget from './Components/Resources/Calculators/GoalsCalculate/WeddingBudget/WeddingBudget';
 import HomeRenovation from './Components/Resources/Calculators/GoalsCalculate/HomeRenovation/HomeRenovation';
@@ -82,6 +89,11 @@ import RetirementPlanning from './Components/FinancialAdvisory/RetirementPlannin
 import TRetirementPlanning from './Components/FinancialAdvisory/RetirementPlanning/TRetirementPlanning/TRetirementPlanning';
 import PostRetirement from './Components/FinancialAdvisory/RetirementPlanning/PostRetirement/PostRetirement';
 import FIREPlanning from './Components/FinancialAdvisory/RetirementPlanning/FIREPlanning/FIREPlanning';
+import Pension from './Components/Resources/Calculators/RetirementCalculate/Pension/Pension';
+import PostRetirementExpenses from './Components/Resources/Calculators/RetirementCalculate/PostRetirement/PostRetirementExpenses';
+import ReverseMortagage from './Components/Resources/Calculators/RetirementCalculate/ReverseMortagage/ReverseMortagage';
+import NPSReinvestment from './Components/Resources/Calculators/RetirementCalculate/NPSReinvestment/NPSReinvestment';
+import NPS from './Components/Resources/Calculators/RetirementCalculate/NPS/NPS';
 import CorporateFinancialWellness from './Components/FinancialAdvisory/CorporateFinancialWellness/CorporateFinancialWellness';
 import CarPurchase from './Components/FinancialAdvisory/GoalBasedInvestments/CarPurchase/CarPurchase';
 import HomeLoanGoal from './Components/FinancialAdvisory/GoalBasedInvestments/HomeLoan/HomeLoanGoal';
@@ -136,9 +148,11 @@ function App() {
       <div className="App">
         <ScrollToTop />
         <TransitionHandler>
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/why-maxiom" element={<WhyMaxiom />} />
+            <Route path="/aboutus" element={<WhyMaxiom />} />
+            <Route path="/aboutus/:section" element={<WhyMaxiom />} />
             <Route path="/wealth-services/alternate-investments" element={<AlternateInvestments />} />
             <Route path="/wealth-services/portfolio-management" element={<PMS />}/>
             <Route path="/wealth-services/tax-planning" element={<TaxPlanning />} />
@@ -149,47 +163,48 @@ function App() {
             <Route path="/financial-advisory/goal-based-investments" element={<GoalBasedInvestments />} />
             <Route path="/financial-advisory/financial-planning" element={<FinancialPlanning />} />
             <Route path="/financial-advisory/retirement-planning" element={<RetirementPlanning />} />
-            <Route path="/financial-advisory/retirement-planning/traditional" element={<TRetirementPlanning />} />
-            <Route path="/financial-advisory/retirement-planning/post" element={<PostRetirement />} />
-            <Route path="/financial-advisory/retirement-planning/fire" element={<FIREPlanning />} />
-            <Route path="/financial-advisory/corporate-financial-wellness" element={<CorporateFinancialWellness />} />
-            <Route path="/financial-advisory/goal-based-investments/car-purchase" element={<CarPurchase />} />
-            <Route path="/financial-advisory/goal-based-investments/home-loan" element={<HomeLoanGoal />} />
-            <Route path="/financial-advisory/goal-based-investments/dream-home" element={<DreamHomeGoal />} />
-            <Route path="/financial-advisory/goal-based-investments/business" element={<BusinessStartGoal />} />
-            <Route path="/financial-advisory/goal-based-investments/gold-loan" element={<GoldLoan />} />
-            <Route path="/financial-advisory/education-planning/ug-india" element={<UGIndia />} />
-            <Route path="/financial-advisory/education-planning/ug-abroad" element={<UGAbroad />} />
-            <Route path="/financial-advisory/education-planning/child-overseas" element={<MToChild />} />
-            <Route path="/financial-advisory/education-planning/masters-abroad" element={<PGMasters />} />
-            <Route path="/financial-advisory/professionals/sportspersons" element={<SportsP />} />
-            <Route path="/financial-advisory/professionals/retired-bank-employees" element={<RBEmp />} />
-            <Route path="/financial-advisory/professionals/doctors" element={<Doctors />} />
-            <Route path="/financial-advisory/professionals/entrepreneurs" element={<EntreP />} />
-            <Route path="/financial-advisory/life-planning/child-birth" element={<ChildBirth />} />
-            <Route path="/financial-advisory/life-planning/child-marriage" element={<ChildMar />} />
-            <Route path="/financial-advisory/life-planning/sudden-death" element={<DeathIncomeEarner />} />
-            <Route path="/financial-advisory/life-planning/disability" element={<Disability />} />
-            <Route path="/financial-advisory/life-planning/divorce" element={<Divorce />} />
-            <Route path="/financial-advisory/life-planning/single-parents" element={<SingleParent />} />
-            <Route path="/financial-advisory/life-planning/single-mothers" element={<SingleMother />} />
-            <Route path="/financial-advisory/life-planning/return-to-india" element={<RetIndia />} />
-            <Route path="/financial-advisory/life-planning/migration-from-india" element={<MigIndia />} />
-            <Route path="/financial-advisory/life-planning/health-emergency" element={<HealthEme />} />
+            <Route path="/services/retirement-planning-services" element={<TRetirementPlanning />} />
+            <Route path="/services/post-retirement-solutions" element={<PostRetirement />} />
+            <Route path="/services/financial-independence-early-retirement-planning-fire" element={<FIREPlanning />} />
+            <Route path="/services/finanacial-wellness-solutions" element={<CorporateFinancialWellness />} />
+            <Route path="/services/financial-planning-for-specific-goals-car-purchase" element={<CarPurchase />} />
+            <Route path="/services/financial-planning-for-life-situations-home-loan-prepayment" element={<HomeLoanGoal />} />
+            <Route path="/services/financial-planning-for-specific-goals-dream-home-purchase" element={<DreamHomeGoal />} />
+            <Route path="/services/invest-now-starting-a-business" element={<BusinessStartGoal />} />
+            <Route path="/services/financial-planning-for-specific-goals-foreclosure-of-a-gold-loan" element={<GoldLoan />} />
+            <Route path="/services/financial-planning-for-education-undergraduate-education-in-india" element={<UGIndia />} />
+            <Route path="/services/financial-planning-for-education-undergraduate-education-abroad" element={<UGAbroad />} />
+            <Route path="/services/financial-planning-for-leducation-tips-on-sending-money-to-child-overseas" element={<MToChild />} />
+            <Route path="/services/financial-planning-for-education-masters-education-abroad" element={<PGMasters />} />
+            <Route path="/services/customised-financial-planning-for-professionals-sports-persons" element={<SportsP />} />
+            <Route path="/services/customised-financial-planning-for-professionals-retired-bank-employees" element={<RBEmp />} />
+            <Route path="/services/customised-financial-planning-for-professionals-doctors" element={<Doctors />} />
+            <Route path="/services/customised-financial-planning-for-professionals-enterpreneurs" element={<EntreP />} />
+            <Route path="/services/financial-planning-for-life-situations-child-birth" element={<ChildBirth />} />
+            <Route path="/services/financial-planning-for-life-situations-childs-marriage" element={<ChildMar />} />
+            <Route path="/services/financial-planning-in-case-of-sudden-death-of-income-earner" element={<DeathIncomeEarner />} />
+            <Route path="/services/financial-planning-for-life-situations-disability" element={<Disability />} />
+            <Route path="/services/financial-planning-for-life-situations-divorce" element={<Divorce />} />
+            <Route path="/services/financial-planning-for-single-parent" element={<SingleParent />} />
+            <Route path="/services/financial-planning-for-life-situations-single-mothers" element={<SingleMother />} />
+            <Route path="/services/financial-planning-for-those-returning-to-india" element={<RetIndia />} />
+            <Route path="/services/financial-planning-for-life-situations-those-emigrating-from-india" element={<MigIndia />} />
+            <Route path="/services/financial-planning-for-life-situations-health-emergency" element={<HealthEme />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blog/blog-list" element={<Blogs />} />
             <Route path="/mutual-funds-pricing" element={<MutualFundsPricing />} />
             <Route path="/stocks" element={<Stocks />} />
             <Route path="/stocks-pricing" element={<StocksPricing />} />
             <Route path="/pms-pricing" element={<PMSPricing />} />
             <Route path="/pms" element={<PMS />} />
-            <Route path="/pms/jewel" element={<JEWELTop350 />} />
-            <Route path="/pms/spark" element={<Spark351 />} />
-            <Route path="/pms/gem" element={<GEM />} />
+            <Route path="/jewel-pms-large-midcap-focused" element={<JEWELTop350 />} />
+            <Route path="/spark-pms-smallcap-5000-cr-cos" element={<Spark351 />} />
+            <Route path="/gem-pms-quality-momentum" element={<GEM />} />
             <Route path="/pms/emerald-equity" element={<EMERALDE />} />
             <Route path="/pms/emerald-non-equity" element={<EMERALDNE />} />
             <Route path="/pms/diamond" element={<Diamond />} />
             <Route path="/resources/calculators" element={<Calculators />} />
+            <Route path="/resources/calculators/:section" element={<Calculators />} />
             <Route path="/resources/calculators/cagr" element={<CAGR />} />
             <Route path="/resources/calculators/compound-interest" element={<CompoundInterest />} />
             <Route path="/resources/calculators/fd" element={<FD />} />
@@ -238,6 +253,18 @@ function App() {
             <Route path="/resources/calculators/retirement-plan" element={<RetirementPlan />} />
             <Route path="/resources/calculators/superannuation" element={<Superannuation />} />
             <Route path="/resources/calculators/fire" element={<FIRE />} />
+            <Route path="/resources/calculators/gratuity" element={<GratuityEstimator />} />
+            <Route path="/resources/calculators/pension" element={<Pension />} />
+            <Route path="/resources/calculators/postretirement" element={<PostRetirementExpenses />} />
+            <Route path="/resources/calculators/reverse-mortgage" element={<ReverseMortagage />} />
+            <Route path="/resources/calculators/nps-reinvestment" element={<NPSReinvestment />} />
+            <Route path="/resources/calculators/nps" element={<NPS />} />
+            <Route path="/resources/calculators/student-loan" element={<StudentLoan />} />
+            <Route path="/resources/calculators/career-growth-planner" element={<CareerGrowth />} />
+            <Route path="/resources/calculators/capital-gains-tax" element={<CapitalGains />} />
+            <Route path="/resources/calculators/hra-exemption" element={<HRA />} />
+            <Route path="/resources/calculators/gst" element={<GST />} />
+            <Route path="/resources/calculators/freelancer-income-tax" element={<Freelancer />} />
             <Route path="/resources/calculators/travel-budget" element={<TravelBudget />} />
             <Route path="/resources/calculators/wedding-budget" element={<WeddingBudget />} />
             <Route path="/resources/calculators/home-renovation-budget" element={<HomeRenovation />} />
