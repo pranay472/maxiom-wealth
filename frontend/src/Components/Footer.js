@@ -17,7 +17,7 @@ const Footer = () => {
     <footer className="bg-[#113262] text-neutral-50">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <FAQ/>
+        <FAQ />
         {/* Download Section */}
         <div className="mb-12 border-b border-primary-300/20 pb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -76,7 +76,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Financial Advisory Services</h3>
             <ul className="space-y-3">
-            <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Financial Planning</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Financial Planning</a></li>
               <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Retirement Planning</a></li>
               <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Corporate Financial Wellness</a></li>
               <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Goal-Based Planning</a></li>
@@ -118,16 +118,16 @@ const Footer = () => {
               <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">EMERALDE E</a></li>
             </ul>
           </div>
-          {/* Financial Planning */}
+          {/* PMS */}
           <div>
             <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
             <ul className="space-y-3">
-            <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">SPARK</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">SPARK</a></li>
               <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">EMERALD NE</a></li>
             </ul>
           </div>
 
-          {/* Mutual Funds */}
+          {/* PMS */}
           <div>
             <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
             <ul className="space-y-3">
@@ -136,7 +136,125 @@ const Footer = () => {
             </ul>
           </div>
         </div>
+        {/* 3rd Main Links Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Portfolio Management */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Financial Planning</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">UG Education Abroad</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">UG Education in India</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Masters Education Abroad</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Helping Child Overseas</a></li>
+            </ul>
+          </div>
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Sports Persons</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Doctors</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Retired Bank Employees</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Entrepreneurs</a></li>
+            </ul>
+          </div>
 
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Child Birth</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Child Marriage</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Health Emergency</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Single Mothers</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Single Parents</a></li>
+            </ul>
+          </div>
+
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Disability</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Sudden Death of Income Earners</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Divorce</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Migrating from india</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors"></a>Returning to india</li>
+
+            </ul>
+          </div>
+        </div>
+
+        {/* 4th Main Links Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Portfolio Management */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Retirement Planning</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Traditional Retirement Planning</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Post Retirement Solutions</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">FIRE Planning</a></li>
+            </ul>
+          </div>
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Goal Based Planning</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Car Purchase</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Home Loan Repayment</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Dream Home Purchase</a></li>
+            </ul>
+          </div>
+
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Starting a business</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Gold Loan Foreclosure</a></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* 5th Main Links Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Portfolio Management */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Financial Calculators</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Investment Calculators</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Personal Finance Calculators</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Children & Family Calculators</a></li>
+            </ul>
+          </div>
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Retirement Calculators</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Education and Career Calculators</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Lifestyle and Goal Planning Calculators</a></li>
+            </ul>
+          </div>
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Tax Calculators</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Income & Cashflow Calculators</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Trading Calculators</a></li>
+            </ul>
+          </div>
+
+          {/* PMS */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">&nbsp;</h3>
+            <ul className="space-y-3">
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Loan Calculators</a></li>
+              <li><a href="#" className="text-neutral-100 hover:text-[#F49611] transition-colors">Miscellaneous Calculators</a></li>
+            </ul>
+          </div>
+        </div>
         {/* Social Links */}
         <div className="border-t border-primary-300/20 pt-8 mb-8">
           <div className="flex flex-wrap justify-between items-center gap-8">
