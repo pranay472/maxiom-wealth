@@ -34,7 +34,7 @@ const EPFInfo = () => {
         <li>Premature withdrawals taxed as per income slab</li>
       </ul>
 
-      <h3 className="text-xl font-semibold mb-3">Using the Equirus Wealth EPF Calculator</h3>
+      <h3 className="text-xl font-semibold mb-3">Using the Maxiom Wealth EPF Calculator</h3>
       <p className="mb-4">Input your current age, basic salary, and expected salary growth. The calculator projects your EPF maturity value, shows contribution breakdowns, and helps plan voluntary contributions. Use it to ensure your EPF corpus aligns with retirement goals.</p>
     </div>
   );

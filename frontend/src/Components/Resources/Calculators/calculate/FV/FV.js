@@ -37,7 +37,7 @@ const FVInfo = () => {
       <h3 className="text-xl font-semibold mb-3">Factors Affecting Future Value</h3>
       <p className="mb-4">Three key variables influence FV calculations: principal amount (higher investments grow more), interest rate (higher returns accelerate growth), and time horizon (longer durations leverage compounding). Even small increases in rate or duration create significant differences over time.</p>
 
-      <h3 className="text-xl font-semibold mb-3">Using the Equirus Wealth FV Calculator</h3>
+      <h3 className="text-xl font-semibold mb-3">Using the Maxiom Wealth FV Calculator</h3>
       <p className="mb-4">Input your initial investment, expected annual return, investment duration, and compounding frequency. The calculator will project your corpus growth, show wealth accumulation timelines, and help compare different compounding scenarios. Use it to set realistic savings targets and retirement goals.</p>
     </div>
   );

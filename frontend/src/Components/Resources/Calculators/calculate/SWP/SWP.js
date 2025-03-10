@@ -38,7 +38,7 @@ const SWPInfo = () => {
       <strong>Monthly Withdrawal = [P × r × (1 + r)^n] / [(1 + r)^n - 1]</strong><br/>
       Where P = Principal, r = monthly return rate, n = number of months. This ensures corpus lasts for desired period.</p>
 
-      <h3 className="text-xl font-semibold mb-3">Using the Equirus Wealth SWP Calculator</h3>
+      <h3 className="text-xl font-semibold mb-3">Using the Maxiom Wealth SWP Calculator</h3>
       <p className="mb-4">Input your investment corpus, desired monthly income, expected returns, and duration. The calculator will show withdrawal sustainability, remaining balance over time, and help balance between income needs and corpus preservation. Use it to plan retirement income or education funding.</p>
     </div>
   );

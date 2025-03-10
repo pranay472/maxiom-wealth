@@ -36,7 +36,7 @@ const MFInfo = () => {
       <h3 className="text-xl font-semibold mb-3">How are returns calculated?</h3>
       <p className="mb-4">Mutual Fund returns are calculated using Compounded Annual Growth Rate (CAGR). For SIPs, returns are calculated using XIRR to account for multiple investments at different times. Returns depend on market performance and are subject to capital market risks.</p>
 
-      <h3 className="text-xl font-semibold mb-3">Using the Equirus Wealth MF Calculator</h3>
+      <h3 className="text-xl font-semibold mb-3">Using the Maxiom Wealth MF Calculator</h3>
       <p className="mb-4">Input your investment amount, expected return rate, and investment duration. Our calculator will project potential returns for both SIP and Lumpsum investments. This tool helps compare scenarios, understand compounding benefits, and make informed investment decisions aligned with your financial goals.</p>
     </div>
   );

@@ -36,7 +36,7 @@ const ELSSInfo = () => {
       <h3 className="text-xl font-semibold mb-3">How are returns calculated?</h3>
       <p className="mb-4">ELSS returns are calculated using Compounded Annual Growth Rate (CAGR). For SIP investments, XIRR (Extended Internal Rate of Return) is used to account for multiple investments. Returns are market-linked and subject to equity risks, with historical returns ranging between 12-15% over 5+ years.</p>
 
-      <h3 className="text-xl font-semibold mb-3">Using the Equirus Wealth ELSS Calculator</h3>
+      <h3 className="text-xl font-semibold mb-3">Using the Maxiom Wealth ELSS Calculator</h3>
       <p className="mb-4">Input your investment amount, expected returns, and investment horizon. Our calculator shows projected maturity value, tax savings under different slabs, and compares ELSS with other tax-saving options. It helps optimize tax planning while demonstrating long-term wealth creation potential.</p>
     </div>
   );

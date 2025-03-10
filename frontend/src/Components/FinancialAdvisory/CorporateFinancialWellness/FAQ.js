@@ -43,7 +43,7 @@ const FAQ = () => {
       answer: "We design our programs to be inclusive and relevant across all employee levels. For entry-level employees, we focus on basic financial literacy and budgeting. For mid-level employees, we emphasize investment strategies and wealth creation. For senior employees, we provide advanced portfolio management and retirement planning. All programs are customizable to match your organization's specific needs."
     },
     {
-      question: "What makes Equirus's Corporate Financial Wellness program unique?",
+      question: "What makes Maxiom's Corporate Financial Wellness program unique?",
       answer: "Our program stands out through its personalized approach, expertise, and comprehensive coverage. We combine digital solutions with personal guidance, offer bilingual support, and provide regular progress tracking. Our team of experienced financial advisors ensures that each employee receives tailored advice while maintaining confidentiality. Additionally, we offer integrated solutions that align with your existing employee benefits programs."
     },
     {

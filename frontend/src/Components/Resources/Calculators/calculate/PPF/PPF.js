@@ -36,7 +36,7 @@ const PPFInfo = () => {
       <h3 className="text-xl font-semibold mb-3">How is PPF calculated?</h3>
       <p className="mb-4">PPF interest is calculated using the formula: Interest = Principal × Rate × Time / 100. The interest is calculated yearly and credited at the end of each financial year. For example, a deposit of ₹1 lakh at 7% interest would earn ₹7,000 in interest after one year.</p>
 
-      <h3 className="text-xl font-semibold mb-3">How to use the Equirus Wealth PPF calculator?</h3>
+      <h3 className="text-xl font-semibold mb-3">How to use the Maxiom Wealth PPF calculator?</h3>
       <p className="mb-4">Simply enter your investment amount, interest rate, and investment duration in our calculator above. The calculator will show you the maturity value and help you plan your PPF investments effectively. It's a useful tool for estimating returns and making informed investment decisions.</p>
     </div>
   );

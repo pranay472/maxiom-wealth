@@ -30,7 +30,7 @@ const PMSFAQ = () => {
   const faqs = [
     {
       question: "What is Portfolio Management Service (PMS)?",
-      answer: "Portfolio Management Service (PMS) is a professional investment management service where experienced portfolio managers handle your investment portfolio. At Equirus, our PMS offers personalized investment strategies tailored to your financial goals, risk appetite, and investment horizon, with a focus on generating superior risk-adjusted returns."
+      answer: "Portfolio Management Service (PMS) is a professional investment management service where experienced portfolio managers handle your investment portfolio. At Maxiom, our PMS offers personalized investment strategies tailored to your financial goals, risk appetite, and investment horizon, with a focus on generating superior risk-adjusted returns."
     },
     {
       question: "What are the different fee structures available in PMS?",

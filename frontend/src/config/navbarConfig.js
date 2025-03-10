@@ -4,7 +4,7 @@ export const navbarConfig = {
     items: [
       {
         title: 'About Us',
-        description: 'Learn more about Equirus and our commitment to excellence',
+        description: 'Learn more about Maxiom and our commitment to excellence',
         subItems: [
           {
             title: 'Values, Vision, Mission',
